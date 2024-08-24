@@ -1,0 +1,132 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropSetupUITrigger",
+          "ButtonCallback": [
+            {
+              "$type": "RPG.GameCore.StartPropInteractMode",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "Mode": "UsePose01"
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.2
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByComparePropAnimState",
+                "State": "Closed",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                  "FetchType": "SinglePropByPropKey",
+                  "SinglePropKey": {
+                    "Custom": true,
+                    "Key": "Red"
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PropTriggerAnimState",
+                  "AnimStateName": "Close",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PropTriggerAnimState",
+                  "AnimStateName": "Activing",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                    "FetchType": "SinglePropByPropKey",
+                    "SinglePropKey": {
+                      "Custom": true,
+                      "Key": "Red"
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PropTriggerAnimState",
+                  "AnimStateName": "UnActiving",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                    "FetchType": "SinglePropByPropKey",
+                    "SinglePropKey": {
+                      "Custom": true,
+                      "Key": "Blue"
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.EndPropInteract"
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PropTriggerAnimState",
+                  "AnimStateName": "Open",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PropTriggerAnimState",
+                  "AnimStateName": "UnActiving",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                    "FetchType": "SinglePropByPropKey",
+                    "SinglePropKey": {
+                      "Custom": true,
+                      "Key": "Red"
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PropTriggerAnimState",
+                  "AnimStateName": "Activing",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                    "FetchType": "SinglePropByPropKey",
+                    "SinglePropKey": {
+                      "Custom": true,
+                      "Key": "Blue"
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.EndPropInteract"
+                }
+              ]
+            }
+          ],
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          }
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Red"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Blue"
+      }
+    ]
+  }
+}

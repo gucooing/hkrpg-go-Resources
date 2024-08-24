@@ -1,0 +1,146 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropSetupTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "TargetTypes": [],
+          "OnTriggerEnter": [
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "Test_AllPuzzle2"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "Test_AllPuzzle2"
+          },
+          "WaitOwnerOnly": true,
+          "GoNextImmediately": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsAllPuzzleStateMatchedClientOnly",
+            "PuzzleStates": [
+              {
+                "GroupID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 6
+                  }
+                },
+                "GroupPropID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 300001
+                  }
+                },
+                "TargetState": "ChestClosed"
+              },
+              {
+                "GroupID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 6
+                  }
+                },
+                "GroupPropID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 300002
+                  }
+                },
+                "TargetState": "ChestUsed"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DebugLog",
+              "Message": "XXXXXXXXX   CheckSuccess"
+            },
+            {
+              "$type": "RPG.GameCore.ToastPile",
+              "DescTextID": {
+                "Hash": 262005022
+              }
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.DebugLog",
+              "Message": "XXXXXXXXX   CheckFailed"
+            },
+            {
+              "$type": "RPG.GameCore.ToastPile",
+              "DescTextID": {
+                "Hash": 1719031299
+              }
+            },
+            {
+              "$type": "RPG.GameCore.ResetAllPuzzleStatesClientOnly",
+              "PuzzleStates": [
+                {
+                  "GroupID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 6
+                    }
+                  },
+                  "GroupPropID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 300001
+                    }
+                  },
+                  "TargetState": "ChestClosed"
+                },
+                {
+                  "GroupID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 6
+                    }
+                  },
+                  "GroupPropID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 300002
+                    }
+                  },
+                  "TargetState": "ChestClosed"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.DebugLog",
+              "Message": "XXXXXXXXX   ResetFinish"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "PuzzleStateMatchedSignal"
+      }
+    ]
+  }
+}

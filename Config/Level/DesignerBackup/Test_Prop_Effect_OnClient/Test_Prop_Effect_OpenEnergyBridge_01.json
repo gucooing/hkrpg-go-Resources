@@ -1,0 +1,121 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropSetupUITrigger",
+          "ButtonCallback": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByComparePropAnimState",
+                "State": "Closed",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.StartPropInteractMode",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                  },
+                  "Mode": "UsePose01"
+                },
+                {
+                  "$type": "RPG.GameCore.PropTriggerAnimState",
+                  "AnimStateName": "Open",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.WaitSecond",
+                  "WaitTime": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.2
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByComparePropAnimState",
+                    "State": "Closed",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                      "FetchType": "SinglePropByPropKey",
+                      "SinglePropKey": {
+                        "Custom": true,
+                        "Key": "PropID"
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PropTriggerAnimState",
+                      "AnimStateName": "Activing",
+                      "WatiAnimFinish": true,
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                        "FetchType": "SinglePropByPropKey",
+                        "SinglePropKey": {
+                          "Custom": true,
+                          "Key": "PropID"
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.EndPropInteract"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PropTriggerAnimState",
+                      "AnimStateName": "UnActiving",
+                      "WatiAnimFinish": true,
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                        "FetchType": "SinglePropByPropKey",
+                        "SinglePropKey": {
+                          "Custom": true,
+                          "Key": "PropID"
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.EndPropInteract"
+                    }
+                  ]
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PropTriggerAnimState",
+                  "AnimStateName": "Closed",
+                  "TransitionDuration": 0,
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                  }
+                }
+              ]
+            }
+          ],
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          }
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "PropID"
+      }
+    ]
+  }
+}

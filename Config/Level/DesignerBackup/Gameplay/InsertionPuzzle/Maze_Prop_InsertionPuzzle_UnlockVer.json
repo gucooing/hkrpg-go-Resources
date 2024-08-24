@@ -1,0 +1,203 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropSetupUITrigger",
+          "ButtonCallback": [
+            {
+              "$type": "RPG.GameCore.BlockInputController",
+              "Enable": true,
+              "ActionNameList": []
+            },
+            {
+              "$type": "RPG.GameCore.PropStateExecute",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "Execute": [
+                {
+                  "$type": "RPG.GameCore.StartPropInteractMode",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                  },
+                  "Mode": "LockControl"
+                },
+                {
+                  "$type": "RPG.GameCore.WaitSecond",
+                  "WaitTime": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.5
+                    }
+                  },
+                  "TaskEnabled": false
+                },
+                {
+                  "$type": "RPG.GameCore.ShowCableUI",
+                  "Visible": true
+                },
+                {
+                  "$type": "RPG.GameCore.ActiveVirtualCamera",
+                  "LevelAreaCameraKey": {
+                    "Custom": true,
+                    "Key": "Camera"
+                  },
+                  "BlendConfig": {
+                    "ExportToJson": true,
+                    "BlendType": "Cut"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.BlockInputController",
+                  "ActionNameList": []
+                },
+                {
+                  "$type": "RPG.GameCore.PropInitPuzzle",
+                  "BoardPath": {
+                    "Custom": true,
+                    "Key": "PrefabPath"
+                  },
+                  "LocalPosition": {
+                    "X": 1,
+                    "Y": 1.8,
+                    "Z": -1.3
+                  },
+                  "LocalScale": {
+                    "X": 9,
+                    "Y": 9,
+                    "Z": 1
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetLocalPlayerDitherAlpha"
+                }
+              ]
+            }
+          ],
+          "InteractAngleRange": 220,
+          "OverrideTargetTypes": [],
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          }
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropPuzzleEventListener",
+          "FinishCallback": [
+            {
+              "$type": "RPG.GameCore.ToastPage",
+              "MessageOne": {
+                "Hash": 362442128
+              },
+              "MessageTwo": {
+                "Hash": -1277162607
+              },
+              "CanInterrupt": true
+            },
+            {
+              "$type": "RPG.GameCore.SetLocalPlayerDitherAlpha",
+              "DitherAlpha": 1
+            },
+            {
+              "$type": "RPG.GameCore.ShowCableUI"
+            },
+            {
+              "$type": "RPG.GameCore.PropClosePuzzle"
+            },
+            {
+              "$type": "RPG.GameCore.BlockInputController",
+              "ActionNameList": []
+            },
+            {
+              "$type": "RPG.GameCore.ActiveVirtualCamera",
+              "LevelAreaCameraKey": {
+                "Custom": true,
+                "Key": "Camera"
+              },
+              "IsActive": false,
+              "BlendConfig": {
+                "ExportToJson": true,
+                "BlendType": "Cut"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.PropReqInteract",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                "FetchType": "SinglePropByPropKey",
+                "SinglePropKey": {
+                  "Custom": true,
+                  "Key": "UnlockTarget"
+                }
+              },
+              "InteractID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1010
+                }
+              }
+            }
+          ],
+          "QuitCallback": [
+            {
+              "$type": "RPG.GameCore.SetLocalPlayerDitherAlpha",
+              "DitherAlpha": 1
+            },
+            {
+              "$type": "RPG.GameCore.ShowCableUI"
+            },
+            {
+              "$type": "RPG.GameCore.PropClosePuzzle"
+            },
+            {
+              "$type": "RPG.GameCore.BlockInputController",
+              "ActionNameList": []
+            },
+            {
+              "$type": "RPG.GameCore.ActiveVirtualCamera",
+              "LevelAreaCameraKey": {
+                "Custom": true,
+                "Key": "Camera"
+              },
+              "IsActive": false,
+              "BlendConfig": {
+                "ExportToJson": true,
+                "BlendType": "Cut"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "PrefabPath"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Camera"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "UnlockTarget"
+      }
+    ]
+  }
+}

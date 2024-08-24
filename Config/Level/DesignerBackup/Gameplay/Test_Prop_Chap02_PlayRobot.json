@@ -1,0 +1,1153 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "FakerPlayerOutArea"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "State": "Open",
+          "Execute": [
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "GameFail"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "RobotGameFindPlayer"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "State": "Open",
+          "Execute": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByComparePropState",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                  "FetchType": "SinglePropByPropKey",
+                  "SinglePropKey": {
+                    "Custom": true,
+                    "Key": "InKillProp"
+                  },
+                  "SinglePropID": {}
+                },
+                "State": "Open"
+              },
+              "SuccessTaskList": [],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerCustomString",
+                  "CustomString": {
+                    "Value": "GameFail"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "Bomb_BoomCamera"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "State": "Open",
+          "Execute": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByComparePropState",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                  "FetchType": "SinglePropByPropKey",
+                  "SinglePropKey": {
+                    "Custom": true,
+                    "Key": "CameraProp"
+                  },
+                  "SinglePropID": {}
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.ActiveVirtualCamera",
+                  "LevelAreaCameraKey": {
+                    "Custom": true,
+                    "Key": "BombCamera"
+                  },
+                  "WaitBlendFinish": true,
+                  "BlendConfig": {
+                    "ExportToJson": true,
+                    "BlendType": "Cut",
+                    "BlendTime": 1
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PropReqInteract",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                    "FetchType": "SinglePropByPropKey",
+                    "SinglePropKey": {
+                      "Custom": true,
+                      "Key": "InKillProp"
+                    }
+                  },
+                  "InteractID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1010
+                    }
+                  },
+                  "OnUICancel": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "State": "Open",
+          "Execute": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByLocalPlayerIsFakeAvatar"
+              },
+              "SuccessTaskList": [],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PropReqInteract",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                  },
+                  "InteractID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1100
+                    }
+                  },
+                  "OnUICancel": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvMonsterEx",
+            "FetchType": "SingleByMonsterKey",
+            "SingleMonsterKey": {
+              "Custom": true,
+              "Key": "ReplaceMonster"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropSetupUITrigger",
+          "ButtonCallback": [
+            {
+              "$type": "RPG.GameCore.StartPropInteractMode",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "Mode": "UsePose01"
+            },
+            {
+              "$type": "RPG.GameCore.PlayScreenTransfer",
+              "Mode": "SwitchOut",
+              "CustomTime": 1
+            },
+            {
+              "$type": "RPG.GameCore.PlayerRemoteControlOtherEntity",
+              "TargetEntity": {
+                "$type": "RPG.GameCore.TargetFetchAdvNpcEx",
+                "FetchType": "SingleNpcByNpcKey",
+                "SingleNpcKey": {
+                  "Custom": true,
+                  "Key": "ReplaceMonster"
+                },
+                "SingleNpcID": {
+                  "GroupID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 11
+                    }
+                  },
+                  "GroupNpcID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 200004
+                    }
+                  }
+                }
+              },
+              "SpecialNPCID": 12113,
+              "RecoverControlEntityPosition": true,
+              "LeavePlayerStubInplace": true,
+              "PlayerStubAnimation": {
+                "Value": "LookatPhoneBS"
+              },
+              "ForcePositionAndRotation": true,
+              "LevelAreaKey": {
+                "Custom": true,
+                "Key": "ExitPoint"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.EndPropInteract"
+            },
+            {
+              "$type": "RPG.GameCore.PropReqInteract",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "InteractID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1010
+                }
+              },
+              "OnUICancel": []
+            },
+            {
+              "$type": "RPG.GameCore.PlayScreenTransfer",
+              "CustomTime": 0.5
+            },
+            {
+              "$type": "RPG.GameCore.SetNPCPlatformMove",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer",
+                "IncludeStoryPlayer": false
+              },
+              "EnableMove": true
+            },
+            {
+              "$type": "RPG.GameCore.NpcSetupTrigger",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvFakeAvatar"
+              },
+              "TriggerID": "Trigger_102050117_06",
+              "Range": 4,
+              "OnTriggerEnter": [
+                {
+                  "$type": "RPG.GameCore.TriggerEffectList",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "TaskActionTarget"
+                  },
+                  "EffectList": [
+                    {
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_FakePlayer_W1_Mecha01_00_WhiteBox_LockTarget.prefab",
+                      "IsAttachToTargetEntity": true
+                    }
+                  ]
+                }
+              ],
+              "OnTriggerExit": [
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "TaskActionTarget"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_FakePlayer_W1_Mecha01_00_WhiteBox_LockTarget.prefab",
+                  "Flags": [],
+                  "IsNeedFadeOut": false
+                }
+              ],
+              "TargetTypes": [
+                "NPCMonster"
+              ]
+            }
+          ],
+          "OverrideTargetTypes": [],
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          }
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "Bomb_KillSelf"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "State": "Open",
+          "Execute": [
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer",
+                "IncludeStoryPlayer": false
+              },
+              "MuteColliderWhenInvisible": false
+            },
+            {
+              "$type": "RPG.GameCore.AdvForceSetNpcAlertValue",
+              "Range": 40,
+              "AlertValue": 24,
+              "TaskEnabled": false
+            },
+            {
+              "$type": "RPG.GameCore.LockPlayerControl"
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 2
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.PlayScreenTransfer",
+              "Mode": "SwitchOut",
+              "CustomTime": 1
+            },
+            {
+              "$type": "RPG.GameCore.PlayerRemoteControlOtherEntity",
+              "TargetEntity": {
+                "$type": "RPG.GameCore.TargetFetchAdvNpcEx",
+                "FetchType": "SingleNpcByNpcKey",
+                "SingleNpcKey": {
+                  "Custom": true,
+                  "Key": "ReplaceMonster"
+                },
+                "SingleNpcID": {
+                  "GroupID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 11
+                    }
+                  },
+                  "GroupNpcID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 200004
+                    }
+                  }
+                }
+              },
+              "SpecialNPCID": 12113,
+              "IsCancel": true,
+              "RecoverControlEntityPosition": true,
+              "LeavePlayerStubInplace": true,
+              "ForcePositionAndRotation": true,
+              "LevelAreaKey": {
+                "Custom": true,
+                "Key": "ExitPoint"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.ActiveVirtualCamera",
+              "LevelAreaCameraKey": {
+                "Custom": true,
+                "Key": "BombCamera"
+              },
+              "IsActive": false,
+              "WaitBlendFinish": true,
+              "BlendConfig": {
+                "ExportToJson": true,
+                "BlendType": "Cut"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByComparePropState",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                      "FetchType": "SinglePropByPropKey",
+                      "SinglePropKey": {
+                        "Custom": true,
+                        "Key": "FinishProp"
+                      },
+                      "SinglePropID": {}
+                    },
+                    "State": "Open"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerCustomString",
+                  "CustomString": {
+                    "Value": "FinishGame"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PlayScreenTransfer",
+                  "CustomTime": 0.5
+                },
+                {
+                  "$type": "RPG.GameCore.UnLockPlayerControl"
+                },
+                {
+                  "$type": "RPG.GameCore.PropStateExecute",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                  },
+                  "State": "Open",
+                  "Execute": [
+                    {
+                      "$type": "RPG.GameCore.PropReqInteract",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                      },
+                      "InteractID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1100
+                        }
+                      },
+                      "OnUICancel": []
+                    },
+                    {
+                      "$type": "RPG.GameCore.PropReqInteract",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                        "FetchType": "SinglePropByPropKey",
+                        "SinglePropKey": {
+                          "Custom": true,
+                          "Key": "GoalObj1"
+                        },
+                        "SinglePropID": {}
+                      },
+                      "InteractID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1100
+                        }
+                      },
+                      "OnUICancel": []
+                    },
+                    {
+                      "$type": "RPG.GameCore.PropReqInteract",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                        "FetchType": "SinglePropByPropKey",
+                        "SinglePropKey": {
+                          "Custom": true,
+                          "Key": "GoalObj2"
+                        },
+                        "SinglePropID": {}
+                      },
+                      "InteractID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1100
+                        }
+                      },
+                      "OnUICancel": []
+                    },
+                    {
+                      "$type": "RPG.GameCore.PropReqInteract",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                        "FetchType": "SinglePropByPropKey",
+                        "SinglePropKey": {
+                          "Custom": true,
+                          "Key": "GoalObj3"
+                        },
+                        "SinglePropID": {}
+                      },
+                      "InteractID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1100
+                        }
+                      },
+                      "OnUICancel": []
+                    }
+                  ]
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PlayScreenTransfer",
+                  "CustomTime": 0.5
+                },
+                {
+                  "$type": "RPG.GameCore.UnLockPlayerControl"
+                },
+                {
+                  "$type": "RPG.GameCore.PropStateExecute",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                  },
+                  "State": "Open",
+                  "Execute": [
+                    {
+                      "$type": "RPG.GameCore.PropReqInteract",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                      },
+                      "InteractID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1100
+                        }
+                      },
+                      "OnUICancel": []
+                    },
+                    {
+                      "$type": "RPG.GameCore.PropReqInteract",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                        "FetchType": "SinglePropByPropKey",
+                        "SinglePropKey": {
+                          "Custom": true,
+                          "Key": "GoalObj1"
+                        },
+                        "SinglePropID": {}
+                      },
+                      "InteractID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1100
+                        }
+                      },
+                      "OnUICancel": []
+                    },
+                    {
+                      "$type": "RPG.GameCore.PropReqInteract",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                        "FetchType": "SinglePropByPropKey",
+                        "SinglePropKey": {
+                          "Custom": true,
+                          "Key": "GoalObj2"
+                        },
+                        "SinglePropID": {}
+                      },
+                      "InteractID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1100
+                        }
+                      },
+                      "OnUICancel": []
+                    },
+                    {
+                      "$type": "RPG.GameCore.PropReqInteract",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                        "FetchType": "SinglePropByPropKey",
+                        "SinglePropKey": {
+                          "Custom": true,
+                          "Key": "GoalObj3"
+                        },
+                        "SinglePropID": {}
+                      },
+                      "InteractID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1100
+                        }
+                      },
+                      "OnUICancel": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "FinishGame"
+          },
+          "WaitOwnerOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PlayScreenTransfer",
+          "CustomTime": 0.5
+        },
+        {
+          "$type": "RPG.GameCore.ParallelConfig",
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.PropStateExecute",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "State": "Open",
+              "Execute": [
+                {
+                  "$type": "RPG.GameCore.TriggerCustomString",
+                  "CustomString": {
+                    "Custom": true,
+                    "Key": "MissionFinish"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PropReqInteract",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                  },
+                  "InteractID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1190
+                    }
+                  },
+                  "OnUICancel": []
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PropStateExecute",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "Execute": [
+                {
+                  "$type": "RPG.GameCore.TriggerCustomString",
+                  "CustomString": {
+                    "Custom": true,
+                    "Key": "MissionFinish"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.PropReqInteract",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                  },
+                  "InteractID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1090
+                    }
+                  },
+                  "OnUICancel": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "GameFail"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "State": "Open",
+          "Execute": [
+            {
+              "$type": "RPG.GameCore.PlayScreenTransfer",
+              "Mode": "SwitchOut",
+              "CustomTime": 1
+            },
+            {
+              "$type": "RPG.GameCore.ActiveVirtualCamera",
+              "LevelAreaCameraKey": {
+                "Custom": true,
+                "Key": "BombCamera"
+              },
+              "IsActive": false,
+              "WaitBlendFinish": true,
+              "BlendConfig": {
+                "ExportToJson": true,
+                "BlendType": "EaseIn"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.PlayerRemoteControlOtherEntity",
+              "TargetEntity": {
+                "$type": "RPG.GameCore.TargetFetchAdvNpcEx",
+                "FetchType": "SingleNpcByNpcKey",
+                "SingleNpcKey": {
+                  "Custom": true,
+                  "Key": "ReplaceMonster"
+                },
+                "SingleNpcID": {
+                  "GroupID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 11
+                    }
+                  },
+                  "GroupNpcID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 200004
+                    }
+                  }
+                }
+              },
+              "SpecialNPCID": 12113,
+              "IsCancel": true,
+              "RecoverControlEntityPosition": true,
+              "LeavePlayerStubInplace": true,
+              "ForcePositionAndRotation": true,
+              "LevelAreaKey": {
+                "Custom": true,
+                "Key": "ExitPoint"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.PropReqInteract",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "InteractID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1100
+                }
+              },
+              "OnUICancel": []
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByComparePropState",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                      "SinglePropKey": {
+                        "Custom": true,
+                        "Key": "FinishProp"
+                      },
+                      "SinglePropID": {}
+                    },
+                    "State": "TriggerDisable"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.WaitSecond",
+                  "WaitTime": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.2
+                    }
+                  }
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PlayScreenTransfer",
+                  "CustomTime": 0.5
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByComparePropState",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                          "FetchType": "SinglePropByPropKey",
+                          "SinglePropKey": {
+                            "Custom": true,
+                            "Key": "FinishProp"
+                          },
+                          "SinglePropID": {}
+                        },
+                        "State": "Open"
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerPerformance",
+                      "ValueSource": {},
+                      "PerformanceType": "E",
+                      "PerformanceID": 201020409
+                    },
+                    {
+                      "$type": "RPG.GameCore.AdvForceSetNpcAlertValue",
+                      "Range": 100
+                    },
+                    {
+                      "$type": "RPG.GameCore.PropReqInteract",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                        "FetchType": "SinglePropByPropKey",
+                        "SinglePropKey": {
+                          "Custom": true,
+                          "Key": "InKillProp"
+                        }
+                      },
+                      "InteractID": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1100
+                        }
+                      },
+                      "OnUICancel": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "MonsterBeHit"
+          },
+          "GoNextImmediately": true
+        },
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "State": "Open",
+          "Execute": []
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "MonsterBeHit"
+          },
+          "GoNextImmediately": true
+        },
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "State": "Open",
+          "Execute": []
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "RobotWin1"
+          },
+          "GoNextImmediately": true
+        },
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "State": "Open",
+          "Execute": [
+            {
+              "$type": "RPG.GameCore.PropReqInteract",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                "FetchType": "SinglePropByPropKey",
+                "SinglePropKey": {
+                  "Custom": true,
+                  "Key": "GoalObj1"
+                },
+                "SinglePropID": {}
+              },
+              "InteractID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1010
+                }
+              },
+              "OnUICancel": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "RobotWin2"
+          },
+          "GoNextImmediately": true
+        },
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "State": "Open",
+          "Execute": [
+            {
+              "$type": "RPG.GameCore.PropReqInteract",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                "FetchType": "SinglePropByPropKey",
+                "SinglePropKey": {
+                  "Custom": true,
+                  "Key": "GoalObj2"
+                },
+                "SinglePropID": {}
+              },
+              "InteractID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1010
+                }
+              },
+              "OnUICancel": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "FakerPlayerOutArea"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByComparePropState",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                },
+                "State": "Open"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByComparePropState",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                      "FetchType": "SinglePropByPropKey",
+                      "SinglePropKey": {
+                        "Custom": true,
+                        "Key": "GoalObj1"
+                      }
+                    },
+                    "State": "Open"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByComparePropState",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                      "FetchType": "SinglePropByPropKey",
+                      "SinglePropKey": {
+                        "Custom": true,
+                        "Key": "GoalObj2"
+                      }
+                    },
+                    "State": "Open"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByComparePropState",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                      "FetchType": "SinglePropByPropKey",
+                      "SinglePropKey": {
+                        "Custom": true,
+                        "Key": "GoalObj3"
+                      }
+                    },
+                    "State": "Open"
+                  }
+                ]
+              },
+              "SuccessTaskList": [],
+              "FailedTaskList": []
+            }
+          ],
+          "FailedTaskList": []
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "RobotWin3"
+          },
+          "GoNextImmediately": true
+        },
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "State": "Open",
+          "Execute": [
+            {
+              "$type": "RPG.GameCore.PropReqInteract",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                "FetchType": "SinglePropByPropKey",
+                "SinglePropKey": {
+                  "Custom": true,
+                  "Key": "GoalObj3"
+                },
+                "SinglePropID": {}
+              },
+              "InteractID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1010
+                }
+              },
+              "OnUICancel": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "ReplaceMonster"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "ExitPoint"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "MissionFinish"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "GoalObj1"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "GoalObj2"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "GoalObj3"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "BombCamera"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "FinishProp"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "CameraProp"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "InKillProp"
+      }
+    ]
+  }
+}

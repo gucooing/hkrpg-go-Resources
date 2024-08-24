@@ -1,0 +1,671 @@
+{
+  "AbilityList": [
+    {
+      "Name": "Monster_Boss_Cocolia_P2_Weapon_Skill01_Phase01",
+      "TargetInfo": {
+        "TargetType": "SkillTargetEntityList"
+      },
+      "OnStart": []
+    },
+    {
+      "Modifiers": {
+        "Cocolia_Mirror_Modifier": {
+          "_CallbackList": {
+            "OnBeingLimbo": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsTeammate",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": "Monster_Boss_Cocolia_P2_Weapon_Passive_Mirror_Insert_Dark",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "OwnerAliveState": "Mask_AliveOrLimbo",
+                      "TargetAliveState": "Mask_AliveOrLimbo"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": "Monster_Boss_Cocolia_P2_Weapon_Passive_Mirror_Insert_Light",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "OwnerAliveState": "Mask_AliveOrLimbo",
+                      "TargetAliveState": "Mask_AliveOrLimbo"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "Stacking": "ReplaceByCaster"
+        }
+      },
+      "Name": "Monster_Boss_Cocolia_P2_Weapon_Passive_Mirror",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Cocolia_Mirror_Modifier"
+        }
+      ]
+    },
+    {
+      "Name": "Monster_Boss_Cocolia_P2_Weapon_Passive_Mirror_Insert_Light",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "CasterToTargetPerform",
+              "TemplateName": "Monster_Common_Range_AOE",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "ResetToDefault": false
+            },
+            "BlendConfig": {
+              "BlendType": "Cut"
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "EnemyTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha02_00/Eff_Monster_W1_Mecha02_00_Skill05_Hit_Heal.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 0.32
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeConfigV2": {
+              "ShakeRange": 0.2,
+              "ShakeTime": 0.25,
+              "ShakeDir": {
+                "X": 0,
+                "Y": 0.2,
+                "Z": 0
+              },
+              "BaseCycle": 0.1,
+              "CycleDamping": 0,
+              "RangeAttenuation": 0.95,
+              "PerlinNoiseAmplitude": {
+                "X": 0.1,
+                "Y": 0.1,
+                "Z": 0.1
+              },
+              "PerlinNoiseFreq": {
+                "X": 16,
+                "Y": 16,
+                "Z": 0
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 0.25
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_Be_treated.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "ModifierName": "Boss_Cocolia_P2_Mirror_Buff",
+          "LifeTime": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAJ",
+              "FixedValues": [],
+              "DynamicHashes": [
+                740265280
+              ]
+            }
+          },
+          "DynamicValues": {
+            "ModifierDamageUpValue": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAJ",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  493975221
+                ]
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 2
+        }
+      ]
+    },
+    {
+      "Name": "Monster_Boss_Cocolia_P2_Weapon_Passive_Mirror_Insert_Dark",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeammate"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "ModifierName": "BOSS_COCOLIA_BOSS_MDF"
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "FriendTeamCenter"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha02_00/Eff_Monster_W1_Mecha02_00_Skill05_Hit_Heal.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": 0.32
+            },
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "ShakeConfigV2": {
+                  "ShakeRange": 0.2,
+                  "ShakeTime": 0.25,
+                  "ShakeDir": {
+                    "X": 0,
+                    "Y": 0.2,
+                    "Z": 0
+                  },
+                  "BaseCycle": 0.1,
+                  "CycleDamping": 0,
+                  "RangeAttenuation": 0.95,
+                  "PerlinNoiseAmplitude": {
+                    "X": 0.1,
+                    "Y": 0.1,
+                    "Z": 0.1
+                  },
+                  "PerlinNoiseFreq": {
+                    "X": 16,
+                    "Y": 16,
+                    "Z": 0
+                  }
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": 0.25
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllTeamMember"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_Be_treated.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "ModifierName": "Boss_Cocolia_P2_Mirror_Buff",
+              "LifeTime": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAJ",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -222698555
+                  ]
+                }
+              },
+              "DynamicValues": {
+                "ModifierDamageUpValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAJ",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -195999602
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Cocolia_Shield_Modifier": {
+          "_CallbackList": {
+            "OnBeingLimbo": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsTeammate",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": "Monster_Boss_Cocolia_P2_Weapon_Passive_Shield_Insert_Dark",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "OwnerAliveState": "Mask_AliveOrLimbo",
+                      "TargetAliveState": "Mask_AliveOrLimbo"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": "Monster_Boss_Cocolia_P2_Weapon_Passive_Shield_Insert_Light",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "AbilityTarget": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "OwnerAliveState": "Mask_AliveOrLimbo",
+                      "TargetAliveState": "Mask_AliveOrLimbo"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "Stacking": "ReplaceByCaster"
+        }
+      },
+      "Name": "Monster_Boss_Cocolia_P2_Weapon_Passive_Shield",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Cocolia_Shield_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {},
+      "Name": "Monster_Boss_Cocolia_P2_Weapon_Passive_Shield_Insert_Light",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "CasterToTargetPerform",
+              "TemplateName": "Monster_Common_Range_AOE",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "ResetToDefault": false
+            },
+            "BlendConfig": {
+              "BlendType": "Cut"
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 0.32
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeConfigV2": {
+              "ShakeRange": 0.2,
+              "ShakeTime": 0.25,
+              "ShakeDir": {
+                "X": 0,
+                "Y": 0.2,
+                "Z": 0
+              },
+              "BaseCycle": 0.1,
+              "CycleDamping": 0,
+              "RangeAttenuation": 0.95,
+              "PerlinNoiseAmplitude": {
+                "X": 0.1,
+                "Y": 0.1,
+                "Z": 0.1
+              },
+              "PerlinNoiseFreq": {
+                "X": 16,
+                "Y": 16,
+                "Z": 0
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 0.25
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_Be_treated.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "ModifierName": "Boss_Cocolia_P2_GlobalShield",
+          "DynamicValues": {
+            "Shield_HP": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAJ",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1950169897
+                ]
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 2
+        }
+      ]
+    },
+    {
+      "Name": "Monster_Boss_Cocolia_P2_Weapon_Passive_Shield_Insert_Dark",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeammate"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "ModifierName": "BOSS_COCOLIA_BOSS_MDF"
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Mecha02_00/Eff_Monster_W1_Mecha02_00_Skill05_Hit_Heal.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": 0.32
+            },
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "ShakeConfigV2": {
+                  "ShakeRange": 0.2,
+                  "ShakeTime": 0.25,
+                  "ShakeDir": {
+                    "X": 0,
+                    "Y": 0.2,
+                    "Z": 0
+                  },
+                  "BaseCycle": 0.1,
+                  "CycleDamping": 0,
+                  "RangeAttenuation": 0.95,
+                  "PerlinNoiseAmplitude": {
+                    "X": 0.1,
+                    "Y": 0.1,
+                    "Z": 0.1
+                  },
+                  "PerlinNoiseFreq": {
+                    "X": 16,
+                    "Y": 16,
+                    "Z": 0
+                  }
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllTeamMember"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_Be_treated.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "ModifierName": "Boss_Cocolia_P2_Shield_Dark",
+              "DynamicValues": {
+                "MDF_Resistance": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAJ",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      245600721
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Cocolia_Weapon_DeathEvent_Modifier": {
+          "_CallbackList": {
+            "OnBeingLimbo": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllTeammate"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "BOSS_COCOLIA_BOSS_MDF"
+                  },
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "Key": "WeaponDeathCount",
+                      "AddValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "Min": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0
+                        }
+                      },
+                      "Max": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 4
+                        }
+                      },
+                      "ContextScope": "TargetEntity"
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "DynamicKey": "WeaponDeathCount",
+                        "ContextScope": "TargetEntity",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 4
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.DefineDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "DynamicKey": "Phase_Flag",
+                          "ResetValue": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1
+                            }
+                          },
+                          "ContextScope": "TargetEntity"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "Stacking": "ReplaceByCaster"
+        }
+      },
+      "Name": "Monster_Boss_Cocolia_P2_Weapon_Passive_DeathEvent",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Cocolia_Weapon_DeathEvent_Modifier"
+        }
+      ]
+    }
+  ]
+}

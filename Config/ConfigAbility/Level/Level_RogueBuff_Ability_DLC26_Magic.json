@@ -1,0 +1,4665 @@
+{
+  "AbilityList": [
+    {
+      "Name": "RogueDLC26_Magic_683010",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.DebugLog",
+          "Message": "==============应急能源======================"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "AbilityName": "UseItem_Camear_SelectAllLightTeam",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.ShowBonusUIEffect",
+          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_Evolve.prefab",
+          "TitleTextID": {
+            "Hash": -1545934468
+          },
+          "ImagePath": "SpriteOutput/Quest/EvolveBuild/EvoLveBuildIcon/3106143.png"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_ActivityTreasureDungeon_Treasure_OtherRise.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1.05
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_MAZ_RecoverSP.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.2
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ByRandom": true,
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 10
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "ModifierName": "Modifier_RogueDLC26_Magic_683010_Sub"
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByProperty",
+              "DynamicKey": "MDF_MaxSP",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "Value": "MaxSP"
+            },
+            {
+              "$type": "RPG.GameCore.ModifySPNew",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "AddValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAAAAQK",
+                  "FixedValues": [
+                    {
+                      "Value": 0.5
+                    }
+                  ],
+                  "DynamicHashes": [
+                    -1657931065
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ModifierName": "Modifier_RogueDLC26_Magic_683010_Sub"
+        },
+        {
+          "$type": "RPG.GameCore.ShowBattleEventButton",
+          "IsShow": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_AttackUp.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.7
+            }
+          }
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1815493198": {},
+          "-1657931065": {}
+        }
+      }
+    },
+    {
+      "Name": "RogueDLC26_Magic_683020",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.DebugLog",
+          "Message": "==============蓄能攻击======================"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "FormationConfigName": "LowSpacing"
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 60,
+              "FollowRadius": 4.5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 1.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 4.5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 0.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ShowBonusUIEffect",
+          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_Evolve.prefab",
+          "TitleTextID": {
+            "Hash": 20149473
+          },
+          "ImagePath": "SpriteOutput/Quest/EvolveBuild/EvoLveBuildIcon/3106003.png"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.8
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_00_Appear.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.175
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 5.3,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 1.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_Skill01Start.prefab",
+          "Scale": {
+            "X": 0.5,
+            "Y": 0.5,
+            "Z": 0.5
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_Skill01Start_02.prefab",
+          "Scale": {
+            "X": 0.5,
+            "Y": 0.5,
+            "Z": 0.5
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Monster_Common_Immediate.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ByRandom": true,
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 10
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByProperty",
+              "DynamicKey": "MDF_CurrentSP",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "Value": "CurrentSP"
+            },
+            {
+              "$type": "RPG.GameCore.LoopExecuteTaskList",
+              "MaxLoopCount": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQABAQAABQkBCg==",
+                  "FixedValues": [
+                    {
+                      "Value": 20
+                    }
+                  ],
+                  "DynamicHashes": [
+                    -1226284721,
+                    -1815493198
+                  ]
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "Modifier_RogueDLC26_Common_AttackUP",
+                  "LifeTime": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 2
+                    }
+                  },
+                  "DynamicValues": {
+                    "AttackUPRatio": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.1
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 2.2
+            }
+          }
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1815493198": {}
+        }
+      }
+    },
+    {
+      "Name": "RogueDLC26_Magic_683030",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.DebugLog",
+          "Message": "==============法力节能======================"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "FormationConfigName": "LowSpacing"
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 60,
+              "FollowRadius": 4.5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 1.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 4.5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 0.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ShowBonusUIEffect",
+          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_Evolve.prefab",
+          "TitleTextID": {
+            "Hash": 1586233414
+          },
+          "ImagePath": "SpriteOutput/Quest/EvolveBuild/EvoLveBuildIcon/3106008.png"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.8
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_Max00_Appear.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.175
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 5.3,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 1.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_MaxSkill01Start.prefab",
+          "Scale": {
+            "X": 0.5,
+            "Y": 0.5,
+            "Z": 0.5
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_MaxSkill01Start_02.prefab",
+          "Scale": {
+            "X": 0.5,
+            "Y": 0.5,
+            "Z": 0.5
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Monster_Common_Immediate.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ModifierName": "Modifier_RogueDLC26_Magic_683030_Sub",
+          "LifeTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 2.2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_Magic_683040",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.DebugLog",
+          "Message": "==============终结之力======================"
+        },
+        {
+          "$type": "RPG.GameCore.ShowBonusUIEffect",
+          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_Evolve.prefab",
+          "TitleTextID": {
+            "Hash": -786419581
+          },
+          "ImagePath": "SpriteOutput/Quest/EvolveBuild/EvoLveBuildIcon/3106132.png"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "CustomFormationName": "BattleEvent_ShenYuan_AllLightTeam",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamEntity"
+          },
+          "CustomFormationIgnoreDying": false
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 3,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.2,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 4,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Argenti_00/Eff_Monster_W2_ArgentiTotem_All_Power_Strat.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Monster_Common_Immediate.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ModifierName": "Modifier_RogueDLC26_Magic_683040_Sub"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_Magic_683050",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.DebugLog",
+          "Message": "==============全体易伤======================"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "AbilityName": "BattleEventAbility_Camear_AllDarkTeam",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.ShowBonusUIEffect",
+          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_Evolve.prefab",
+          "TitleTextID": {
+            "Hash": 779664360
+          },
+          "ImagePath": "SpriteOutput/Quest/EvolveBuild/EvoLveBuildIcon/3106901.png"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_DeBuff.prefab",
+          "PositionOffset": {
+            "X": 0,
+            "Y": 3.8,
+            "Z": 0
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_DeBuff_02.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.LoopExecuteTaskList",
+          "MaxLoopCount": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                1311312484
+              ]
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "ModifierName": "Modifier_RogueDLC26_Common_DamageTakenUP",
+              "MaxLayer": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 10
+                }
+              },
+              "DynamicValues": {
+                "DamageTakenUPRatio": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0.1
+                  }
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.08
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1.3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_Magic_683060",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.DebugLog",
+          "Message": "==============火球印记======================"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "AbilityName": "BattleEventAbility_Camear_AllDarkTeam",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.ShowBonusUIEffect",
+          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_Evolve.prefab",
+          "TitleTextID": {
+            "Hash": -1949218995
+          },
+          "ImagePath": "SpriteOutput/Quest/EvolveBuild/EvoLveBuildIcon/3106013.png"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_DeBuff.prefab",
+          "PositionOffset": {
+            "X": 0,
+            "Y": 3.8,
+            "Z": 0
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_DeBuff_02.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.LoopExecuteTaskList",
+          "MaxLoopCount": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                1311312484
+              ]
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "ModifierName": "Modifier_RogueDLC26_Magic_683060_Sub"
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.08
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1.3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_Magic_683070",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.DebugLog",
+          "Message": "==============全体击破======================"
+        },
+        {
+          "$type": "RPG.GameCore.ShowBonusUIEffect",
+          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_Evolve.prefab",
+          "TitleTextID": {
+            "Hash": -383135054
+          },
+          "ImagePath": "SpriteOutput/Quest/EvolveBuild/EvoLveBuildIcon/3106901.png"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "AbilityName": "BattleEventAbility_Camera_AllDarkTeamWithoutDither",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_Damage.prefab",
+          "PositionOffset": {
+            "X": 0,
+            "Y": 3.8,
+            "Z": 0
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_Damage_hit.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.05
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "ByRandom": true,
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 10
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
+                "StanceValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 99999
+                  }
+                },
+                "IsNotHit": true,
+                "StanceDamageType": {
+                  "DamageType": "AllType"
+                },
+                "AttackType": "Pursued",
+                "HitAnimation": "Hit"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Physical"
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Physical",
+                  "DynamicValues": {
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    },
+                    "DitherRangeX": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.05
+                      }
+                    },
+                    "DitherRangeY": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.1
+                      }
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Physical.prefab"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Ice"
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Ice",
+                  "DynamicValues": {
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.15
+                      }
+                    },
+                    "DitherRangeX": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.05
+                      }
+                    },
+                    "DitherRangeY": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.1
+                      }
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Ice.prefab"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Fire"
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Fire",
+                  "DynamicValues": {
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.3
+                      }
+                    },
+                    "DitherRangeX": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.05
+                      }
+                    },
+                    "DitherRangeY": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.1
+                      }
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Fire.prefab"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Wind"
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Wind",
+                  "DynamicValues": {
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.45
+                      }
+                    },
+                    "DitherRangeX": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.05
+                      }
+                    },
+                    "DitherRangeY": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.1
+                      }
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Wind.prefab"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Thunder"
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Thunder",
+                  "DynamicValues": {
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.6
+                      }
+                    },
+                    "DitherRangeX": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.05
+                      }
+                    },
+                    "DitherRangeY": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.1
+                      }
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Thunder.prefab"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Imaginary"
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Imaginary",
+                  "DynamicValues": {
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.45
+                      }
+                    },
+                    "DitherRangeX": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.05
+                      }
+                    },
+                    "DitherRangeY": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.1
+                      }
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Imaginary.prefab"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Quantum"
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "StanceBreak_Quantum",
+                  "DynamicValues": {
+                    "UIMessageHeight": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.45
+                      }
+                    },
+                    "DitherRangeX": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.05
+                      }
+                    },
+                    "DitherRangeY": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0.1
+                      }
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Quantum.prefab"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_DeBuff_03.prefab"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_DeBuff_02.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1800273296": {},
+          "142612140": {},
+          "-1293338785": {},
+          "-276098552": {},
+          "-2054634397": {},
+          "-46276406": {}
+        }
+      }
+    },
+    {
+      "Name": "RogueDLC26_Magic_683080",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.DebugLog",
+          "Message": "==============直击弱点======================"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "FormationConfigName": "LowSpacing"
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 60,
+              "FollowRadius": 4.5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 1.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 4.5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 0.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ShowBonusUIEffect",
+          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_Evolve.prefab",
+          "TitleTextID": {
+            "Hash": 1539179247
+          },
+          "ImagePath": "SpriteOutput/Quest/EvolveBuild/EvoLveBuildIcon/3106003.png"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.8
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_00_Appear.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.175
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 5.3,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 1.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_Skill01Start.prefab",
+          "Scale": {
+            "X": 0.5,
+            "Y": 0.5,
+            "Z": 0.5
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_Skill01Start_02.prefab",
+          "Scale": {
+            "X": 0.5,
+            "Y": 0.5,
+            "Z": 0.5
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Monster_Common_Immediate.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ModifierName": "Modifier_RogueDLC26_Magic_683080_Sub",
+          "LifeTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 2
+            }
+          },
+          "InheritCaster": "TargetSelf"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 2.2
+            }
+          }
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1815493198": {}
+        }
+      }
+    },
+    {
+      "Name": "RogueDLC26_Magic_683090",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.DebugLog",
+          "Message": "==============击破特化======================"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "AbilityName": "BattleEventAbility_Camear_AllDarkTeam",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.ShowBonusUIEffect",
+          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_Evolve.prefab",
+          "TitleTextID": {
+            "Hash": -1189704108
+          },
+          "ImagePath": "SpriteOutput/Quest/EvolveBuild/EvoLveBuildIcon/3106004.png"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_DeBuff.prefab",
+          "PositionOffset": {
+            "X": 0,
+            "Y": 3.8,
+            "Z": 0
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_DeBuff_02.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.LoopExecuteTaskList",
+          "MaxLoopCount": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                1311312484
+              ]
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "ModifierName": "Modifier_RogueDLC26_Magic_683090_Sub",
+              "LifeTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 2
+                }
+              },
+              "DynamicValues": {
+                "BreakDamageTakenUP": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0.3
+                  }
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.08
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1.3
+            }
+          }
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1815493198": {}
+        }
+      }
+    },
+    {
+      "Name": "RogueDLC26_Magic_683100",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.DebugLog",
+          "Message": "==============全体易伤======================"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "AbilityName": "BattleEventAbility_Camear_AllDarkTeam",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.ShowBonusUIEffect",
+          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_Evolve.prefab",
+          "TitleTextID": {
+            "Hash": 1182948790
+          },
+          "ImagePath": "SpriteOutput/Quest/EvolveBuild/EvoLveBuildIcon/3106010.png"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_DeBuff.prefab",
+          "PositionOffset": {
+            "X": 0,
+            "Y": 3.8,
+            "Z": 0
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_DeBuff_02.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.LoopExecuteTaskList",
+          "MaxLoopCount": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                1311312484
+              ]
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "ModifierName": "MCommon_CTRL_Frozen",
+              "LifeTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.08
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1.3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_Magic_683110",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.DebugLog",
+          "Message": "==============黑洞术======================"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "FormationConfigName": "LowSpacing"
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 60,
+              "FollowRadius": 4.5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 1.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 4.5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 0.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ShowBonusUIEffect",
+          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_Evolve.prefab",
+          "TitleTextID": {
+            "Hash": -1545934565
+          },
+          "ImagePath": "SpriteOutput/Quest/EvolveBuild/EvoLveBuildIcon/3106005.png"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.8
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_00_Appear.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.175
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 5.3,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 1.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_Skill01Start.prefab",
+          "Scale": {
+            "X": 0.5,
+            "Y": 0.5,
+            "Z": 0.5
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_Skill01Start_02.prefab",
+          "Scale": {
+            "X": 0.5,
+            "Y": 0.5,
+            "Z": 0.5
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Monster_Common_Immediate.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ModifierName": "Modifier_RogueDLC26_Magic_683110_Sub",
+          "DynamicValues": {
+            "MDF_BreakDamageAddedRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1.5
+              }
+            }
+          },
+          "InheritCaster": "TargetSelf"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 2.2
+            }
+          }
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1815493198": {}
+        }
+      }
+    },
+    {
+      "Name": "RogueDLC26_Magic_683110_Sub",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "RogueDLC26_PFM_CameraDarkTeamFar"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.3
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "DarkTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_CorpseExplosion_Body_02.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.85
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "DarkTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_CorpseExplosion_Body_01.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "RogueDLC26_PFM_CameraShakeBig"
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCharacterDamageType",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "DamageType": "Physical"
+              },
+              {
+                "$type": "RPG.GameCore.ByCharacterDamageType",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "DamageType": "Fire"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 2
+                }
+              },
+              "DynamicKey": "MDF_Damage"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCharacterDamageType",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "DamageType": "Wind"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1.5
+                }
+              },
+              "DynamicKey": "MDF_Damage"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCharacterDamageType",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "DamageType": "Thunder"
+              },
+              {
+                "$type": "RPG.GameCore.ByCharacterDamageType",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "DamageType": "Ice"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicKey": "MDF_Damage"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCharacterDamageType",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "DamageType": "Imaginary"
+              },
+              {
+                "$type": "RPG.GameCore.ByCharacterDamageType",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "DamageType": "Quantum"
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.5
+                }
+              },
+              "DynamicKey": "MDF_Damage"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "ByRandom": true,
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 10
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByProperty",
+              "DynamicKey": "MDF_MaxStance",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "Value": "MaxStance"
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
+                "DamageType": {
+                  "SourceType": "ReadTargetType",
+                  "ReadTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  }
+                },
+                "FormulaType": "ByBreakDamage",
+                "AttackType": "ElementDamage",
+                "BreakDamagePercentage": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQABAQAABQABAgQAAgUBAgQK",
+                    "FixedValues": [
+                      {
+                        "Value": 30
+                      },
+                      {
+                        "Value": 2
+                      },
+                      {
+                        "Value": 4
+                      }
+                    ],
+                    "DynamicHashes": [
+                      991190183,
+                      793524170,
+                      -1046855615
+                    ]
+                  }
+                },
+                "FinalFormulaType": "ByPureDamage",
+                "HitEffect": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_CorpseExplosion_Hit.prefab",
+                "HitEffectHeight": 1.5
+              },
+              "CanTriggerLastKill": true,
+              "DisplayData": {
+                "UIMessageHeight": 1,
+                "DitherRangeX": 0.01,
+                "DitherRangeY": 0.01
+              },
+              "IsHitAnimPerformanceDelay": true
+            },
+            {
+              "$type": "RPG.GameCore.DebugLog",
+              "Level": "Warn",
+              "Message": "==============基础击破伤害{MDF_Damage}，击破特攻提升比率{1+MDF_BreakDamageAddedRatio}，表里参数{MDF_BreakDamageAddedRatio}======================"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.RadialBlurEffect",
+          "Duration": 0.3,
+          "BlurRadius": 0.6,
+          "Iteration": 8,
+          "BlurStart": 0.01,
+          "BlurFeather": 0.15
+        },
+        {
+          "$type": "RPG.GameCore.DamagePerformFinish"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1.5
+            }
+          }
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1815493198": {},
+          "-611665526": {},
+          "-2145785502": {},
+          "-1323996017": {},
+          "-1987517287": {},
+          "991190183": {},
+          "793524170": {}
+        }
+      }
+    },
+    {
+      "Name": "RogueDLC26_Magic_683120",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.DebugLog",
+          "Message": "==============法术回能+罐中脑======================"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "AbilityName": "UseItem_Camear_SelectAllLightTeam",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.ShowBonusUIEffect",
+          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_Evolve.prefab",
+          "TitleTextID": {
+            "Hash": -1545934468
+          },
+          "ImagePath": "SpriteOutput/Quest/EvolveBuild/EvoLveBuildIcon/3106143.png"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_ActivityTreasureDungeon_Treasure_OtherRise.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1.05
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_MAZ_RecoverSP.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.2
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ModifySPNew",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "AddMaxSPRatio": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQABAQQK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                1334442181,
+                25364071
+              ]
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ModifierName": "MLevel_Rogue_Knowledge",
+          "DynamicValues": {
+            "MDF_EnergyCount": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQABAQQK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -282160789,
+                  25364071
+                ]
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ModifierName": "Modifier_RogueDLC26_Magic_683010_Sub"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_AttackUp.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.7
+            }
+          }
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1815493198": {},
+          "-1657931065": {}
+        }
+      }
+    },
+    {
+      "Name": "RogueDLC26_Magic_683130",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.DebugLog",
+          "Message": "==============攻击增加======================"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "FormationConfigName": "LowSpacing"
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 60,
+              "FollowRadius": 4.5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 1.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 4.5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 0.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ShowBonusUIEffect",
+          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_Evolve.prefab",
+          "TitleTextID": {
+            "Hash": 20149473
+          },
+          "ImagePath": "SpriteOutput/Quest/EvolveBuild/EvoLveBuildIcon/3106003.png"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.8
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_00_Appear.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.175
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.5,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 5.3,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 1.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.5
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_Skill01Start.prefab",
+          "Scale": {
+            "X": 0.5,
+            "Y": 0.5,
+            "Z": 0.5
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_EvolveBuild_01/Eff_ActivityProp_EvolveBuild_Strengthening_Skill01Start_02.prefab",
+          "Scale": {
+            "X": 0.5,
+            "Y": 0.5,
+            "Z": 0.5
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Monster_Common_Immediate.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "ModifierName": "Modifier_RogueDLC26_Common_AttackUP",
+          "DynamicValues": {
+            "AttackUPRatio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -1605046434
+                ]
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 2.2
+            }
+          }
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-1815493198": {}
+        }
+      }
+    }
+  ],
+  "GlobalModifiers": {
+    "Modifier_RogueDLC26_Common_AttackUP": {
+      "LayerAddWhenStack": {
+        "IsDynamic": false,
+        "FixedValue": {
+          "Value": 1
+        }
+      },
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ValueType": "Layer",
+              "Multiplier": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicKey": "ModifierLayers"
+            },
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "AttackAddedRatio",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQABAQQK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1605046434,
+                    1458882163
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace",
+      "DynamicValues": {
+        "Values": {
+          "1458882163": {}
+        }
+      }
+    },
+    "Modifier_RogueDLC26_Common_DamageUP": {
+      "LayerAddWhenStack": {
+        "IsDynamic": false,
+        "FixedValue": {
+          "Value": 1
+        }
+      },
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ValueType": "Layer",
+              "Multiplier": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicKey": "ModifierLayers"
+            },
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "AllDamageTypeAddedRatio",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQABAQQK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1526516753,
+                    1458882163
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace",
+      "DynamicValues": {
+        "Values": {
+          "1458882163": {}
+        }
+      }
+    },
+    "Modifier_RogueDLC26_Common_DamageTakenUP": {
+      "LayerAddWhenStack": {
+        "IsDynamic": false,
+        "FixedValue": {
+          "Value": 1
+        }
+      },
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ValueType": "Layer",
+              "Multiplier": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicKey": "ModifierLayers"
+            },
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "AllDamageTypeTakenRatio",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQABAQQK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    566496634,
+                    1458882163
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace",
+      "DynamicValues": {
+        "Values": {
+          "1458882163": {}
+        }
+      }
+    },
+    "Modifier_RogueDLC26_Magic_683010_Sub": {
+      "_CallbackList": [
+        {
+          "Event": "OnSPChange",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueBySPChange",
+              "DynamicKey": "MDF_SPvalue",
+              "ValueType": "ClampedAdd"
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "MDF_SPvalue",
+                    "ContextScope": "ContextModifier",
+                    "CompareType": "Greater",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MLevel_Rogue_Knowledge",
+                  "DynamicValues": {
+                    "MDF_EnergyCount": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AAABAAQK",
+                        "FixedValues": [
+                          {
+                            "Value": 0.0069999993
+                          }
+                        ],
+                        "DynamicHashes": [
+                          1608529156
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "1608529156": {}
+        }
+      }
+    },
+    "Modifier_RogueDLC26_Magic_683030_Sub": {
+      "UIConfig": {
+        "ModifierUIPriority": "HardControl"
+      },
+      "_CallbackList": [
+        {
+          "Event": "OnAfterSkillUse",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCurrentSkillType",
+                "SkillType": "Ultra"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MLevel_Rogue_Knowledge",
+                  "DynamicValues": {
+                    "MDF_EnergyCount": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -282160789
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-282160789": {}
+        }
+      }
+    },
+    "Modifier_RogueDLC26_Magic_683040_Sub": {
+      "_CallbackList": [
+        {
+          "Event": "OnAfterSkillUse",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCurrentSkillType",
+                "SkillType": "Ultra"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "ModifierName": "Modifier_RogueDLC26_Magic_683040_Sub_DamageUP",
+                  "LifeTime": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 2
+                    }
+                  },
+                  "MaxLayer": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 99
+                    }
+                  },
+                  "DynamicValues": {
+                    "DamageUPRatio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -1526516753
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "Modifier_RogueDLC26_Magic_683040_Sub",
+                  "LayerAddWhenStack": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": -1
+                    }
+                  },
+                  "IsShowUIMessageOnUpdate": false
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+                  "ReadTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ValueType": "Layer",
+                  "Multiplier": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "DynamicKey": "ModifierLayers"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "ModifierLayers",
+                    "CompareType": "Less",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "1458882163": {},
+          "-1526516753": {}
+        }
+      }
+    },
+    "Modifier_RogueDLC26_Magic_683040_Sub_DamageUP": {
+      "LayerAddWhenStack": {
+        "IsDynamic": false,
+        "FixedValue": {
+          "Value": 1
+        }
+      },
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ValueType": "Layer",
+              "Multiplier": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicKey": "ModifierLayers"
+            },
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "AllDamageTypeAddedRatio",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQABAQQK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1526516753,
+                    1458882163
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace",
+      "DynamicValues": {
+        "Values": {
+          "1458882163": {}
+        }
+      }
+    },
+    "Modifier_RogueDLC26_Magic_683060_Sub": {
+      "LayerAddWhenStack": {
+        "IsDynamic": false,
+        "FixedValue": {
+          "Value": 1
+        }
+      },
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetMonsterEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Active": "False",
+              "CenterStyle": 3,
+              "IconPath": "SpriteOutput/BuffIcon/Inlevel/IconMonsterSign.png",
+              "MaxCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 99
+                }
+              },
+              "CurrentCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ValueType": "Layer",
+              "Multiplier": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicKey": "ModifierLayers"
+            },
+            {
+              "$type": "RPG.GameCore.SetMonsterEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Active": "True",
+              "CenterStyle": 3,
+              "IconPath": "SpriteOutput/BuffIcon/Inlevel/IconMonsterSign.png",
+              "MaxCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 99
+                }
+              },
+              "CurrentCount": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1458882163
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Event": "OnAfterBeingAttacked",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByProperty",
+              "DynamicKey": "MDF_Attack",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "Value": "Attack"
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
+                "DamageType": {
+                  "DamageType": "Fire"
+                },
+                "DamageValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQABAQQK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      1628139512,
+                      -959889440
+                    ]
+                  }
+                },
+                "AttackType": "Pursued",
+                "HitAnimation": "Hit",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Common/Eff_Common_Explosion.prefab",
+                "HitEffectHeight": 1,
+                "HitTimeSlowType": "Puncture"
+              },
+              "CanTriggerLastKill": true,
+              "DisplayData": {
+                "UIMessageHeight": 1,
+                "DitherRangeX": 0.02,
+                "DitherRangeY": 0.02
+              }
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Modifier_RogueDLC26_Magic_683060_Sub",
+              "LayerAddWhenStack": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": -1
+                }
+              },
+              "IsShowUIMessageOnUpdate": false
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ValueType": "Layer",
+              "Multiplier": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicKey": "ModifierLayers"
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "ModifierLayers",
+                "CompareType": "Less",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace",
+      "DynamicValues": {
+        "Values": {
+          "1458882163": {},
+          "1628139512": {},
+          "-959889440": {}
+        }
+      }
+    },
+    "Modifier_RogueDLC26_Magic_683080_Sub": {
+      "_CallbackList": [
+        {
+          "Event": "OnAfterAttack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCharacterDamageType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DamageType": "Physical"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCharacterDamageType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DamageType": "Fire"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 2
+                    }
+                  },
+                  "DynamicKey": "MDF_Damage"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCharacterDamageType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DamageType": "Wind"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1.5
+                    }
+                  },
+                  "DynamicKey": "MDF_Damage"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCharacterDamageType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DamageType": "Thunder"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCharacterDamageType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DamageType": "Ice"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "DynamicKey": "MDF_Damage"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCharacterDamageType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DamageType": "Imaginary"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCharacterDamageType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DamageType": "Quantum"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.5
+                    }
+                  },
+                  "DynamicKey": "MDF_Damage"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AttackTargetList"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Flag": "Break"
+              },
+              "ByRandom": true,
+              "MaxNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 10
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ChallengeStory_Damage_Tips.prefab",
+                  "AttachPoint": "SelectRoot"
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ChallengeStory_Damage_01.prefab",
+                  "AttachPoint": "SelectRoot"
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                  "DynamicKey": "MDF_MaxStance",
+                  "ReadTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "Value": "MaxStance"
+                },
+                {
+                  "$type": "RPG.GameCore.DamageByAttackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "AttackProperty": {
+                    "$type": "RPG.GameCore.AttackData",
+                    "DamageType": {
+                      "SourceType": "ReadTargetType",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      }
+                    },
+                    "FormulaType": "ByBreakDamage",
+                    "AttackType": "ElementDamage",
+                    "BreakDamagePercentage": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQABAQAABQABAgQAAgUBAgQK",
+                        "FixedValues": [
+                          {
+                            "Value": 30
+                          },
+                          {
+                            "Value": 2
+                          },
+                          {
+                            "Value": 4
+                          }
+                        ],
+                        "DynamicHashes": [
+                          991190183,
+                          793524170,
+                          -1046855615
+                        ]
+                      }
+                    },
+                    "FinalFormulaType": "ByPureDamage",
+                    "HitEffect": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ChallengeStory_Damage_hit01.prefab",
+                    "HitEffectHeight": 1.5
+                  },
+                  "CanTriggerLastKill": true,
+                  "DisplayData": {
+                    "DitherRangeX": 0,
+                    "DitherRangeY": 0,
+                    "AttachPoint": "SelectRoot",
+                    "AdditionalDisplay": {
+                      "UIMessageHeight": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0.75
+                        }
+                      },
+                      "DitherRangeX": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0.05
+                        }
+                      },
+                      "DitherRangeY": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 0.1
+                        }
+                      }
+                    }
+                  },
+                  "PerformanceDelay": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.1
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.DebugLog",
+                  "Level": "Warn",
+                  "Message": "==============基础击破伤害{MDF_Damage}，击破特攻提升比率{1+MDF_BreakDamageAddedRatio}，表里参数{MDF_BreakDamageAddedRatio}======================"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "991190183": {},
+          "-1046855615": {},
+          "793524170": {}
+        }
+      }
+    },
+    "Modifier_RogueDLC26_Magic_683090_Sub": {
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeBeingHitAll",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ValueType": "Layer",
+              "Multiplier": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicKey": "ModifierLayers"
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAttackType",
+                "AttackTypes": [
+                  "ElementDamage"
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.ModifyDamageData",
+                  "Defender_AllDamageTypeTakenRatio": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQABAQQK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        277062810,
+                        1458882163
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "1458882163": {}
+        }
+      }
+    },
+    "Modifier_RogueDLC26_Magic_683110_Sub": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.OwnerEntityAddAbility",
+              "AbilityName": "RogueDLC26_Magic_683110_Sub"
+            }
+          ]
+        },
+        {
+          "Event": "OnAfterAttack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.TurnInsertAbility",
+              "AbilityName": "RogueDLC26_Magic_683110_Sub",
+              "AbilityTarget": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "InsertAbilityPriority": "LevelPerformAvatar",
+              "DynamicValues": {
+                "MDF_BreakDamageAddedRatio": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1.5
+                  }
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "GlobalTemplates": [
+    {
+      "Name": "RogueDLC26_VAR_AllTargetCount",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "_TargetNumber",
+          "ContextScope": "ContextAbility"
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByCharacterCount",
+          "DynamicKey": "_TargetNumber",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByTargetTeam",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "Team": "TeamDark"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_VAR_HitTargetCount",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "_TargetNumber",
+          "ContextScope": "ContextAbility"
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByCharacterCount",
+          "DynamicKey": "_TargetNumber",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ProjectileHitEntityAdjoinEntity"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByTargetTeam",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "Team": "TeamDark"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Key": "_TargetNumber",
+          "AddValue": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "Min": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          },
+          "Max": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 5
+            }
+          },
+          "ContextScope": "ContextAbility"
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_VAR_AttackTargetCount",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "_TargetNumber",
+          "ContextScope": "ContextAbility"
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByCharacterCount",
+          "DynamicKey": "_TargetNumber",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ParamEntityAdjoinEntity"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByTargetTeam",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "Team": "TeamDark"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Key": "_TargetNumber",
+          "AddValue": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "Min": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          },
+          "Max": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 5
+            }
+          },
+          "ContextScope": "ContextAbility"
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_VAR_ModifierTargetCount",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "DynamicKey": "_TargetNumber",
+          "ContextScope": "ContextAbility"
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByCharacterCount",
+          "DynamicKey": "_TargetNumber",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerAdjoinEntity"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByTargetTeam",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "Team": "TeamDark"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "Key": "_TargetNumber",
+          "AddValue": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "Min": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          },
+          "Max": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 5
+            }
+          },
+          "ContextScope": "ContextAbility"
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_PFM_CameraShakeSmall",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeConfigV2": {
+              "ShakeRange": 0.07,
+              "ShakeTime": 0.2,
+              "ShakeDir": {
+                "X": 0,
+                "Y": 0.14,
+                "Z": 0
+              },
+              "BaseCycle": 0.06,
+              "CycleDamping": 0,
+              "RangeAttenuation": 0.95,
+              "PerlinNoiseAmplitude": {
+                "X": 0.03,
+                "Y": 0.03,
+                "Z": 0
+              },
+              "PerlinNoiseFreq": {
+                "X": 16,
+                "Y": 16,
+                "Z": 0
+              },
+              "RotationalAmplitude": {
+                "X": 0,
+                "Y": 0,
+                "Z": 1
+              },
+              "RotationFreqV3": {
+                "X": 0,
+                "Y": 0,
+                "Z": 8
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_PFM_CameraShakeFireBall",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeConfigV2": {
+              "ShakeRange": 0.14,
+              "ShakeTime": 0.3,
+              "ShakeDir": {
+                "X": 0,
+                "Y": 0.14,
+                "Z": 0
+              },
+              "BaseCycle": 0.06,
+              "CycleDamping": 0,
+              "RangeAttenuation": 0.95,
+              "PerlinNoiseAmplitude": {
+                "X": 0.03,
+                "Y": 0.03,
+                "Z": 0
+              },
+              "PerlinNoiseFreq": {
+                "X": 16,
+                "Y": 16,
+                "Z": 0
+              },
+              "RotationalAmplitude": {
+                "X": 0,
+                "Y": 0,
+                "Z": 2
+              },
+              "RotationFreqV3": {
+                "X": 0,
+                "Y": 0,
+                "Z": 8
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_PFM_CameraShakeBig",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeConfigV2": {
+              "ShakeRange": 0.21,
+              "ShakeTime": 0.2,
+              "ShakeDir": {
+                "X": 0,
+                "Y": 0.14,
+                "Z": 0
+              },
+              "BaseCycle": 0.24,
+              "CycleDamping": 0,
+              "RangeAttenuation": 1.6,
+              "PerlinNoiseAmplitude": {
+                "X": 0.03,
+                "Y": 0.03,
+                "Z": 0
+              },
+              "PerlinNoiseFreq": {
+                "X": 16,
+                "Y": 16,
+                "Z": 0
+              },
+              "RotationalAmplitude": {
+                "X": 0,
+                "Y": 0,
+                "Z": 1
+              },
+              "RotationFreqV3": {
+                "X": 0,
+                "Y": 0,
+                "Z": 8
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_PFM_CameraDarkTeamNear",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 2.5,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 9.5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 0.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_PFM_CameraDarkTeamFar",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 2.5,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 0.7,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 12.5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 0.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_PFM_CameraDarkEntityNear",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0,
+                "Y": 0,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AimOffset": {
+                "X": 0,
+                "Y": 0,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 80,
+              "FollowRadius": 5.5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 0.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "RogueDLC26_PFM_CameraLightTeamNear",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.001,
+                "Y": 1.2,
+                "Z": 0.001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.001,
+                "Y": 1.7,
+                "Z": 0.001
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 5,
+              "FollowDamp": 0.5,
+              "AimDamp": 0.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 0.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "IsTargetIgnoreCameraDither": true,
+              "IsAliveOnly": false
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

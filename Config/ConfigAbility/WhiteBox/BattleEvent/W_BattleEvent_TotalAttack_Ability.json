@@ -1,0 +1,1816 @@
+{
+  "AbilityList": [
+    {
+      "Modifiers": {
+        "Modifier_StageAbility_3999400": {
+          "BehaviorFlagList": [
+            "ListenBattleEventSkill"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.ShowBattleWhiteboxText",
+                  "TextContent": "当前评级为 B\n当前评级进度为 {Progress}/{#ADF_1}"
+                }
+              ]
+            },
+            {
+              "Event": "OnListenHPChange",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByTargetTeam",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Team": "TeamLight"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByTargetTeam",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity2"
+                        },
+                        "Team": "TeamDark"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareParamValue",
+                        "CompareType": "Less",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                      "DynamicKey": "HPChangeValue",
+                      "VariateType": "ParamValue"
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                      "DynamicKey": "MaxHp",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "Value": "MaxHP"
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": "Progress",
+                        "CompareType": "Greater",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareDynamicValue",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "DynamicKey": "Progress",
+                            "CompareType": "Greater",
+                            "CompareValue": {
+                              "IsDynamic": true,
+                              "PostfixExpr": {
+                                "OpCodes": "AAAHAQABAQECBQABBAEDBAkBBAo=",
+                                "FixedValues": [
+                                  {
+                                    "Value": 1
+                                  },
+                                  {
+                                    "Value": 100
+                                  }
+                                ],
+                                "DynamicHashes": [
+                                  -1226284721,
+                                  741240385,
+                                  -307186788,
+                                  -1862642832
+                                ]
+                              }
+                            }
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetDynamicValue",
+                              "DynamicKey": "Progress",
+                              "Value": {
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQABAQECAQMFAAAEAQQECQECCg==",
+                                  "FixedValues": [
+                                    {
+                                      "Value": 100
+                                    }
+                                  ],
+                                  "DynamicHashes": [
+                                    1837830969,
+                                    -1226284721,
+                                    741240385,
+                                    -307186788,
+                                    -1862642832
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "FailedTaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetDynamicValue",
+                              "DynamicKey": "Progress",
+                              "Value": {
+                                "IsDynamic": false,
+                                "FixedValue": {
+                                  "Value": 0
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                          "Name": "TotalAttack_Progess"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareDynamicValue",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "DynamicKey": "Rank",
+                            "CompareType": "Greater",
+                            "CompareValue": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 0
+                              }
+                            }
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetDynamicValue",
+                              "DynamicKey": "Rank",
+                              "Value": {
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAAAAMK",
+                                  "FixedValues": [
+                                    {
+                                      "Value": 1
+                                    }
+                                  ],
+                                  "DynamicHashes": [
+                                    -1516408252
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "$type": "RPG.GameCore.PredicateTaskList",
+                              "Predicate": {
+                                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ModifierOwnerEntity"
+                                },
+                                "DynamicKey": "Rank",
+                                "CompareType": "Equal",
+                                "CompareValue": {
+                                  "IsDynamic": false,
+                                  "FixedValue": {
+                                    "Value": 0
+                                  }
+                                }
+                              },
+                              "SuccessTaskList": [
+                                {
+                                  "$type": "RPG.GameCore.SetDynamicValue",
+                                  "DynamicKey": "Progress",
+                                  "Value": {
+                                    "IsDynamic": true,
+                                    "PostfixExpr": {
+                                      "OpCodes": "AQABAQECAQMFAAAEAQQECQECCg==",
+                                      "FixedValues": [
+                                        {
+                                          "Value": 100
+                                        }
+                                      ],
+                                      "DynamicHashes": [
+                                        462955996,
+                                        -1226284721,
+                                        741240385,
+                                        -307186788,
+                                        -1862642832
+                                      ]
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "$type": "RPG.GameCore.PredicateTaskList",
+                              "Predicate": {
+                                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ModifierOwnerEntity"
+                                },
+                                "DynamicKey": "Rank",
+                                "CompareType": "Equal",
+                                "CompareValue": {
+                                  "IsDynamic": false,
+                                  "FixedValue": {
+                                    "Value": 1
+                                  }
+                                }
+                              },
+                              "SuccessTaskList": [
+                                {
+                                  "$type": "RPG.GameCore.SetDynamicValue",
+                                  "DynamicKey": "Progress",
+                                  "Value": {
+                                    "IsDynamic": true,
+                                    "PostfixExpr": {
+                                      "OpCodes": "AQABAQECAQMFAAAEAQQECQECCg==",
+                                      "FixedValues": [
+                                        {
+                                          "Value": 100
+                                        }
+                                      ],
+                                      "DynamicHashes": [
+                                        59671469,
+                                        -1226284721,
+                                        741240385,
+                                        -307186788,
+                                        -1862642832
+                                      ]
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "$type": "RPG.GameCore.PredicateTaskList",
+                              "Predicate": {
+                                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ModifierOwnerEntity"
+                                },
+                                "DynamicKey": "Rank",
+                                "CompareType": "Equal",
+                                "CompareValue": {
+                                  "IsDynamic": false,
+                                  "FixedValue": {
+                                    "Value": 2
+                                  }
+                                }
+                              },
+                              "SuccessTaskList": [
+                                {
+                                  "$type": "RPG.GameCore.SetDynamicValue",
+                                  "DynamicKey": "Progress",
+                                  "Value": {
+                                    "IsDynamic": true,
+                                    "PostfixExpr": {
+                                      "OpCodes": "AQABAQECAQMFAAAEAQQECQECCg==",
+                                      "FixedValues": [
+                                        {
+                                          "Value": 100
+                                        }
+                                      ],
+                                      "DynamicHashes": [
+                                        1625755410,
+                                        -1226284721,
+                                        741240385,
+                                        -307186788,
+                                        -1862642832
+                                      ]
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                              "Name": "TotalAttack_Progess"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Event": "OnListenAfterSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "DynamicKey": "Progress",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQIK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            1837830969,
+                            866240523
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "TotalAttack_Progess"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {
+              "741240385": {},
+              "-307186788": {}
+            }
+          }
+        }
+      },
+      "Name": "StageAbility_3999400",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LevelEntity"
+          },
+          "DynamicKey": "Rank",
+          "ContextScope": "TargetEntity"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LevelEntity"
+          },
+          "DynamicKey": "Progress",
+          "ContextScope": "TargetEntity"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LevelEntity"
+          },
+          "DynamicKey": "RankB",
+          "ResetValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                462955996
+              ]
+            }
+          },
+          "ContextScope": "TargetEntity"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LevelEntity"
+          },
+          "DynamicKey": "RankA",
+          "ResetValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                59671469
+              ]
+            }
+          },
+          "ContextScope": "TargetEntity"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LevelEntity"
+          },
+          "DynamicKey": "RankS",
+          "ResetValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                1625755410
+              ]
+            }
+          },
+          "ContextScope": "TargetEntity"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Modifier_StageAbility_3999400"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Modifier_StageAbility_3999401": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenBreak",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "Progress",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQABAQIK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1837830969,
+                        462955996
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "TotalAttack_Progess"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "StageAbility_3999401",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Modifier_StageAbility_3999401"
+        },
+        {
+          "$type": "RPG.GameCore.OwnerEntityAddAbility",
+          "AbilityName": "StageAbility_3999401_SSRankEffect"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "MDF_BaseSpeed": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "BaseSpeed",
+                  "PropertyValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1500670274
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "Stacking": "ReplaceByCaster"
+        },
+        "Modifier_StageAbility_3999401_SSRankEffect_CountDown": {
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "ModifierName": "Modifier_StageAbility_3999401_RankSS_CD"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "ModifierName": "Modifier_StageAbility_3999401_SSRankEffect_BreakDamageUp"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "ModifierName": "Modifier_StageAbility_3999401_SSRankEffect"
+                },
+                {
+                  "$type": "RPG.GameCore.RPGColorGradingCurveEffect",
+                  "Active": false,
+                  "CustomLUT": "CustomRP/Textures/Acheron_Ultra_LUT.exr",
+                  "CustomLUTIntensityBegin": 1,
+                  "CustomLUTIntensityEnd": 1,
+                  "StartRadiusBegin": 1,
+                  "BlendRadiusBegin": -0.48,
+                  "BlendRadiusEnd": -0.48,
+                  "CurveName": "ColorGradingCurveHQ"
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "Rank",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 2
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "DynamicKey": "Progress",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "TotalAttack_Progess"
+                },
+                {
+                  "$type": "RPG.GameCore.DestroyBattleCharacter",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  }
+                }
+              ]
+            },
+            {
+              "Event": "OnListenBreak",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "DynamicKey": "BreakCount",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAAAAIK",
+                      "FixedValues": [
+                        {
+                          "Value": 1
+                        }
+                      ],
+                      "DynamicHashes": [
+                        2061490348
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "ModifierName": "Modifier_StageAbility_3999401_SSRankEffect_BreakDamageUp",
+                  "DynamicValues": {
+                    "_Value": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQABAQQK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -1862642832,
+                          2061490348
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.ShowBattleWhiteboxText",
+                  "TextContent": "已累计造成{BreakCount}次破盾\n全队击破特攻提升{#ADF_5 * BreakCount}%"
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_StageAbility_3999401_SSRankEffect": {
+          "BehaviorFlagList": [
+            "ListenBattleEventSkill"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnTriggerBreak",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Physical"
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "StanceBreak_Physical",
+                      "DynamicValues": {
+                        "UIMessageHeight": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        },
+                        "DitherRangeX": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.05
+                          }
+                        },
+                        "DitherRangeY": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.1
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Ice"
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "StanceBreak_Ice",
+                      "DynamicValues": {
+                        "UIMessageHeight": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.15
+                          }
+                        },
+                        "DitherRangeX": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.05
+                          }
+                        },
+                        "DitherRangeY": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.1
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Fire"
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "StanceBreak_Fire",
+                      "DynamicValues": {
+                        "UIMessageHeight": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.3
+                          }
+                        },
+                        "DitherRangeX": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.05
+                          }
+                        },
+                        "DitherRangeY": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.1
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Wind"
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "StanceBreak_Wind",
+                      "DynamicValues": {
+                        "UIMessageHeight": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.45
+                          }
+                        },
+                        "DitherRangeX": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.05
+                          }
+                        },
+                        "DitherRangeY": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.1
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Thunder"
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "StanceBreak_Thunder",
+                      "DynamicValues": {
+                        "UIMessageHeight": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.6
+                          }
+                        },
+                        "DitherRangeX": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.05
+                          }
+                        },
+                        "DitherRangeY": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.1
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Imaginary"
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "StanceBreak_Imaginary",
+                      "DynamicValues": {
+                        "UIMessageHeight": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.75
+                          }
+                        },
+                        "DitherRangeX": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.05
+                          }
+                        },
+                        "DitherRangeY": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.1
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByHasStanceWeak",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "WeakType": {
+                      "DamageType": "Quantum"
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "StanceBreak_Quantum",
+                      "DynamicValues": {
+                        "UIMessageHeight": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.9
+                          }
+                        },
+                        "DitherRangeX": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.05
+                          }
+                        },
+                        "DitherRangeY": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0.1
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_StageAbility_3999401_SSRankEffect_BreakDamageUp": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "BreakDamageAddedRatioBase",
+                  "PropertyValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAAAAUK",
+                      "FixedValues": [
+                        {
+                          "Value": 100
+                        }
+                      ],
+                      "DynamicHashes": [
+                        -1976239376
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "Stacking": "Replace"
+        },
+        "Modifier_StageAbility_3999401_RankSS_CD": {}
+      },
+      "Name": "StageAbility_3999401_SSRankEffect",
+      "TargetInfo": {
+        "TargetType": "AllDarkTeamMember"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.CreateBattleEvent",
+          "EventID": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 96085
+            }
+          },
+          "Team": "TeamNeutral",
+          "TotalDamageTeam": "TeamLight",
+          "OnBattleEventCreate": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LevelEntity"
+              },
+              "ModifierName": "Modifier_StageAbility_3999401_RankSS_CD"
+            },
+            {
+              "$type": "RPG.GameCore.ShowBattleWhiteboxText",
+              "TextContent": "已累计造成{BreakCount}次破盾\n全队击破特攻提升{#ADF_5 * BreakCount}%"
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "ModifierName": "Modifier_StageAbility_3999401_SSRankEffect_CountDown"
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "ModifierName": "Modifier_StageAbility_3999401_SSRankEffect",
+              "DynamicValues": {
+                "CasterLevel": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                },
+                "ElementDamageValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                },
+                "TargetStance": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 30
+                  }
+                },
+                "StanceUnit": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 30
+                  }
+                },
+                "CasterBreakBaseDamage": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 100
+                  }
+                },
+                "DamageRatio": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              },
+              "InheritCaster": "TargetSelf"
+            },
+            {
+              "$type": "RPG.GameCore.SetActionDelay",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "Value": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAAAAUK",
+                  "FixedValues": [
+                    {
+                      "Value": 10
+                    }
+                  ],
+                  "DynamicHashes": [
+                    -699843418
+                  ]
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByProperty",
+              "DynamicKey": "_CurrentDelay",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "Value": "ActionDelay"
+            }
+          ],
+          "IsDynamicPreload": true
+        },
+        {
+          "$type": "RPG.GameCore.ModifyActionDelay",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "AddValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                -667705017
+              ]
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetActionDelay",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ModifySPNew",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "FixedAddMaxSPRatio": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ModifyTeamBoostPoint",
+          "ModifyFunction": "Add",
+          "ModifyValue": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 20
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.RPGColorGradingCurveEffect",
+          "CustomLUT": "CustomRP/Textures/Acheron_Ultra_LUT.exr",
+          "CustomLUTIntensityBegin": 1,
+          "CustomLUTIntensityEnd": 1,
+          "StartRadiusEnd": 1,
+          "BlendRadiusBegin": -0.48,
+          "BlendRadiusEnd": -0.48,
+          "CurveName": "ColorGradingCurveHQ"
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-978103959": {},
+          "-667705017": {}
+        }
+      }
+    }
+  ],
+  "GlobalModifiers": {
+    "Modifier_StageAbility_RankEffect": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "LevelEntity"
+                },
+                "ModifierName": "Modifier_StageAbility_3999401"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "ModifierName": "Modifier_StageAbility_3999401_ARankEffect"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "ModifierName": "Modifier_StageAbility_3999401_SRankEffect"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "Rank",
+                    "CompareType": "GreaterEqual",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam"
+                      },
+                      "ModifierName": "Modifier_StageAbility_3999401_ARankEffect"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "Rank",
+                    "CompareType": "GreaterEqual",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 2
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam"
+                      },
+                      "ModifierName": "Modifier_StageAbility_3999401_SRankEffect"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "Rank",
+                    "CompareType": "GreaterEqual",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 3
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "LevelEntity"
+                        },
+                        "ModifierName": "Modifier_StageAbility_3999401_RankSS_CD",
+                        "Inverse": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TurnInsertAbility",
+                          "AbilityName": "StageAbility_3999401_SSRankEffect",
+                          "AbilityTarget": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AllDarkTeam"
+                          },
+                          "InsertAbilityPriority": "MonsterInsertAttackSelf"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "Modifier_StageAbility_RankEffect"
+            }
+          ]
+        }
+      ]
+    },
+    "Modifier_StageAbility_3999401_ARankEffect": {
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "StanceBreakAddedRatio",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    59671469
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "Modifier_StageAbility_3999401_SRankEffect": {
+      "_CallbackList": [
+        {
+          "Event": "OnAfterAttack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "MaxNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 5
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Flag": "Break"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Modifier_StageAbility_3999401_SRankEffect_Enemy",
+                      "MaxLayer": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            866240523
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.ExitBreakState",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "CancelRecoverAnim": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.ResetStance",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ForbidWhenEmpty": false,
+                      "SkipLockTeamStance": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerAnimState",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "AnimLogicState": "Idle"
+                    },
+                    {
+                      "$type": "RPG.GameCore.RefreshChangePhaseUI"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "Modifier_StageAbility_3999401_SRankEffect_Enemy": {
+      "LayerAddWhenStack": {
+        "IsDynamic": false,
+        "FixedValue": {
+          "Value": 1
+        }
+      },
+      "_CallbackList": [
+        {
+          "Event": "OnStanceReset",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ValueType": "Layer",
+              "Multiplier": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "DynamicKey": "_Layer"
+            },
+            {
+              "$type": "RPG.GameCore.ReduceStanceRatio",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ReduceValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQABAQQK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1625755410,
+                    1912601768
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {
+        "Values": {
+          "1912601768": {}
+        }
+      }
+    }
+  },
+  "GlobalTemplates": [
+    {
+      "Name": "TotalAttack_Progess",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "LevelEntity"
+            },
+            "DynamicKey": "Rank",
+            "CompareType": "Equal",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "Progress",
+                "CompareType": "GreaterEqual",
+                "CompareValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -1328805594
+                    ]
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "DynamicKey": "Rank",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAAAAIK",
+                      "FixedValues": [
+                        {
+                          "Value": 1
+                        }
+                      ],
+                      "DynamicHashes": [
+                        -1516408252
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "DynamicKey": "Progress",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQABAQMK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1837830969,
+                        -1328805594
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.ShowBattleWhiteboxText",
+                  "TextContent": "当前评级为 A\n当前评级进度为 {Progress}/{RankA}"
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.ShowBattleWhiteboxText",
+                  "TextContent": "当前评级为 B\n当前评级进度为 {Progress}/{RankB}"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Modifier_StageAbility_RankEffect"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "LevelEntity"
+            },
+            "DynamicKey": "Rank",
+            "CompareType": "Equal",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "Progress",
+                "CompareType": "GreaterEqual",
+                "CompareValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -1328805597
+                    ]
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "DynamicKey": "Rank",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAAAAIK",
+                      "FixedValues": [
+                        {
+                          "Value": 1
+                        }
+                      ],
+                      "DynamicHashes": [
+                        -1516408252
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "DynamicKey": "Progress",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQABAQMK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1837830969,
+                        -1328805597
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.ShowBattleWhiteboxText",
+                  "TextContent": "当前评级为 S\n当前评级进度为 {Progress}/{RankS}"
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.ShowBattleWhiteboxText",
+                  "TextContent": "当前评级为 A\n当前评级进度为 {Progress}/{RankA}"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Modifier_StageAbility_RankEffect"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "LevelEntity"
+            },
+            "DynamicKey": "Rank",
+            "CompareType": "Equal",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 2
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "Progress",
+                "CompareType": "GreaterEqual",
+                "CompareValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -1328805611
+                    ]
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "DynamicKey": "Rank",
+                  "Value": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAAAAIK",
+                      "FixedValues": [
+                        {
+                          "Value": 1
+                        }
+                      ],
+                      "DynamicHashes": [
+                        -1516408252
+                      ]
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "DynamicKey": "Progress",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "DynamicKey": "BreakCount",
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "StageAbility_3999401_SSRankEffect",
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "InsertAbilityPriority": "MonsterInsertAttackSelf"
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.ShowBattleWhiteboxText",
+                  "TextContent": "当前评级为 S\n当前评级进度为 {Progress}/{RankS}"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Modifier_StageAbility_RankEffect"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

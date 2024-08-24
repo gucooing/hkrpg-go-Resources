@@ -1,0 +1,142 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropInitPuzzle",
+          "BoardPath": {
+            "Custom": true,
+            "Key": "DeployPuzzlePrefabPath"
+          },
+          "LocalPosition": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0
+          }
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "TutorialStart"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PropStartPuzzle",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PlayScreenTransfer",
+          "Mode": "SwitchOut",
+          "CustomTime": 0.3
+        },
+        {
+          "$type": "RPG.GameCore.ActiveVirtualCamera",
+          "LevelAreaCameraKey": {
+            "Custom": true,
+            "Key": "Camera_Start"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PropTriggerAnimState",
+          "AnimStateName": "Show",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+            "FetchType": "SinglePropByPropKey",
+            "SinglePropKey": {
+              "Custom": true,
+              "Key": "Hint"
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PlayScreenTransfer",
+          "CustomTime": 0.3
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "TutorialFinish"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PlayScreenTransfer",
+          "Mode": "SwitchOut",
+          "CustomTime": 0.3
+        },
+        {
+          "$type": "RPG.GameCore.ActiveVirtualCamera",
+          "LevelAreaCameraKey": {
+            "Custom": true,
+            "Key": "Camera_Start"
+          },
+          "IsActive": false
+        },
+        {
+          "$type": "RPG.GameCore.DeployPuzzleFinished",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PropTriggerAnimState",
+          "AnimStateName": "Default",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+            "FetchType": "SinglePropByPropKey",
+            "SinglePropKey": {
+              "Custom": true,
+              "Key": "Hint"
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PlayScreenTransfer",
+          "CustomTime": 0.5
+        },
+        {
+          "$type": "RPG.GameCore.PropReqInteract",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "InteractID": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1010
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "DeployPuzzlePrefabPath"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Camera_Start"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Hint"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "CustomString_TriggerEffect"
+      }
+    ]
+  }
+}

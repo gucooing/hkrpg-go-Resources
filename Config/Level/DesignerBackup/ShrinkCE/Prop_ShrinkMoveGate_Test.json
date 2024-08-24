@@ -1,0 +1,81 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropSetupUITrigger",
+          "ButtonText": {
+            "Hash": 965521453
+          },
+          "ButtonCallback": [
+            {
+              "$type": "RPG.GameCore.CartoonScreenTransfer",
+              "TargetEntity": {
+                "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+              },
+              "AttachPoint": "CameraRoot",
+              "Duration": 1,
+              "AnimationCurvePath": "Camera/BlendCurve/Blend_N1FastToSlow.asset"
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.5
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.SwitchCharacterAnchor",
+              "IsLocalPlayer": true,
+              "CharacterUniqueName": "LocalPlayer",
+              "LevelAreaKey": {
+                "Custom": true,
+                "Key": "MoveTo"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.CartoonScreenTransfer",
+              "TargetEntity": {
+                "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer"
+              },
+              "AttachPoint": "CameraRoot",
+              "Duration": 1,
+              "AnimationCurvePath": "Camera/BlendCurve/Blend_SlowToFast.asset",
+              "Close": true
+            }
+          ],
+          "OverrideTargetTypes": [],
+          "TriggerByFakeAvatar": true,
+          "SkipFakeAvatar": false,
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          }
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.SetPropSpecialVisionConfig",
+          "SpecialVisionConfigs": [
+            {
+              "TargetIsOwner": true,
+              "StencilRefGBuffer": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "MoveTo"
+      }
+    ]
+  }
+}

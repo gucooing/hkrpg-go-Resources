@@ -1,0 +1,224 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.CreateProp",
+          "GroupID": {
+            "fixedValue": {
+              "Value": 157.0000000365544
+            }
+          },
+          "GroupPropID": {
+            "fixedValue": {
+              "Value": 300001.0000698494
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.CreateNPC",
+          "GroupID": {
+            "fixedValue": {
+              "Value": 157.0000000365544
+            }
+          },
+          "GroupNpcID": {
+            "fixedValue": {
+              "Value": 400001.0000931325
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PhotoGraphAimTarget",
+          "AimTargetType": {
+            "$type": "RPG.GameCore.TargetConcat",
+            "Targets": [
+              {
+                "$type": "RPG.GameCore.TargetFetchAdvNPC",
+                "MultiGroupFetch": [
+                  {
+                    "GroupID": 157,
+                    "GroupNpcID": 400001
+                  }
+                ]
+              },
+              {
+                "$type": "RPG.GameCore.TargetFetchAdvProp",
+                "MultiGroupFetch": [
+                  {
+                    "GroupID": {
+                      "fixedValue": {
+                        "Value": 157.0000000365544
+                      }
+                    },
+                    "ID": {
+                      "fixedValue": {
+                        "Value": 300001.0000698494
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "IsAim": true,
+          "AimIdentifyType": "Manual",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PhotoGraphWaitIdentifyFinish",
+          "WaitTargetType": {
+            "$type": "RPG.GameCore.TargetConcat",
+            "Targets": [
+              {
+                "$type": "RPG.GameCore.TargetFetchAdvNPC",
+                "MultiGroupFetch": [
+                  {
+                    "GroupID": 157,
+                    "GroupNpcID": 400001
+                  }
+                ]
+              },
+              {
+                "$type": "RPG.GameCore.TargetFetchAdvProp",
+                "MultiGroupFetch": [
+                  {
+                    "GroupID": {
+                      "fixedValue": {
+                        "Value": 157.0000000365544
+                      }
+                    },
+                    "ID": {
+                      "fixedValue": {
+                        "Value": 300001.0000698494
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "WaitAll": true,
+          "OnIdentifyFailed": [
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "301020410_fail"
+              },
+              "TaskEnabled": true
+            }
+          ],
+          "OnPreviewFinish": [
+            {
+              "$type": "RPG.GameCore.PhotoGraphAimTarget",
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetConcat",
+                "Targets": [
+                  {
+                    "$type": "RPG.GameCore.TargetFetchAdvNPC",
+                    "MultiGroupFetch": [
+                      {
+                        "GroupID": 157,
+                        "GroupNpcID": 400001
+                      }
+                    ]
+                  },
+                  {
+                    "$type": "RPG.GameCore.TargetFetchAdvProp",
+                    "MultiGroupFetch": [
+                      {
+                        "GroupID": {
+                          "fixedValue": {
+                            "Value": 157.0000000365544
+                          }
+                        },
+                        "ID": {
+                          "fixedValue": {
+                            "Value": 300001.0000698494
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SwitchPhotoGraphMode",
+              "ExitWhenPreViewDialogFinish": true,
+              "IdentifyRadiusOverride": {},
+              "InitFov": -1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "Mission_301020410"
+              },
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "Mission_301020410"
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.FinishPerformanceMission",
+          "Key": "Mission_301020410",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "Order": 1,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "301020410_fail"
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.ToastPile",
+          "ImgPath": "SpriteOutput/UI/MobilePhone/TextPanel.png",
+          "DescTextID": {
+            "Hash": 1553609823
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Mission"
+}

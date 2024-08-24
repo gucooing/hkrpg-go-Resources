@@ -1,0 +1,675 @@
+{
+  "AbilityList": [
+    {
+      "Name": "W_BattleEvent_Vanish_Skill03_Phase01",
+      "TargetInfo": {
+        "TargetType": "SkillTargetEntityList"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Welt/Eff_Avatar_Welt_00_Skill01_Hit.prefab"
+        },
+        {
+          "$type": "RPG.GameCore.MakeCharacterHUDVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 0.5
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareTargetCount",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllDarkTeam"
+                },
+                "AliveOnly": true,
+                "Number": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                },
+                "CompareType": "Greater"
+              },
+              {
+                "$type": "RPG.GameCore.ByIsTargetValid",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AbilityTargetEntity"
+                }
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": 0.2
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAbility",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AbilityInherentTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AbilityName": "W_BattleEvent_Vanish_Start"
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.CharacterLeaveStage",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "ReasonKey": "Vanish",
+              "RefreshFormation": false
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": 0.5
+            },
+            {
+              "$type": "RPG.GameCore.DestroyBattleCharacter",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 0.5
+        }
+      ]
+    },
+    {
+      "Name": "W_BattleEvent_Vanish_Skill03_EnterReady",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AlignTargetToTeamCenter",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": 0.1
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "TargetType": "DarkTeamCenter"
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "SelectDarkTeamEntity",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0,
+                "Y": 1,
+                "Z": -5
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0,
+                "Y": 1,
+                "Z": 0
+              },
+              "FollowRadius": 3.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "BlendCut_00to1",
+              "BlendTime": 1
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "W_BattleEvent_Vanish_Start",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.CharacterLeaveStage",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "ReasonKey": "Vanish",
+          "RefreshFormation": false
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "Visible": true
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByProperty",
+          "DynamicKey": "TargetSpeed",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "Value": "BaseSpeed"
+        },
+        {
+          "$type": "RPG.GameCore.CreateBattleEvent",
+          "EventID": 96001,
+          "PropertyFromTarget": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "DynamicValues": {
+            "TargetSpeed": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAJ",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  1981308670
+                ]
+              }
+            }
+          },
+          "OnBattleEventCreate": [
+            {
+              "$type": "RPG.GameCore.SetDynamicEntityParam",
+              "DynamicKey": "Vanish_Target",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "ParamTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "BattleEventAbility_Vanish_CountDown": {
+          "_CallbackList": {
+            "OnPhase1": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsTargetValid",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetSequence",
+                          "Sequence": [
+                            {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            {
+                              "$type": "RPG.GameCore.TargetMapDynamicEntityParam",
+                              "DynamicKey": "Vanish_Target"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareTargetCount",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "AllDarkTeam"
+                        },
+                        "AliveOnly": true,
+                        "Number": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 5
+                          }
+                        },
+                        "CompareType": "Less"
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.CharacterReenterStage",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetSequence",
+                        "Sequence": [
+                          {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          {
+                            "$type": "RPG.GameCore.TargetMapDynamicEntityParam",
+                            "DynamicKey": "Vanish_Target"
+                          }
+                        ]
+                      },
+                      "ReasonKey": "Vanish"
+                    },
+                    {
+                      "$type": "RPG.GameCore.VCameraConfigChange",
+                      "CameraConfig": {
+                        "NormalConfig": {
+                          "CameraState": "SelectDarkTeamEntity",
+                          "AnchorTargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "DarkTeamCenter"
+                          },
+                          "IsLocalOffset": true,
+                          "AnchorOffset": {
+                            "X": 0,
+                            "Y": 1,
+                            "Z": -3
+                          },
+                          "AimTargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "DarkTeamCenter"
+                          },
+                          "AimOffset": {
+                            "X": 0,
+                            "Y": 1,
+                            "Z": 0
+                          },
+                          "FollowRadius": 4
+                        },
+                        "BlendConfig": {
+                          "BlendType": "Custom",
+                          "CustomCurveName": "BlendCut_00to1",
+                          "BlendTime": 1
+                        },
+                        "ShowEntityConfig": {
+                          "ShowTargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AllDarkTeam"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetSequence",
+                        "Sequence": [
+                          {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          {
+                            "$type": "RPG.GameCore.TargetMapDynamicEntityParam",
+                            "DynamicKey": "Vanish_Target"
+                          }
+                        ]
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Welt/Eff_Avatar_Welt_00_Skill01_Hit.prefab"
+                    },
+                    {
+                      "$type": "RPG.GameCore.WaitSecond",
+                      "WaitTime": 1
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.DestroyBattleCharacter",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetSequence",
+                        "Sequence": [
+                          {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          {
+                            "$type": "RPG.GameCore.TargetMapDynamicEntityParam",
+                            "DynamicKey": "Vanish_Target"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.DestroyBattleCharacter",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  }
+                }
+              ]
+            },
+            "OnStack": {
+              "CallbackConfig": []
+            },
+            "OnModifierAdd": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetActionDelay",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "NormalizedValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 2
+                    }
+                  }
+                }
+              ]
+            },
+            "OnTeamMemberRemove": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsTargetValid",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByHaveEnemyAlive",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        }
+                      }
+                    ]
+                  },
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.DestroyBattleCharacter",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetSequence",
+                        "Sequence": [
+                          {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          {
+                            "$type": "RPG.GameCore.TargetMapDynamicEntityParam",
+                            "DynamicKey": "Vanish_Target"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.ForceKill",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Name": "BattleEventAbility_Vanish_Revert",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "BattleEventAbility_Vanish_CountDown"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "W_BattleEvent_Vanish_00_PassiveAbility": {
+          "BehaviorFlagList": [
+            "BlockDamage",
+            "Stealth"
+          ],
+          "_CallbackList": {
+            "OnCreate": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetEntityUnselectable",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Unselectable": true
+                }
+              ]
+            },
+            "OnModifierAdd": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.DispelStatus",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "BuffType": "Buff"
+                },
+                {
+                  "$type": "RPG.GameCore.DispelStatus",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.DispelStatus",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "BuffType": "Other"
+                }
+              ]
+            }
+          }
+        },
+        "W_BattleEvent_Vanish_BanBPSkill": {
+          "_CallbackList": {
+            "OnStack": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AttachSkillTypeDisable",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Types": [
+                    "Skill"
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "SpeedDelta",
+                  "PropertyValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": -1000
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "W_BattleEvent_Vanish_Charge": {
+          "_CallbackList": {
+            "OnCreate": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.ModifySPNew",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "FixedAddValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Name": "W_BattleEvent_Vanish_PassiveSkill01",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "W_BattleEvent_Vanish_00_PassiveAbility"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "W_BattleEvent_Vanish_Charge"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Monster_Mecha04_Vanish_Break": {
+          "_CallbackList": {
+            "OnCreate": {
+              "CallbackConfig": []
+            },
+            "OnBeforeHitAll": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.ModifyDamageData",
+                  "Attacker_AllDamageTypeAddedRatio": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.5000000004656613
+                    }
+                  }
+                }
+              ]
+            },
+            "OnBeingBreak": {
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "DynamicKey": "WMonster_W1_Mecha_02_AIFlag_P2",
+                  "ResetValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllEnemy"
+                  },
+                  "ModifierName": "Sign_W1_Mecha02",
+                  "OnlyRemoveCasterAdded": true
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Name": "Monster_W1_Mecha04_00_VanishTestAbility",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "Monster_Mecha04_Vanish_Break"
+        }
+      ]
+    }
+  ],
+  "GlobalModifiers": {}
+}

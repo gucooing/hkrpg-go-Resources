@@ -1,0 +1,275 @@
+{
+  "AbilityList": [
+    {
+      "Modifiers": {
+        "WModifier_BattleEventAbility_Challenge_LevelBuff3": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "DynamicKey": "BattleEvent_P1_ADF",
+                  "ResetValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -142090201
+                      ]
+                    }
+                  },
+                  "ContextScope": "TargetEntity"
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "ModifierName": "WModifier_BattleEventAbility_Challenge_LevelBuff3_01",
+                  "InheritCaster": "TargetSelf"
+                }
+              ]
+            }
+          ],
+          "Stacking": "ReplaceByCaster"
+        },
+        "WModifier_BattleEventAbility_Challenge_LevelBuff3_01": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.OwnerEntityAddAbility",
+                  "AbilityName": "W_BattleEventAbility_Challenge_SummonTest_3_InsertDamage"
+                }
+              ]
+            },
+            {
+              "Event": "OnTriggerDeath",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "WModifier_BattleEventAbility_Challenge_InsertKillMark"
+                }
+              ]
+            },
+            {
+              "Event": "OnAfterAttack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.TriggerAbility",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "AbilityInherentTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "AbilityName": "W_BattleEventAbility_Challenge_SummonTest_3_InsertDamage",
+                  "IsSkillPerform": true
+                }
+              ]
+            },
+            {
+              "Event": "OnTriggerBreak",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "WModifier_TriggerBreakCount",
+                  "LayerAddWhenStack": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "W_BattleEventAbility_Challenge_SummonTest_3",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "WModifier_BattleEventAbility_Challenge_LevelBuff3"
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-142090201": {
+            "ReadInfo": {
+              "Type": "None",
+              "Str": "#BattleEvent"
+            }
+          }
+        }
+      }
+    },
+    {
+      "Name": "W_BattleEventAbility_Challenge_SummonTest_3_InsertDamage",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "ModifierName": "WModifier_TriggerBreakCount",
+          "ValueType": "Layer",
+          "Multiplier": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "DynamicKey": "MDF_BreakCount_Get"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "ModifierName": "WModifier_TriggerBreakCount"
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "DynamicKey": "MDF_BreakCount_Get",
+            "CompareType": "Greater",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.LoopExecuteTaskList",
+              "MaxLoopCount": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 3
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.RandomConfig",
+                  "OddsList": [
+                    {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  ],
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.DamageByAttackProperty",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllDarkTeam"
+                      },
+                      "AttackProperty": {
+                        "DamageType": {
+                          "SourceType": "ReadTargetType",
+                          "DamageType": "Physical",
+                          "ReadTargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          }
+                        },
+                        "DamagePercentage": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              546201620
+                            ]
+                          }
+                        },
+                        "AttackType": "Pursued",
+                        "HitAnimation": "Hit_H",
+                        "HitEffect": "Effects/Eff_Prefab/Eff_BattleEvent/Eff_Rogue_Elation/Eff_BattleEvent_Rogue_Elation_Hit.prefab",
+                        "HitEffectHeight": 1.2
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_Damage_hit2.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.DamagePerformFinish"
+            },
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "DynamicKey": "MDF_BreakCount_Get"
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "WModifier_testFail"
+            }
+          ]
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-723657019": {}
+        }
+      }
+    }
+  ],
+  "GlobalModifiers": {
+    "WModifier_testFail": {},
+    "WModifier_TriggerBreakCount": {
+      "LifeStepMoment": "ModifierPhase1End",
+      "UIConfig": {},
+      "Stacking": "ReplaceByCaster"
+    }
+  }
+}

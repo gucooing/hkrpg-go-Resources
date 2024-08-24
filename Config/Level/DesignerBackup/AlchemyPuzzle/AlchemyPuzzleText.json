@@ -1,0 +1,170 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropInitPuzzle",
+          "BoardPath": {
+            "Custom": true,
+            "Key": "Puzzle"
+          },
+          "LocalPosition": {
+            "X": 0,
+            "Y": 0.5,
+            "Z": 0
+          },
+          "LocalScale": {
+            "X": 0.2,
+            "Y": 0.2,
+            "Z": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Custom": true,
+            "Key": "CustomString"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PropStartPuzzle",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ActiveVirtualCamera",
+          "AreaName": "LevelArea_P90120_F90120003_G2",
+          "AnchorName": "Anchor1",
+          "LevelAreaCameraKey": {
+            "Custom": true,
+            "Key": "Camera"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.LockPlayerControl"
+        },
+        {
+          "$type": "RPG.GameCore.SetLocalPlayerDitherAlpha"
+        },
+        {
+          "$type": "RPG.GameCore.ShowTalkUI",
+          "Show": true,
+          "ShowDialogControlUI": false
+        },
+        {
+          "$type": "RPG.GameCore.PropEnableCollider",
+          "OPType": "TriggerOnly",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+            "FetchType": "SinglePropByPropKey",
+            "SinglePropKey": {
+              "Custom": true,
+              "Key": "Trigger"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropPuzzleEventListener",
+          "FinishCallback": [
+            {
+              "$type": "RPG.GameCore.ActiveVirtualCamera",
+              "AreaName": "LevelArea_P90120_F90120003_G2",
+              "AnchorName": "Anchor1",
+              "LevelAreaCameraKey": {
+                "Custom": true,
+                "Key": "Camera"
+              },
+              "IsActive": false
+            },
+            {
+              "$type": "RPG.GameCore.UnLockPlayerControl"
+            },
+            {
+              "$type": "RPG.GameCore.SetLocalPlayerDitherAlpha",
+              "DitherAlpha": 1,
+              "Duration": 0.2
+            },
+            {
+              "$type": "RPG.GameCore.ShowTalkUI",
+              "ShowDialogControlUI": false
+            },
+            {
+              "$type": "RPG.GameCore.ToastPage",
+              "MessageOne": {
+                "Hash": 362442128
+              }
+            }
+          ],
+          "QuitCallback": [
+            {
+              "$type": "RPG.GameCore.ActiveVirtualCamera",
+              "AreaName": "LevelArea_P90120_F90120003_G2",
+              "AnchorName": "Anchor1",
+              "LevelAreaCameraKey": {
+                "Custom": true,
+                "Key": "Camera"
+              },
+              "IsActive": false
+            },
+            {
+              "$type": "RPG.GameCore.UnLockPlayerControl"
+            },
+            {
+              "$type": "RPG.GameCore.SetLocalPlayerDitherAlpha",
+              "DitherAlpha": 1,
+              "Duration": 0.2
+            },
+            {
+              "$type": "RPG.GameCore.ShowTalkUI",
+              "ShowDialogControlUI": false
+            },
+            {
+              "$type": "RPG.GameCore.PropEnableCollider",
+              "OPType": "TriggerOnly",
+              "Enabled": true,
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                "FetchType": "SinglePropByPropKey",
+                "SinglePropKey": {
+                  "Custom": true,
+                  "Key": "Trigger"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Puzzle"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Camera"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Trigger"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "CustomString"
+      }
+    ]
+  }
+}

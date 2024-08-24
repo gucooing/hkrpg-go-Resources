@@ -1,0 +1,209 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByComparePropState",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+              "FetchType": "SinglePropByPropKey",
+              "SinglePropKey": {
+                "Custom": true,
+                "Key": "Chest"
+              }
+            },
+            "State": "ChestLocked"
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PropInitPuzzle",
+              "BoardPath": {
+                "Custom": true,
+                "Key": "Pillar_Puzzle_Config_Prefab"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "pillar_puzzle_sequence_activate_watch_hint"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.LockPlayerControl"
+        },
+        {
+          "$type": "RPG.GameCore.SetPropInteractBtnSwitch"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 2
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PropPuzzleCustomEventSender",
+          "Event": "PillarPuzzleSequenceActivateWithHint"
+        },
+        {
+          "$type": "RPG.GameCore.SetPropInteractBtnSwitch",
+          "SwitchState": true
+        },
+        {
+          "$type": "RPG.GameCore.UnLockPlayerControl"
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "pillar_puzzle_sequence_activate_skip_hint"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SetPropInteractBtnSwitch"
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 2
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.PropPuzzleCustomEventSender",
+          "Event": "PillarPuzzleSequenceActivateSkipHint"
+        },
+        {
+          "$type": "RPG.GameCore.SetPropInteractBtnSwitch",
+          "SwitchState": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropPuzzleEventListener",
+          "FinishCallback": [
+            {
+              "$type": "RPG.GameCore.PropReqInteract",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                "FetchType": "SinglePropByPropID",
+                "SinglePropID": {
+                  "GroupID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 3
+                    }
+                  },
+                  "ID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 300001
+                    }
+                  }
+                }
+              },
+              "InteractID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 111120
+                }
+              }
+            }
+          ],
+          "ResetCallback": [
+            {
+              "$type": "RPG.GameCore.ToastPile",
+              "DescTextID": {
+                "Hash": -905389354
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropStateChangeListenerConfig",
+          "FromState": "ChestLocked",
+          "ToState": "ChestClosed",
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 2
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.PropPuzzleCustomEventSender",
+              "Event": "PillarPuzzleDisappear"
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 5
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.PropClosePuzzle"
+            }
+          ],
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+            "FetchType": "SinglePropByPropKey",
+            "SinglePropKey": {
+              "Custom": true,
+              "Key": "Chest"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Chest"
+      },
+      {
+        "$type": "RPG.GameCore.SharedFloat",
+        "Key": "Chest_Group"
+      },
+      {
+        "$type": "RPG.GameCore.SharedFloat",
+        "Key": "Chest_Prop"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Pillar_Puzzle_Config_Prefab"
+      }
+    ]
+  }
+}

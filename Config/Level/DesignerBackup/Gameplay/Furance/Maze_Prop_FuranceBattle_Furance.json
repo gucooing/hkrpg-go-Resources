@@ -1,0 +1,347 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "State": "Open",
+          "Execute": [
+            {
+              "$type": "RPG.GameCore.TriggerEffectList",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "EffectList": [
+                {
+                  "EffectPath": "Props/DesignerBackup/Chap01_Prop_Floodlight_01/Eff_WarmArea.prefab",
+                  "Scale": {
+                    "X": 1,
+                    "Y": 1,
+                    "Z": 1
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropStateExecute",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "Execute": [
+            {
+              "$type": "RPG.GameCore.PropSetupUITrigger",
+              "ButtonIcon": "SpriteOutput/TalkIcon/CheckIcon.png",
+              "ButtonText": {
+                "Hash": -1435978486
+              },
+              "ButtonCallback": [
+                {
+                  "$type": "RPG.GameCore.StartPropInteractMode",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.ShowTalkUI",
+                  "Show": true
+                },
+                {
+                  "$type": "RPG.GameCore.PlaySimpleTalk",
+                  "SimpleTalkList": [
+                    {
+                      "TalkSentenceID": 900905104
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.WaitSimpleTalkFinish"
+                },
+                {
+                  "$type": "RPG.GameCore.PlayOptionTalk",
+                  "OptionList": [
+                    {
+                      "OptionTextmapID": {
+                        "Hash": 1407225012
+                      },
+                      "OptionIconType": "TriggerProp",
+                      "TriggerCustomString": "Furance_Add01"
+                    },
+                    {
+                      "OptionTextmapID": {
+                        "Hash": 179459187
+                      },
+                      "OptionIconType": "TriggerProp",
+                      "TriggerCustomString": "Furance_Exit"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.ShowTalkUI"
+                }
+              ],
+              "OverrideTargetTypes": [],
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {},
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "Furance_Exit"
+          },
+          "WaitOwnerOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.EndPropInteract"
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "Furance_Add01"
+          },
+          "WaitOwnerOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.EndPropInteract"
+        },
+        {
+          "$type": "RPG.GameCore.StartPropInteractMode",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "Mode": "UsePose02"
+        },
+        {
+          "$type": "RPG.GameCore.PropReqInteract",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "InteractID": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1012
+            }
+          },
+          "OnUICancel": [
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "Furance_Exit"
+              }
+            }
+          ],
+          "OnCheckItemFail": []
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffectList",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          },
+          "EffectList": [
+            {
+              "EffectPath": "Props/DesignerBackup/Chap01_Prop_Floodlight_01/Eff_WarmArea.prefab",
+              "Scale": {
+                "X": 1,
+                "Y": 1,
+                "Z": 1
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.PropEnableCollider",
+          "OPType": "TriggerOnly",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.EndPropInteract"
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropSetupAbilityTrigger",
+          "GroupID": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 13
+            }
+          },
+          "ID": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 300002
+            }
+          },
+          "TargetIsOwner": true,
+          "CustomTriggerName": "CustomTrigger_01",
+          "TriggerTargetTypes": [
+            "NPCMonster"
+          ],
+          "OnTriggerCreate": [
+            {
+              "$type": "RPG.GameCore.AddMazeBuff",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "TaskActionTarget"
+              },
+              "ID": 3999021,
+              "LifeTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": -1
+                }
+              },
+              "Count": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 99
+                }
+              }
+            }
+          ],
+          "OnTriggerDestroy": [
+            {
+              "$type": "RPG.GameCore.RemoveMazeBuff",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "TaskActionTarget"
+              },
+              "ID": 3999021
+            }
+          ],
+          "OnTriggerEnable": [
+            {
+              "$type": "RPG.GameCore.AddMazeBuff",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "TaskActionTarget"
+              },
+              "ID": 3999021,
+              "LifeTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": -1
+                }
+              },
+              "Count": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 99
+                }
+              }
+            }
+          ],
+          "OnTriggerDisable": [
+            {
+              "$type": "RPG.GameCore.RemoveMazeBuff",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "TaskActionTarget"
+              },
+              "ID": 3999021
+            }
+          ],
+          "OnTriggerEnter": [
+            {
+              "$type": "RPG.GameCore.AddMazeBuff",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "TaskActionTarget"
+              },
+              "ID": 3999021,
+              "LifeTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": -1
+                }
+              },
+              "Count": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 99
+                }
+              }
+            }
+          ],
+          "OnTriggerExit": [
+            {
+              "$type": "RPG.GameCore.RemoveMazeBuff",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "TaskActionTarget"
+              },
+              "ID": 3999021
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitPredicateSucc",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetPropAbilityTriggerEnable",
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitPredicateSucc",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetPropAbilityTriggerEnable",
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Furance"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Furance_Eff"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "FeulController"
+      }
+    ]
+  }
+}

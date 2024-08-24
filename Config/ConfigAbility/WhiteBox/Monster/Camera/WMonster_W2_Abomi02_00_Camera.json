@@ -1,0 +1,92 @@
+{
+  "AbilityList": [
+    {
+      "Name": "WMonster_W2_Abomi02_00_Skill01_Camera",
+      "TargetInfo": {
+        "TargetType": "SkillTargetEntityList",
+        "MaxTargetCount": 3
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchCaster"
+          },
+          "AnimStateName": "Skill01"
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "CasterToTargetPerform",
+              "TemplateName": "Monster_Common_SoloRangeAttack",
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": -1.8,
+                "Y": -0.4,
+                "Z": 2
+              },
+              "AnchorRatio": 1,
+              "AimOffset": {
+                "X": 2.5,
+                "Y": 0,
+                "Z": 0
+              },
+              "AimRatio": 0.01,
+              "FollowDamp": 0.01,
+              "AimDamp": 0.01,
+              "Dutch": 2,
+              "ResetToDefault": false
+            },
+            "AdditiveNormalConfig": {
+              "AnchorOffset": {
+                "X": 0,
+                "Y": 1,
+                "Z": 2.5
+              },
+              "ResetToDefault": false
+            },
+            "BlendConfig": {
+              "BlendType": "Cut"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "WMonster_W2_Abomi02_00_Skill02_Camera",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "CasterToTargetPerform",
+              "TemplateName": "Monster_Common_Summon",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllEnemy"
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllTeamMember"
+              },
+              "ResetToDefault": false
+            },
+            "BlendConfig": {
+              "BlendType": "Cut"
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllTeamMember"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

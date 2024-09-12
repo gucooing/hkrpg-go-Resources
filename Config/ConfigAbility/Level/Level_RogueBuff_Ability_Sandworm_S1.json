@@ -35,6 +35,74 @@
         "StageAbility_615210_Modifier_Sub": {
           "_CallbackList": [
             {
+              "Event": "OnBeforeBeingHitAll",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "BuffNumber",
+                    "CompareType": "Greater",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -1862642832
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -1862642832
+                          ]
+                        }
+                      },
+                      "DynamicKey": "BuffNumber"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAttackType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "AttackTypes": [
+                      "DOT"
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ModifyDamageData",
+                      "Attacker_AllDamageTypeAddedRatio": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQQK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            866240523,
+                            -648181786
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "Event": "OnModifierOnStack",
               "CallbackConfig": [
                 {
@@ -49,51 +117,22 @@
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.PredicateTaskList",
-                      "Predicate": {
-                        "$type": "RPG.GameCore.ByContainsParamFlag",
-                        "Flag": "IsModifierAdding"
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
                       },
-                      "SuccessTaskList": [
-                        {
-                          "$type": "RPG.GameCore.AddModifier",
-                          "TargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "ModifierOwnerEntity"
-                          },
-                          "ModifierName": "MLevel_Rogue_DOTTakenUp_S1",
-                          "LayerAddWhenStack": {
-                            "IsDynamic": true,
-                            "PostfixExpr": {
-                              "OpCodes": "AQAK",
-                              "FixedValues": [],
-                              "DynamicHashes": [
-                                462955996
-                              ]
-                            }
-                          }
+                      "ModifierName": "MLevel_Rogue_DOTTakenUp_S1",
+                      "LayerAddWhenStack": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            462955996
+                          ]
                         }
-                      ],
-                      "FailedTaskList": [
-                        {
-                          "$type": "RPG.GameCore.AddModifier",
-                          "TargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "ModifierOwnerEntity"
-                          },
-                          "ModifierName": "MLevel_Rogue_DOTTakenUp_S1",
-                          "LayerAddWhenStack": {
-                            "IsDynamic": true,
-                            "PostfixExpr": {
-                              "OpCodes": "AQAK",
-                              "FixedValues": [],
-                              "DynamicHashes": [
-                                59671469
-                              ]
-                            }
-                          }
-                        }
-                      ]
+                      }
                     }
                   ]
                 }
@@ -112,7 +151,12 @@
           },
           "ModifierName": "StageAbility_615210_Modifier"
         }
-      ]
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-648181786": {}
+        }
+      }
     },
     {
       "Name": "StageAbility_615220",
@@ -1737,6 +1781,61 @@
             "Alias": "Caster"
           },
           "ModifierName": "StageAbility_615245_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "StageAbility_615246_Modifier": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamDark"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MLevel_Rogue_DOTTakenUp_S1",
+                      "LayerAddWhenStack": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            462955996
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "StageAbility_615246",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_615246_Modifier"
         }
       ]
     },

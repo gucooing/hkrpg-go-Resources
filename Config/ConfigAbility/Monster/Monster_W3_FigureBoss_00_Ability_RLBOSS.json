@@ -22,7 +22,8 @@
         "Monster_W3_FigureBoss_00_Initiate": {
           "BehaviorFlagList": [
             "MuteSpeed",
-            "MuteHPChangeCallBack"
+            "MuteHPChangeCallBack",
+            "ResistDebuff"
           ],
           "_CallbackList": [
             {
@@ -404,6 +405,7 @@
             },
             {
               "Event": "OnEnterBattle",
+              "Priority": -91,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RetargetList",
@@ -545,12 +547,6 @@
                   }
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "DefineHPSharedGroup"
             }
           ]
         },
@@ -3493,6 +3489,9 @@
                 "Alias": "AllDarkTeam"
               },
               "ModifierName": "Monster_W3_FigureBoss_00_Common_TheChosenOneEffect"
+            },
+            {
+              "$type": "RPG.GameCore.WaitSkillPerformAbilityFinish"
             }
           ]
         }
@@ -4892,6 +4891,9 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "$type": "RPG.GameCore.WaitSkillPerformAbilityFinish"
                 }
               ]
             },
@@ -5031,6 +5033,7 @@
       "_CallbackList": [
         {
           "Event": "OnLimboWaitHeal",
+          "Priority": -90,
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.DebugLog",
@@ -5332,12 +5335,6 @@
               ]
             }
           ]
-        }
-      ],
-      "_PriorityList": [
-        {
-          "PriorityName": "LimboWaitHealPriority",
-          "Key": "ChangePhase"
         }
       ]
     },

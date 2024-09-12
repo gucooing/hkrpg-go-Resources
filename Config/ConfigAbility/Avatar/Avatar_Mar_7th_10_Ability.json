@@ -437,20 +437,20 @@
           "$type": "RPG.GameCore.DamagePerformFinish"
         },
         {
-          "$type": "RPG.GameCore.SetDynamicValue",
-          "ContextScope": "ContextCaster",
-          "Value": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQABAQIK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                958546626,
-                -380229800
-              ]
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "Mar_7th_10_GainEnergyWithCheck",
+          "DynamicValues": {
+            "Arg0_AddValue": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -380229800
+                ]
+              }
             }
-          },
-          "DynamicKey": "EnergyBar_CurEnergy"
+          }
         },
         {
           "$type": "RPG.GameCore.SkillPerformFinish"
@@ -1027,20 +1027,20 @@
           "$type": "RPG.GameCore.DamagePerformFinish"
         },
         {
-          "$type": "RPG.GameCore.SetDynamicValue",
-          "ContextScope": "ContextCaster",
-          "Value": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQABAQIK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                958546626,
-                836291279
-              ]
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "Mar_7th_10_GainEnergyWithCheck",
+          "DynamicValues": {
+            "Arg0_AddValue": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  836291279
+                ]
+              }
             }
-          },
-          "DynamicKey": "EnergyBar_CurEnergy"
+          }
         }
       ]
     },
@@ -1852,19 +1852,24 @@
           "$type": "RPG.GameCore.DamagePerformFinish"
         },
         {
-          "$type": "RPG.GameCore.SetDynamicValue",
-          "Value": {
-            "IsDynamic": true,
-            "PostfixExpr": {
-              "OpCodes": "AQABAQMK",
-              "FixedValues": [],
-              "DynamicHashes": [
-                958546626,
-                -1119705798
-              ]
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "Mar_7th_10_GainEnergyWithCheck",
+          "DynamicValues": {
+            "Arg0_AddValue": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AAABAAMK",
+                "FixedValues": [
+                  {
+                    "Value": 0
+                  }
+                ],
+                "DynamicHashes": [
+                  -1119705798
+                ]
+              }
             }
-          },
-          "DynamicKey": "EnergyBar_CurEnergy"
+          }
         },
         {
           "$type": "RPG.GameCore.RemoveModifier",
@@ -2814,6 +2819,7 @@
             },
             {
               "Event": "OnEnterBattle",
+              "Priority": 999999,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -2885,12 +2891,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "AfterAllEnterBattle"
             }
           ]
         },
@@ -3303,6 +3303,14 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.ResetHeadLookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "StopImmediately": true
+        },
+        {
           "$type": "RPG.GameCore.WaitSecond",
           "WaitTime": {
             "IsDynamic": false,
@@ -3437,6 +3445,14 @@
       },
       "OnStart": [
         {
+          "$type": "RPG.GameCore.ResetHeadLookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "StopImmediately": true
+        },
+        {
           "$type": "RPG.GameCore.AlignTargetToTeamCenter",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -3456,7 +3472,7 @@
           "CenterOffset": {
             "X": 0,
             "Y": 0,
-            "Z": -10
+            "Z": -9
           },
           "TargetFormation": {
             "Yaw": 180
@@ -3475,8 +3491,9 @@
           "CenterOffset": {
             "X": -7.35,
             "Y": 0,
-            "Z": 12.5
+            "Z": 13.5
           },
+          "SetBodyPartPos": true,
           "TargetFormation": {
             "Yaw": 160
           }
@@ -4149,70 +4166,6 @@
                           "CurrentState": "Normal"
                         }
                       ]
-                    },
-                    {
-                      "$type": "RPG.GameCore.PredicateTaskList",
-                      "Predicate": {
-                        "$type": "RPG.GameCore.ByAnd",
-                        "PredicateList": [
-                          {
-                            "$type": "RPG.GameCore.ByCompareDynamicValue",
-                            "DynamicKey": "EnergyBar_CurEnergy",
-                            "CompareType": "GreaterEqual",
-                            "CompareValue": {
-                              "IsDynamic": true,
-                              "PostfixExpr": {
-                                "OpCodes": "AQAK",
-                                "FixedValues": [],
-                                "DynamicHashes": [
-                                  -1119705798
-                                ]
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      "SuccessTaskList": [
-                        {
-                          "$type": "RPG.GameCore.PredicateTaskList",
-                          "Predicate": {
-                            "$type": "RPG.GameCore.ByIsTurnOwnerEntity",
-                            "TargetType": {
-                              "$type": "RPG.GameCore.TargetAlias",
-                              "Alias": "Caster"
-                            }
-                          },
-                          "SuccessTaskList": [
-                            {
-                              "$type": "RPG.GameCore.ModifyCurrentSkillDelayCost",
-                              "NormalizedValue": {
-                                "IsDynamic": false,
-                                "FixedValue": {
-                                  "Value": 0
-                                }
-                              },
-                              "ModifyFunction": "Set"
-                            }
-                          ]
-                        },
-                        {
-                          "$type": "RPG.GameCore.SetActionDelay",
-                          "TargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "Caster"
-                          },
-                          "Value": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 0
-                            }
-                          }
-                        },
-                        {
-                          "$type": "RPG.GameCore.IncludeTaskListTemplate",
-                          "Name": "Mar_7th_10_GetEnhance"
-                        }
-                      ]
                     }
                   ]
                 }
@@ -4222,6 +4175,7 @@
           "_CallbackList": [
             {
               "Event": "OnPhase1",
+              "Priority": 100,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4278,7 +4232,8 @@
                         "TargetType": {
                           "$type": "RPG.GameCore.TargetAlias",
                           "Alias": "Caster"
-                        }
+                        },
+                        "IncludeUnselectable": true
                       }
                     }
                   ]
@@ -4369,7 +4324,8 @@
                             "TargetType": {
                               "$type": "RPG.GameCore.TargetAlias",
                               "Alias": "Caster"
-                            }
+                            },
+                            "IncludeUnselectable": true
                           }
                         }
                       ]
@@ -4380,6 +4336,7 @@
             },
             {
               "Event": "OnEnterBattle",
+              "Priority": 999999,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.IncludeTaskListTemplate",
@@ -4498,7 +4455,8 @@
                             "TargetType": {
                               "$type": "RPG.GameCore.TargetAlias",
                               "Alias": "Caster"
-                            }
+                            },
+                            "IncludeUnselectable": true
                           }
                         }
                       ]
@@ -4506,16 +4464,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "AfterAllEnterBattle"
-            },
-            {
-              "PriorityName": "Phase1Priority",
-              "Key": "AvatarPassiveAfterDamage"
             }
           ],
           "TaskListTemplate": [
@@ -4853,6 +4801,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -80,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4888,12 +4837,6 @@
                 }
               ]
             }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "CharacterBuff"
-            }
           ]
         }
       },
@@ -4918,6 +4861,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -80,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4933,29 +4877,24 @@
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "Value": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQABAQIK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            958546626,
-                            462955996
-                          ]
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "Mar_7th_10_GainEnergyWithCheck",
+                      "DynamicValues": {
+                        "Arg0_AddValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              462955996
+                            ]
+                          }
                         }
-                      },
-                      "DynamicKey": "EnergyBar_CurEnergy"
+                      }
                     }
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "CharacterBuff"
             }
           ]
         }
@@ -4981,6 +4920,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -80,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -5019,12 +4959,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "CharacterBuff"
             }
           ]
         }
@@ -5600,14 +5534,6 @@
               "Event": "OnListenBeforeSkillUse",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.RemoveModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllEnemyWithUnSelectable"
-                  },
-                  "ModifierName": "M_Mar_7th_10_Rank02_Mark_Main"
-                },
-                {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
                     "$type": "RPG.GameCore.ByAnd",
@@ -5713,18 +5639,38 @@
           ],
           "_CallbackList": [
             {
-              "Event": "OnListenAllowAction",
+              "Event": "OnCreate",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.RemoveSelfModifier"
-                }
-              ]
-            },
-            {
-              "Event": "OnInsertAbilityFinish",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllEnemyWithUnSelectable - ModifierOwnerEntity"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": "M_Mar_7th_10_Rank02_Mark_Main"
+                  },
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 99
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.RemoveModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "M_Mar_7th_10_Rank02_Mark_Main"
+                    }
+                  ]
                 }
               ]
             }
@@ -6041,20 +5987,20 @@
           "Event": "OnAfterAttack",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.SetDynamicValue",
-              "ContextScope": "ContextCaster",
-              "Value": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQABAQIK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    958546626,
-                    1130654476
-                  ]
+              "$type": "RPG.GameCore.IncludeTaskListTemplate",
+              "Name": "Mar_7th_10_GainEnergyWithCheck",
+              "DynamicValues": {
+                "Arg0_AddValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      1130654476
+                    ]
+                  }
                 }
-              },
-              "DynamicKey": "EnergyBar_CurEnergy"
+              }
             },
             {
               "$type": "RPG.GameCore.SetDynamicValue",
@@ -6111,20 +6057,20 @@
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "ContextScope": "ContextCaster",
-                  "Value": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQABAQIK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        958546626,
-                        1130654476
-                      ]
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "Mar_7th_10_GainEnergyWithCheck",
+                  "DynamicValues": {
+                    "Arg0_AddValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1130654476
+                        ]
+                      }
                     }
-                  },
-                  "DynamicKey": "EnergyBar_CurEnergy"
+                  }
                 }
               ]
             },
@@ -6347,7 +6293,6 @@
           ]
         }
       ],
-      "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
           "-1266164220": {}
@@ -6548,6 +6493,15 @@
       ],
       "_CallbackList": [
         {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.IncludeTaskListTemplate",
+              "Name": "Mar_7th_10_InsertRetarget"
+            }
+          ]
+        },
+        {
           "Event": "OnListenAllowAction",
           "CallbackConfig": [
             {
@@ -6557,58 +6511,11 @@
         },
         {
           "Event": "OnEnterBattle",
+          "Priority": -55,
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.Retarget",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllEnemy"
-              },
-              "Predicate": {
-                "$type": "RPG.GameCore.ByIsTargetValid",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
-                "AliveOnly": true
-              },
-              "ByRandom": true,
-              "MaxNumber": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              },
-              "TaskList": [
-                {
-                  "$type": "RPG.GameCore.TurnInsertAbility",
-                  "AbilityName": "Avatar_Mar_7th_10_Rank02_Insert_SelectTarget",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "Caster"
-                  },
-                  "AbilityTarget": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllEnemy"
-                  },
-                  "AbortBehaviorFlags": [
-                    "STAT_CTRL",
-                    "DisableAction"
-                  ],
-                  "InsertAbilityPriority": "AvatarInsertAttackSelf",
-                  "ShowInActionBar": true,
-                  "PreCheck": {
-                    "$type": "RPG.GameCore.TurnInsertAbilityCondition",
-                    "Type": "AbilityOwnerInsertUnusedCount",
-                    "Count": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 1
-                      }
-                    }
-                  }
-                }
-              ]
+              "$type": "RPG.GameCore.IncludeTaskListTemplate",
+              "Name": "Mar_7th_10_InsertRetarget"
             }
           ]
         },
@@ -6616,62 +6523,34 @@
           "Event": "OnCustomEvent",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.Retarget",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllEnemy"
-              },
-              "Predicate": {
-                "$type": "RPG.GameCore.ByIsTargetValid",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
-                "AliveOnly": true
-              },
-              "ByRandom": true,
-              "MaxNumber": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              },
-              "TaskList": [
-                {
-                  "$type": "RPG.GameCore.TurnInsertAbility",
-                  "AbilityName": "Avatar_Mar_7th_10_Rank02_Insert_SelectTarget",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "Caster"
-                  },
-                  "AbilityTarget": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllEnemy"
-                  },
-                  "AbortBehaviorFlags": [
-                    "STAT_CTRL",
-                    "DisableAction"
-                  ],
-                  "InsertAbilityPriority": "AvatarInsertAttackSelf",
-                  "ShowInActionBar": true,
-                  "PreCheck": {
-                    "$type": "RPG.GameCore.TurnInsertAbilityCondition",
-                    "Type": "AbilityOwnerInsertUnusedCount",
-                    "Count": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 1
-                      }
-                    }
-                  }
-                }
-              ]
+              "$type": "RPG.GameCore.IncludeTaskListTemplate",
+              "Name": "Mar_7th_10_InsertRetarget"
             }
           ]
         },
         {
           "Event": "OnWaveMonster",
           "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.IncludeTaskListTemplate",
+              "Name": "Mar_7th_10_InsertRetarget"
+            }
+          ]
+        },
+        {
+          "Event": "OnListenInsertAbilityFinish",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.IncludeTaskListTemplate",
+              "Name": "Mar_7th_10_InsertRetarget"
+            }
+          ]
+        }
+      ],
+      "TaskListTemplate": [
+        {
+          "Name": "Mar_7th_10_InsertRetarget",
+          "TaskList": [
             {
               "$type": "RPG.GameCore.Retarget",
               "TargetType": {
@@ -6725,12 +6604,6 @@
               ]
             }
           ]
-        }
-      ],
-      "_PriorityList": [
-        {
-          "PriorityName": "EnterBattlePriority",
-          "Key": "AvatarInsertAbility"
         }
       ]
     }
@@ -6876,6 +6749,107 @@
                   ]
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "Mar_7th_10_GainEnergyWithCheck",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "ContextScope": "ContextCaster",
+          "Value": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQABAQIK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                958546626,
+                1662106773
+              ]
+            }
+          },
+          "DynamicKey": "EnergyBar_CurEnergy"
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "DynamicKey": "EnergyBar_CurEnergy",
+                "CompareType": "GreaterEqual",
+                "CompareValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -1119705798
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsTurnOwnerEntity",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.ModifyCurrentSkillDelayCost",
+                  "NormalizedValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "ModifyFunction": "Set"
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.SetActionDelay",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MAvatar_Mar_7th_10_Enhance",
+              "DynamicValues": {
+                "MDF_PropertyRatio": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      764368463
+                    ]
+                  }
+                }
+              }
             }
           ]
         }

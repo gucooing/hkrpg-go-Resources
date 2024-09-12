@@ -5,7 +5,7 @@
         "StageAbility_615410_Modifier": {
           "_CallbackList": [
             {
-              "Event": "OnListenBreak",
+              "Event": "OnListenCharacterCreate",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -13,75 +13,134 @@
                     "$type": "RPG.GameCore.ByTargetTeam",
                     "TargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity2"
+                      "Alias": "ParamEntity"
                     },
                     "Team": "TeamLight"
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.SetDynamicValueByCopying",
-                      "FromTargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "LevelEntity"
-                      },
-                      "FromDynamicKey": "RogueBuffModifier_HaloMaxLayer",
-                      "ToTargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "ToDynamicKey": "_MaxLayer"
-                    },
-                    {
                       "$type": "RPG.GameCore.AddModifier",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity2"
+                        "Alias": "ParamEntity"
                       },
-                      "ModifierName": "RogueBuffModifier_Halo_S1",
-                      "MaxLayer": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            916155872
-                          ]
-                        }
-                      },
-                      "LayerAddWhenStack": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            462955996
-                          ]
-                        }
-                      },
-                      "DynamicValues": {
-                        "ADF_1": {
-                          "IsDynamic": true,
-                          "PostfixExpr": {
-                            "OpCodes": "AQAK",
-                            "FixedValues": [],
-                            "DynamicHashes": [
-                              59671469
-                            ]
-                          }
-                        },
-                        "ADF_2": {
-                          "IsDynamic": true,
-                          "PostfixExpr": {
-                            "OpCodes": "AQAK",
-                            "FixedValues": [],
-                            "DynamicHashes": [
-                              1625755410
-                            ]
-                          }
-                        }
-                      }
+                      "ModifierName": "StageAbility_615410_Modifier_Sub"
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        },
+        "StageAbility_615410_Modifier_Sub": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByCopying",
+                  "FromTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "FromDynamicKey": "RogueBuffModifier_HaloMaxLayer",
+                  "ToTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ToDynamicKey": "_MaxLayer"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "BuffNumber",
+                    "CompareType": "Greater",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          2029039937
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            2029039937
+                          ]
+                        }
+                      },
+                      "DynamicKey": "BuffNumber"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "RogueBuffModifier_Halo_S1",
+                  "Chance": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQABAQECBAIK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        462955996,
+                        -1862642832,
+                        -648181786
+                      ]
+                    }
+                  },
+                  "MaxLayer": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        916155872
+                      ]
+                    }
+                  },
+                  "LayerAddWhenStack": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "DynamicValues": {
+                    "ADF_1": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          59671469
+                        ]
+                      }
+                    },
+                    "ADF_2": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1625755410
+                        ]
+                      }
+                    }
+                  }
                 }
               ]
             }
@@ -183,7 +242,12 @@
           },
           "ModifierName": "StageAbility_615410_Modifier"
         }
-      ]
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-648181786": {}
+        }
+      }
     },
     {
       "Name": "StageAbility_615420",
@@ -2575,6 +2639,163 @@
     },
     {
       "Modifiers": {
+        "StageAbility_615446_Modifier": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "StageAbility_615446_Modifier_Sub"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "StageAbility_615446_Modifier_Sub": {
+          "_CallbackList": [
+            {
+              "Event": "OnActionPhaseBegin",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "ModifierName": "RogueBuffModifier_Halo_S1"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "RogueBuffModifier_Halo_S1",
+                      "ValueType": "Layer",
+                      "Multiplier": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "DynamicKey": "_Layer"
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "_Layer",
+                        "CompareType": "GreaterEqual",
+                        "CompareValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              462955996
+                            ]
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "StageAbility_615446_Modifier_Effect",
+                          "LifeTime": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                1625755410
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {
+              "1912601768": {}
+            }
+          }
+        },
+        "StageAbility_615446_Modifier_Effect": {
+          "BehaviorFlagList": [
+            "STAT_SpeedUp"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "SpeedAddedRatio",
+                  "PropertyValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        59671469
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "Stacking": "Replace"
+        }
+      },
+      "Name": "StageAbility_615446",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_615446_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
         "StageAbility_615450_Modifier": {
           "_CallbackList": [
             {
@@ -3394,7 +3615,7 @@
       "WorkingTurn": "AnyOneTurn",
       "_CallbackList": [
         {
-          "Event": "OnPhase1",
+          "Event": "OnListenAllowAction",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -3405,7 +3626,7 @@
                     "$type": "RPG.GameCore.ByTargetTeam",
                     "TargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "CurrentTurnOwnerEntity"
+                      "Alias": "ParamEntity"
                     },
                     "Team": "TeamLight"
                   },
@@ -3417,7 +3638,7 @@
                     },
                     "CompareType": {
                       "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "CurrentTurnOwnerEntity"
+                      "Alias": "ParamEntity"
                     },
                     "Inverse": true
                   },
@@ -3425,9 +3646,18 @@
                     "$type": "RPG.GameCore.ByIsBattleEventEntity",
                     "TargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "CurrentTurnOwnerEntity"
+                      "Alias": "ParamEntity"
                     },
                     "ExpectSubType": "AssistEvent",
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ExpectSubType": "DummyCharacter",
                     "Inverse": true
                   }
                 ]
@@ -3437,7 +3667,7 @@
                   "$type": "RPG.GameCore.AddModifier",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "CurrentTurnOwnerEntity"
+                    "Alias": "ParamEntity"
                   },
                   "ModifierName": "RogueBuffModifier_Halo_S1",
                   "MaxLayer": {
@@ -3791,6 +4021,12 @@
                           909827942
                         ]
                       }
+                    },
+                    "isAdd": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
                     }
                   }
                 },
@@ -3808,7 +4044,8 @@
           "1912601768": {},
           "916155872": {},
           "-1736484015": {},
-          "1628897680": {}
+          "1628897680": {},
+          "2085897795": {}
         }
       }
     }

@@ -13,30 +13,11 @@
     "TaskList": [
       {
         "$type": "RPG.GameCore.ST_Side_OverrideVision",
-        "VisionSetName": "DefaultVision_Chase"
+        "VisionSetName": "DefaultVision_Chase",
+        "Visions": []
       }
     ],
-    "TransitionList": [
-      {
-        "Trigger": "OnTick",
-        "TransitionToType": "TreeFail",
-        "Condition": {
-          "$type": "RPG.GameCore.ByAnd",
-          "PredicateList": [
-            {
-              "$type": "RPG.GameCore.ST_ByInAIStatus",
-              "States": [
-                "Attack"
-              ],
-              "Inverse": true
-            },
-            {
-              "$type": "RPG.GameCore.ST_ByExitCombat"
-            }
-          ]
-        }
-      }
-    ],
+    "TransitionList": [],
     "SubStateList": [
       {
         "$type": "RPG.GameCore.StateTreeStateConfig",
@@ -73,7 +54,9 @@
         ],
         "TransitionList": [
           {
-            "TransitionToState": "WaitState"
+            "TransitionToState": "WaitState",
+            "BoolVariableList": [],
+            "FloatVariableList": []
           }
         ],
         "Name": "AttackState"
@@ -100,7 +83,18 @@
                   "Inverse": true
                 }
               ]
-            }
+            },
+            "BoolVariableList": [],
+            "FloatVariableList": []
+          },
+          {
+            "Trigger": "OnTick",
+            "TransitionToType": "TreeFail",
+            "Condition": {
+              "$type": "RPG.GameCore.ST_ByExitCombat"
+            },
+            "BoolVariableList": [],
+            "FloatVariableList": []
           }
         ],
         "SubStateList": [
@@ -131,7 +125,9 @@
             "TransitionList": [
               {
                 "TransitionToType": "NextState",
-                "TransitionToState": "WaitSteer"
+                "TransitionToState": "WaitSteer",
+                "BoolVariableList": [],
+                "FloatVariableList": []
               }
             ],
             "Name": "WaitChase"
@@ -150,7 +146,9 @@
                 "TransitionToType": "TreeFail",
                 "Condition": {
                   "$type": "RPG.GameCore.ST_ByExitCombat"
-                }
+                },
+                "BoolVariableList": [],
+                "FloatVariableList": []
               },
               {
                 "Trigger": "OnTick",
@@ -167,7 +165,9 @@
                       "Inverse": true
                     }
                   ]
-                }
+                },
+                "BoolVariableList": [],
+                "FloatVariableList": []
               }
             ],
             "Name": "WaitSteer"
@@ -176,5 +176,11 @@
         "Name": "WaitState"
       }
     ]
+  },
+  "OnDisable": {
+    "$type": "RPG.GameCore.TaskConfig"
+  },
+  "OnInit": {
+    "$type": "RPG.GameCore.TaskConfig"
   }
 }

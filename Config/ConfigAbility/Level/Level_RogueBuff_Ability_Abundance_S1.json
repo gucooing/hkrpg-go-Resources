@@ -70,6 +70,40 @@
                   },
                   "SuccessTaskList": [
                     {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "BuffNumber",
+                        "CompareType": "Greater",
+                        "CompareValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1625755410
+                            ]
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                1625755410
+                              ]
+                            }
+                          },
+                          "DynamicKey": "BuffNumber"
+                        }
+                      ]
+                    },
+                    {
                       "$type": "RPG.GameCore.AddModifier",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
@@ -80,11 +114,13 @@
                         "Charge_Amount": {
                           "IsDynamic": true,
                           "PostfixExpr": {
-                            "OpCodes": "AQABAQQK",
+                            "OpCodes": "AQABAQECAQMEAgQK",
                             "FixedValues": [],
                             "DynamicHashes": [
                               484176919,
-                              462955996
+                              462955996,
+                              59671469,
+                              -648181786
                             ]
                           }
                         }
@@ -112,7 +148,12 @@
           },
           "ModifierName": "StageAbility_615310_Modifier"
         }
-      ]
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-648181786": {}
+        }
+      }
     },
     {
       "Name": "StageAbility_615320",
@@ -1742,6 +1783,97 @@
     },
     {
       "Modifiers": {
+        "StageAbility_615346_Modifier": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "StageAbility_615346_Modifier_Sub"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "StageAbility_615346_Modifier_Sub": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeHitAll",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDamageTag",
+                    "DamageTagList": [
+                      "Dewdrop"
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ModifyDamageData",
+                      "Attacker_CriticalChance": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            462955996
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.ModifyDamageData",
+                      "Attacker_CriticalDamage": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            59671469
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "StageAbility_615346",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_615346_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
         "StageAbility_615350_Modifier": {
           "_CallbackList": [
             {
@@ -2066,68 +2198,98 @@
             },
             {
               "Event": "OnEnterBattle",
+              "Priority": -90,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareHPRatio",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ModifierOwnerEntity"
-                    },
-                    "CompareType": "Less",
-                    "CompareValue": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAK",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          462955996
-                        ]
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareHPRatio",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "CompareType": "Less",
+                        "CompareValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              462955996
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareHPRatio",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "CompareType": "Greater",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
                       }
-                    }
+                    ]
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "Value": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 0
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "Active_Flag",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
                         }
                       },
-                      "DynamicKey": "Active_Flag"
-                    },
-                    {
-                      "$type": "RPG.GameCore.HealHP",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "FormulaType": "HealByTargetMaxHP",
-                      "HealPercentage": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            59671469
-                          ]
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 0
+                            }
+                          },
+                          "DynamicKey": "Active_Flag"
+                        },
+                        {
+                          "$type": "RPG.GameCore.HealHP",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "FormulaType": "HealByTargetMaxHP",
+                          "HealPercentage": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                59671469
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "$type": "RPG.GameCore.RemoveSelfModifier"
                         }
-                      }
-                    },
-                    {
-                      "$type": "RPG.GameCore.RemoveSelfModifier"
+                      ]
                     }
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "LevelBuff"
             }
           ],
           "DynamicValues": {

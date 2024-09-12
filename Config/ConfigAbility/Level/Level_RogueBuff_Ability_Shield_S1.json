@@ -35,6 +35,36 @@
                               462955996
                             ]
                           }
+                        },
+                        "ADF_2": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              59671469
+                            ]
+                          }
+                        },
+                        "ADF_3": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1625755410
+                            ]
+                          }
+                        },
+                        "BuffNumber": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -648181786
+                            ]
+                          }
                         }
                       },
                       "InheritCaster": "TargetSelf"
@@ -120,16 +150,52 @@
                       "DynamicKey": "_Shield"
                     },
                     {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "BuffNumber",
+                        "CompareType": "Greater",
+                        "CompareValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              909827943
+                            ]
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                909827943
+                              ]
+                            }
+                          },
+                          "DynamicKey": "BuffNumber"
+                        }
+                      ]
+                    },
+                    {
                       "$type": "RPG.GameCore.SetDynamicValue",
                       "Value": {
                         "IsDynamic": true,
                         "PostfixExpr": {
-                          "OpCodes": "AQABAQECBAIK",
+                          "OpCodes": "AQABAQECAQMBBAQCBAIK",
                           "FixedValues": [],
                           "DynamicHashes": [
                             -254826041,
                             1508201202,
-                            909827945
+                            909827945,
+                            -648181786,
+                            909827942
                           ]
                         }
                       },
@@ -249,7 +315,12 @@
           },
           "ModifierName": "StageAbility_615010_Modifier"
         }
-      ]
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-648181786": {}
+        }
+      }
     },
     {
       "Name": "StageAbility_615020",
@@ -2482,6 +2553,97 @@
     },
     {
       "Modifiers": {
+        "StageAbility_615046_Modifier": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "StageAbility_615046_Modifier_Sub"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "StageAbility_615046_Modifier_Sub": {
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeHitAll",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDamageTag",
+                    "DamageTagList": [
+                      "Quake"
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ModifyDamageData",
+                      "Attacker_CriticalChance": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            462955996
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.ModifyDamageData",
+                      "Attacker_CriticalDamage": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            59671469
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "StageAbility_615046",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_615046_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
         "StageAbility_615050_Modifier": {
           "_CallbackList": [
             {
@@ -2571,6 +2733,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -90,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2628,12 +2791,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "LevelBuff"
             }
           ],
           "DynamicValues": {

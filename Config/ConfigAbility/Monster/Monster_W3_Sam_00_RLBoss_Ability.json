@@ -6,6 +6,7 @@
           "_CallbackList": [
             {
               "Event": "OnLimboWaitHeal",
+              "Priority": -90,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.DebugLog",
@@ -15,6 +16,14 @@
                 {
                   "$type": "RPG.GameCore.TriggerAnimState",
                   "AnimStateName": "Stagger"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MMonster_W3_Sam_00_RLBoss_Skill07isAiming"
                 },
                 {
                   "$type": "RPG.GameCore.RemoveModifier",
@@ -230,12 +239,6 @@
                   }
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "LimboWaitHealPriority",
-              "Key": "ChangePhase"
             }
           ]
         },
@@ -1491,6 +1494,14 @@
           "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MMonster_W3_Sam_00_RLBoss_Skill07isAiming"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllLightTeam"
           },
           "ModifierName": "MMonster_W3_Sam_00_RLBoss_Skill07AimTarget"
@@ -2365,6 +2376,14 @@
                 "Alias": "AllLightTeam"
               },
               "ModifierName": "MMonster_W3_Sam_00_RLBoss_BlackBlood"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "MMonster_W3_Sam_00_RLBoss_Skill07isAiming"
             },
             {
               "$type": "RPG.GameCore.RemoveModifier",
@@ -3364,6 +3383,10 @@
       }
     },
     "MMonster_W3_Sam_00_RLBoss_Skill07AimTarget": {
+      "BehaviorFlagList": [
+        "RemoveWhenCasterDead",
+        "AttackSign"
+      ],
       "UIConfig": {
         "UIEffectPath": "UI/Battle/Widget/TeamInfoStatusEff/TeamInfoStatus_Aimed.prefab",
         "UIPosition": "UI_TOP",
@@ -3372,52 +3395,84 @@
       "_CallbackList": [
         {
           "Event": "OnStack",
-          "CallbackConfig": []
-        },
-        {
-          "Event": "OnBeforeDying",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.Retarget",
+              "$type": "RPG.GameCore.AddModifier",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllLightTeam"
+                "Alias": "Caster"
               },
-              "ByRandom": true,
-              "MaxNumber": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 1
-                }
-              },
-              "TaskList": [
-                {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "MMonster_W3_Sam_00_RLBoss_Skill07AimTarget"
-                },
-                {
-                  "$type": "RPG.GameCore.ShowUIPage",
-                  "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
-                  "UITextNodes": [
-                    {
-                      "TextPath": "AreaInfoPanel/Title/Text",
-                      "TextContent": {
-                        "Hash": -1901612770
-                      }
-                    }
-                  ],
-                  "LifeTime": 2
-                }
-              ]
+              "ModifierName": "MMonster_W3_Sam_00_RLBoss_Skill07isAiming"
             }
           ]
         }
       ],
       "Stacking": "Replace"
+    },
+    "MMonster_W3_Sam_00_RLBoss_Skill07isAiming": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenModifierRemove",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                "ModifierName": "MMonster_W3_Sam_00_RLBoss_Skill07AimTarget"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetCompute",
+                    "ComputeType": "Minus",
+                    "Targets": [
+                      {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam"
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      }
+                    ]
+                  },
+                  "ByRandom": true,
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "MMonster_W3_Sam_00_RLBoss_Skill07AimTarget"
+                    },
+                    {
+                      "$type": "RPG.GameCore.ShowUIPage",
+                      "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+                      "UITextNodes": [
+                        {
+                          "TextPath": "AreaInfoPanel/Title/Text",
+                          "TextContent": {
+                            "Hash": -1901612770
+                          }
+                        }
+                      ],
+                      "LifeTime": 2
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   }
 }

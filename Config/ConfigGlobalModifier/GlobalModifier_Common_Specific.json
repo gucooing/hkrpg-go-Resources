@@ -106,6 +106,11 @@
         }
       ]
     },
+    "RedStanceState": {
+      "BehaviorFlagList": [
+        "RedStance"
+      ]
+    },
     "MonsterAllDamageReduce": {
       "_CallbackList": [
         {
@@ -211,14 +216,68 @@
                       ],
                       "FailedTaskList": [
                         {
-                          "$type": "RPG.GameCore.ModifierAttachEffect",
-                          "TargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "ModifierOwnerEntity"
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByAnd",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByCompareCharacterID",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "DamageAttackerEntity"
+                                },
+                                "TargetCharacterID": {
+                                  "IsDynamic": false,
+                                  "FixedValue": {
+                                    "Value": 1303
+                                  }
+                                }
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByCompareCharacterID",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "CurrentTurnActionEntity"
+                                },
+                                "TargetCharacterID": {
+                                  "IsDynamic": false,
+                                  "FixedValue": {
+                                    "Value": 1220
+                                  }
+                                }
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByIsContainModifier",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "CurrentTurnActionEntity"
+                                },
+                                "ModifierName": "MAvatar_Feixiao_00_Ultramode"
+                              }
+                            ]
                           },
-                          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Ice.prefab",
-                          "MinMutexTime": -1,
-                          "MutexType": "Entity"
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.TriggerEffect",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ModifierOwnerEntity"
+                              },
+                              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Feixiao_00/Eff_Avatar_Feixiao_00_Common_StanceBreak_01.prefab"
+                            }
+                          ],
+                          "FailedTaskList": [
+                            {
+                              "$type": "RPG.GameCore.ModifierAttachEffect",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ModifierOwnerEntity"
+                              },
+                              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Ice.prefab",
+                              "MinMutexTime": -1,
+                              "MutexType": "Entity"
+                            }
+                          ]
                         }
                       ]
                     }
@@ -405,12 +464,53 @@
                       "MutexType": "Entity"
                     },
                     {
-                      "$type": "RPG.GameCore.TriggerEffect",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByCompareCharacterID",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "DamageAttackerEntity"
+                            },
+                            "TargetCharacterID": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 1220
+                              }
+                            }
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByIsContainModifier",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "DamageAttackerEntity"
+                            },
+                            "ModifierName": "MAvatar_Feixiao_00_Ultramode"
+                          }
+                        ]
                       },
-                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Wind.prefab"
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Feixiao_00/Eff_Avatar_Feixiao_00_Common_StanceBreak_01.prefab"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Wind.prefab"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -6881,6 +6981,7 @@
       "_CallbackList": [
         {
           "Event": "OnPhase1",
+          "Priority": -12,
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.LevelChallengeTurnAcc"
@@ -7034,12 +7135,6 @@
           ]
         }
       ],
-      "_PriorityList": [
-        {
-          "PriorityName": "Phase1Priority",
-          "Key": "TurnLimitCheck"
-        }
-      ],
       "DynamicValues": {
         "Values": {
           "-15267545": {}
@@ -7059,6 +7154,7 @@
         },
         {
           "Event": "OnLimboWaitHeal",
+          "Priority": -80,
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -7110,12 +7206,6 @@
               "FailedTaskList": []
             }
           ]
-        }
-      ],
-      "_PriorityList": [
-        {
-          "PriorityName": "LimboWaitHealPriority",
-          "Key": "AvatarReviveSelf"
         }
       ],
       "DynamicValues": {

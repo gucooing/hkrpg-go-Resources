@@ -1960,6 +1960,50 @@
       ]
     },
     {
+      "Modifiers": {
+        "MMonster_W3_Death_00_FightFest_LockHP": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.UnlockTargetHP",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "LockKey": "Monster_W3_Death_FightFest_LockHP"
+                }
+              ]
+            },
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.LockTargetHP",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "LockKey": "Monster_W3_Death_FightFest_LockHP",
+                  "Threshold": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AAAK",
+                      "FixedValues": [
+                        {
+                          "Value": 1.0000076E-05
+                        }
+                      ],
+                      "DynamicHashes": []
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
       "Name": "Monster_W3_Death_00_Skill05_Phase02",
       "TargetInfo": {
         "TargetType": "InherentTargetEntity"
@@ -2293,162 +2337,332 @@
           }
         },
         {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
-          },
-          "ModifierName": "Monster_W3_Death_00_LockHP"
-        },
-        {
-          "$type": "RPG.GameCore.DamageByAttackProperty",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
-          },
-          "AttackProperty": {
-            "$type": "RPG.GameCore.AttackData",
-            "DamageType": {
-              "DamageType": "Physical"
-            },
-            "AttackType": "DOT",
-            "CustomName": "MortallyWonded",
-            "IsMortallyWonded": true,
-            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Death_00/Eff_Monster_W3_Death_00_Skill05_Hit.prefab",
-            "HitEffectHeight": 0.88
-          },
-          "TriggerHitSound": true,
-          "DisplayData": {
-            "UIMessageHeight": 1
-          }
-        },
-        {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
-          },
-          "ModifierName": "Monster_W3_Death_00_LockHP"
-        },
-        {
-          "$type": "RPG.GameCore.DamagePerformFinish"
-        },
-        {
-          "$type": "RPG.GameCore.TriggerEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Death_00/Eff_Monster_W3_Death_00_Highlight.prefab"
-        },
-        {
-          "$type": "RPG.GameCore.WaitAnimState",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AnimStateName": "Skill05",
-          "NormalizedTimeEnd": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0.8
-            }
-          }
-        },
-        {
-          "$type": "RPG.GameCore.SetDynamicValueByAddValue",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "Key": "Bullet_Flag",
-          "AddValue": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": -1
-            }
-          },
-          "ContextScope": "TargetEntity"
-        },
-        {
-          "$type": "RPG.GameCore.RemoveModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "Modifier_W3_Death_00_HuntingMode"
-        },
-        {
-          "$type": "RPG.GameCore.WaitTimelineFinish",
-          "TimelineName": "Monster_W3_Death_00_Skill05_Timeline",
-          "TriggerBeforeFinish": true
-        },
-        {
-          "$type": "RPG.GameCore.HideLevelStage"
-        },
-        {
-          "$type": "RPG.GameCore.RemoveEffect",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AbilityTargetEntity"
-          },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Death_00/Eff_Monster_W3_Death_00_SoulOut1.prefab"
-        },
-        {
-          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
-          "IsRevert": true
-        },
-        {
-          "$type": "RPG.GameCore.SetAttachmentScale",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "AttachPoints": [
-            {
-              "Name": "Eye_L1"
-            },
-            {
-              "Name": "Eye_L2"
-            },
-            {
-              "Name": "Eye_L3"
-            },
-            {
-              "Name": "Eye_R1"
-            },
-            {
-              "Name": "Eye_R2"
-            },
-            {
-              "Name": "Eye_R3"
-            }
-          ],
-          "IsReset": true
-        },
-        {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
-            "$type": "RPG.GameCore.ByIsContainModifier",
-            "TargetType": {
-              "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "Caster"
-            },
-            "ModifierName": "W3_Death_00_AddMoifierSuccess",
-            "Inverse": true
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareCharacterNumber",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllTeamMember"
+                },
+                "CompareType": "GreaterEqual",
+                "CompareNumber": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 5
+                  }
+                }
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareStageType",
+                "CurrentStageType": "FightFest"
+              }
+            ]
           },
           "SuccessTaskList": [
             {
-              "$type": "RPG.GameCore.TurnInsertAbility",
-              "AbilityName": "Monster_W3_Death_00_Skill08_Insert",
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "ModifierName": "MMonster_W3_Death_00_FightFest_LockHP"
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
+                "DamageValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1000000
+                  }
+                },
+                "AttackType": "DOT",
+                "HitAnimation": "HitH",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Death_00/Eff_Monster_W3_Death_00_Skill05_Hit.prefab",
+                "HitEffectHeight": 0.88,
+                "HitTimeSlowType": "Impact"
+              },
+              "TriggerHitSound": true,
+              "DisplayData": {
+                "UIMessageHeight": -100
+              }
+            },
+            {
+              "$type": "RPG.GameCore.DamagePerformFinish"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "ModifierName": "MMonster_W3_Death_00_FightFest_LockHP"
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Death_00/Eff_Monster_W3_Death_00_Highlight.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
               },
-              "InsertAbilityPriority": "MonsterInsertAttackOthers"
+              "AnimStateName": "Skill05",
+              "NormalizedTimeEnd": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.7
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "Key": "Bullet_Flag",
+              "AddValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": -1
+                }
+              },
+              "ContextScope": "TargetEntity"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Modifier_W3_Death_00_HuntingMode"
+            },
+            {
+              "$type": "RPG.GameCore.WaitTimelineFinish",
+              "TimelineName": "Monster_W3_Death_00_Skill05_Timeline",
+              "TriggerBeforeFinish": true
+            },
+            {
+              "$type": "RPG.GameCore.HideLevelStage"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Death_00/Eff_Monster_W3_Death_00_SoulOut1.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+              "IsRevert": true
+            },
+            {
+              "$type": "RPG.GameCore.SetAttachmentScale",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AttachPoints": [
+                {
+                  "Name": "Eye_L1"
+                },
+                {
+                  "Name": "Eye_L2"
+                },
+                {
+                  "Name": "Eye_L3"
+                },
+                {
+                  "Name": "Eye_R1"
+                },
+                {
+                  "Name": "Eye_R2"
+                },
+                {
+                  "Name": "Eye_R3"
+                }
+              ],
+              "IsReset": true
             }
           ],
-          "FailedTaskList": []
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "ModifierName": "Monster_W3_Death_00_LockHP"
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
+                "DamageType": {
+                  "DamageType": "Physical"
+                },
+                "AttackType": "DOT",
+                "CustomName": "MortallyWonded",
+                "IsMortallyWonded": true,
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Death_00/Eff_Monster_W3_Death_00_Skill05_Hit.prefab",
+                "HitEffectHeight": 0.88
+              },
+              "TriggerHitSound": true,
+              "DisplayData": {
+                "UIMessageHeight": 1
+              }
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "ModifierName": "Monster_W3_Death_00_LockHP"
+            },
+            {
+              "$type": "RPG.GameCore.DamagePerformFinish"
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Death_00/Eff_Monster_W3_Death_00_Highlight.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimStateName": "Skill05",
+              "NormalizedTimeEnd": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.8
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "Key": "Bullet_Flag",
+              "AddValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": -1
+                }
+              },
+              "ContextScope": "TargetEntity"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Modifier_W3_Death_00_HuntingMode"
+            },
+            {
+              "$type": "RPG.GameCore.WaitTimelineFinish",
+              "TimelineName": "Monster_W3_Death_00_Skill05_Timeline",
+              "TriggerBeforeFinish": true
+            },
+            {
+              "$type": "RPG.GameCore.HideLevelStage"
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Death_00/Eff_Monster_W3_Death_00_SoulOut1.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+              "IsRevert": true
+            },
+            {
+              "$type": "RPG.GameCore.SetAttachmentScale",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AttachPoints": [
+                {
+                  "Name": "Eye_L1"
+                },
+                {
+                  "Name": "Eye_L2"
+                },
+                {
+                  "Name": "Eye_L3"
+                },
+                {
+                  "Name": "Eye_R1"
+                },
+                {
+                  "Name": "Eye_R2"
+                },
+                {
+                  "Name": "Eye_R3"
+                }
+              ],
+              "IsReset": true
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "ModifierName": "W3_Death_00_AddMoifierSuccess",
+                "Inverse": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": "Monster_W3_Death_00_Skill08_Insert",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "InsertAbilityPriority": "MonsterInsertAttackOthers"
+                }
+              ],
+              "FailedTaskList": []
+            }
+          ]
         }
       ]
     },
@@ -3711,7 +3925,7 @@
           "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeam"
+            "Alias": "AllLightTeamWithAllUnselectableLightTeam"
           },
           "ModifierName": "Monster_W3_Death_00_BattleAlert"
         }
@@ -5023,6 +5237,7 @@
       "_CallbackList": [
         {
           "Event": "OnLimboWaitHeal",
+          "Priority": -90,
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -5232,12 +5447,6 @@
               ]
             }
           ]
-        }
-      ],
-      "_PriorityList": [
-        {
-          "PriorityName": "LimboWaitHealPriority",
-          "Key": "ChangePhase"
         }
       ]
     },
@@ -5641,6 +5850,7 @@
                         "Break"
                       ],
                       "InsertAbilityPriority": "MonsterInsertAttackOthers",
+                      "CanRunOnUnselectableTarget": false,
                       "ShowInActionBar": true,
                       "PreCheck": {
                         "$type": "RPG.GameCore.TurnInsertAbilityConditionBase"
@@ -6835,6 +7045,30 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W3_Death_00/Eff_Monster_W3_Death_00_Skill06_Hit.prefab"
+            }
+          ]
+        },
+        {
+          "Event": "OnPhase2",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DebugLog",
+              "Message": "==============MOZE Listen======================"
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsTargetUnselectable",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier"
+                }
+              ]
             }
           ]
         },

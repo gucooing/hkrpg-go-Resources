@@ -2424,7 +2424,7 @@
                           "$type": "RPG.GameCore.RadialBlurCurveEffect",
                           "TargetType": {
                             "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "TemplateParamEntityList"
+                            "Alias": "ParamEntityList"
                           },
                           "BlurRadius": 0.6,
                           "Iteration": 4,
@@ -2434,6 +2434,10 @@
                           "CurveName": "ChargeBlurCurve"
                         }
                       ],
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "TemplateParamEntityList"
+                      },
                       "Delay": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -2511,7 +2515,7 @@
                           "$type": "RPG.GameCore.RadialBlurCurveEffect",
                           "TargetType": {
                             "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "TemplateParamEntityList"
+                            "Alias": "ParamEntityList"
                           },
                           "BlurRadius": 0.6,
                           "Iteration": 4,
@@ -2521,6 +2525,10 @@
                           "CurveName": "ChargeBlurCurve"
                         }
                       ],
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "TemplateParamEntityList"
+                      },
                       "Delay": {
                         "IsDynamic": true,
                         "PostfixExpr": {
@@ -2553,6 +2561,77 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "Name": "ModifyDamageData_IndependentDamageAddedRatio",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "MDF_OriginalDamagePercentage",
+          "ContextScope": "ContextModifier"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "MDF_OriginalDamageValue",
+          "ContextScope": "ContextModifier"
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByDamageDataProperty",
+          "DynamicKey": "MDF_OriginalDamagePercentage",
+          "ContextScope": "ContextModifier",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "Property": "AttackData_RawDamagePercentage"
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByDamageDataProperty",
+          "DynamicKey": "MDF_OriginalDamageValue",
+          "ContextScope": "ContextModifier",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "Property": "AttackData_RawDamageValue"
+        },
+        {
+          "$type": "RPG.GameCore.ModifyDamageData",
+          "AttackData_DamagePercentage": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQABAQQK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                1929857978,
+                -1161405881
+              ]
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.ModifyDamageData",
+          "AttackData_DamageValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQABAQQK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                -2071377431,
+                -1161405881
+              ]
+            }
+          }
         }
       ]
     },

@@ -1577,7 +1577,7 @@
           "$type": "RPG.GameCore.ScaleCharacterModel",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllDarkTeamWithAllUnselectable"
+            "Alias": "AllEnemyWithUnSelectable"
           },
           "AliveOnly": false,
           "OutlineWidthScale": 0.7,
@@ -1668,7 +1668,7 @@
           "$type": "RPG.GameCore.ScaleCharacterModel",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllDarkTeamWithAllUnselectable"
+            "Alias": "AllEnemyWithUnSelectable"
           },
           "AliveOnly": false,
           "ModelScaleBase": 0.001,
@@ -1749,7 +1749,7 @@
           "$type": "RPG.GameCore.ScaleCharacterModel",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllDarkTeamWithAllUnselectable"
+            "Alias": "AllEnemyWithUnSelectable"
           },
           "AliveOnly": false,
           "ReadTargetFromCaster": true
@@ -2370,6 +2370,7 @@
             },
             {
               "Event": "OnPhase1",
+              "Priority": -11,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -2439,18 +2440,13 @@
                 }
               ]
             }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "Phase1Priority",
-              "Key": "Phase1StartMark"
-            }
           ]
         },
         "M_BlackSwan_P01_ListenAddPoison_SubOnEnemy_ListenPhase1Mark": {
           "_CallbackList": [
             {
               "Event": "OnPhase1",
+              "Priority": 200,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.RemoveModifier",
@@ -2461,12 +2457,6 @@
                   "ModifierName": "M_BlackSwan_P01_ListenAddPoison_SubOnEnemy_Phase1Mark"
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "Phase1Priority",
-              "Key": "AvatarBuffLifeStepMoment"
             }
           ],
           "AdditionConfig": {
@@ -2696,6 +2686,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -55,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2726,7 +2717,8 @@
                         "TargetType": {
                           "$type": "RPG.GameCore.TargetAlias",
                           "Alias": "Caster"
-                        }
+                        },
+                        "IncludeUnselectable": true
                       }
                     ]
                   },
@@ -2748,12 +2740,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "AvatarInsertAbility"
             }
           ]
         },
@@ -3405,6 +3391,7 @@
             },
             {
               "Event": "OnEnterBattle",
+              "Priority": -80,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -3800,12 +3787,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "CharacterBuff"
             }
           ]
         },
@@ -4274,6 +4255,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -80,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.SetDynamicValueByProperty",
@@ -4311,12 +4293,6 @@
                   }
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "CharacterBuff"
             }
           ],
           "DynamicValues": {
@@ -4452,6 +4428,7 @@
             },
             {
               "Event": "OnEnterBattle",
+              "Priority": -80,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -4474,12 +4451,6 @@
                   }
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "CharacterBuff"
             }
           ]
         },
@@ -5501,12 +5472,6 @@
               ]
             }
           ],
-          "_PriorityList": [
-            {
-              "PriorityName": "Phase1Priority",
-              "Key": "AvatarPassiveBeforeDamage"
-            }
-          ],
           "Stacking": "EntityUnique",
           "DynamicValues": {
             "Values": {
@@ -6327,6 +6292,7 @@
         },
         {
           "Event": "OnPhase1",
+          "Priority": 90,
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
@@ -8175,12 +8141,6 @@
           ]
         }
       ],
-      "_PriorityList": [
-        {
-          "PriorityName": "Phase1Priority",
-          "Key": "BlackSwanPassive"
-        }
-      ],
       "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
@@ -8471,12 +8431,6 @@
           ]
         }
       ],
-      "_PriorityList": [
-        {
-          "PriorityName": "Phase1Priority",
-          "Key": "AvatarBuffLifeStepMoment"
-        }
-      ],
       "Count": 1,
       "Stacking": "Replace",
       "DynamicValues": {
@@ -8499,6 +8453,7 @@
       "_CallbackList": [
         {
           "Event": "OnPhase1",
+          "Priority": -10,
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.ModifySPNew",
@@ -8529,12 +8484,6 @@
               "$type": "RPG.GameCore.RemoveSelfModifier"
             }
           ]
-        }
-      ],
-      "_PriorityList": [
-        {
-          "PriorityName": "Phase1Priority",
-          "Key": "AvatarPassiveBeforeDamage"
         }
       ],
       "AdditionConfig": {

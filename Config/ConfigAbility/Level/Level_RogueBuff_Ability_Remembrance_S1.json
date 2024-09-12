@@ -45,6 +45,36 @@
                               59671469
                             ]
                           }
+                        },
+                        "ADF_4": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              866240523
+                            ]
+                          }
+                        },
+                        "ADF_5": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1862642832
+                            ]
+                          }
+                        },
+                        "BuffNumber": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -648181786
+                            ]
+                          }
                         }
                       },
                       "InheritCaster": "TargetSelf"
@@ -99,14 +129,58 @@
                         "$type": "RPG.GameCore.TargetAlias",
                         "Alias": "ParamEntity"
                       },
+                      "ModifierName": "StageAbility_615110_Modifier_FrozenMark"
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "BuffNumber",
+                        "CompareType": "Greater",
+                        "CompareValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              909827949
+                            ]
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                909827949
+                              ]
+                            }
+                          },
+                          "DynamicKey": "BuffNumber"
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
                       "ModifierName": "MLevel_Super_Ice_Rogue_S1",
                       "Chance": {
                         "IsDynamic": true,
                         "PostfixExpr": {
-                          "OpCodes": "AQAK",
+                          "OpCodes": "AQABAQECBAIK",
                           "FixedValues": [],
                           "DynamicHashes": [
-                            909827945
+                            909827945,
+                            -648181786,
+                            909827948
                           ]
                         }
                       },
@@ -120,45 +194,6 @@
                           ]
                         }
                       }
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "Event": "OnListenModifierAdd",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByAnd",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "Flag": "STAT_CTRL_Frozen"
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByTargetTeam",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "Team": "TeamDark"
-                      }
-                    ]
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.AddModifier",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "ModifierName": "StageAbility_615110_Modifier_FrozenMark"
                     }
                   ]
                 }
@@ -236,7 +271,12 @@
           },
           "ContextScope": "TargetEntity"
         }
-      ]
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-648181786": {}
+        }
+      }
     },
     {
       "Name": "StageAbility_615120",
@@ -1798,6 +1838,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -90,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -1885,12 +1926,6 @@
                 }
               ]
             }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "LevelBuff"
-            }
           ]
         }
       },
@@ -1905,6 +1940,187 @@
           "ModifierName": "StageAbility_615145_Modifier"
         }
       ]
+    },
+    {
+      "Modifiers": {
+        "StageAbility_615146_Modifier": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamLight"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "StageAbility_615146_Modifier_Character"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "StageAbility_615146_Modifier_Character": {
+          "_CallbackList": [
+            {
+              "Event": "OnAfterAttack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AttackTargetList"
+                  },
+                  "ByRandom": true,
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "StageAbility_615146_Modifier_Mark",
+                      "ValueType": "Layer",
+                      "Multiplier": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "DynamicKey": "_Layer"
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "_Layer",
+                        "CompareType": "Less",
+                        "CompareValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              59671469
+                            ]
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "MLevel_Super_Ice_Rogue_S1",
+                          "Chance": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                462955996
+                              ]
+                            }
+                          },
+                          "LifeTime": {
+                            "IsDynamic": false,
+                            "FixedValue": {
+                              "Value": 1
+                            }
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.AddModifier",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "ModifierName": "StageAbility_615146_Modifier_Mark"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {
+              "1912601768": {}
+            }
+          }
+        },
+        "StageAbility_615146_Modifier_Mark": {
+          "LayerAddWhenStack": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "Stacking": "Replace"
+        }
+      },
+      "Name": "StageAbility_615146",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_615146_Modifier"
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByMazeBuffConfig",
+          "QueryList": {
+            "DamageRatio": {
+              "MazeBuffID": 615110,
+              "Index": 3
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LevelEntity"
+          },
+          "DynamicKey": "StageAbility_615110_IceRatio",
+          "ResetValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                -46276406
+              ]
+            }
+          },
+          "ContextScope": "TargetEntity"
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "-46276406": {}
+        }
+      }
     },
     {
       "Modifiers": {

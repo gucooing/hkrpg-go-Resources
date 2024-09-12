@@ -720,6 +720,7 @@
             },
             {
               "Event": "OnEnterBattle",
+              "Priority": -90,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -829,12 +830,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "LevelBuff"
             }
           ]
         },
@@ -3932,11 +3927,6 @@
                   "ShowInActionBar": true
                 },
                 {
-                  "$type": "RPG.GameCore.RefreshTeamFormationWhenNextCameraShot",
-                  "Team": "TeamDark",
-                  "FormationType": "DarkTeamNormal"
-                },
-                {
                   "$type": "RPG.GameCore.SetMonsterEnergyBarState",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
@@ -6100,6 +6090,7 @@
             },
             {
               "Event": "OnEnterBattle",
+              "Priority": -90,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -6147,12 +6138,6 @@
                   }
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "LevelBuff"
             }
           ],
           "DynamicValues": {
@@ -6354,11 +6339,6 @@
                   },
                   "OwnerAliveState": "Mask_AliveOrLimbo",
                   "TargetAliveState": "Mask_AliveOrLimbo"
-                },
-                {
-                  "$type": "RPG.GameCore.RefreshTeamFormationWhenNextCameraShot",
-                  "Team": "TeamDark",
-                  "FormationType": "DarkTeamNormal"
                 }
               ]
             }
@@ -6885,7 +6865,8 @@
                         "TargetType": {
                           "$type": "RPG.GameCore.TargetAlias",
                           "Alias": "AllLightTeam"
-                        }
+                        },
+                        "IncludeUnselectable": true
                       },
                       {
                         "$type": "RPG.GameCore.ByCompareDynamicValue",
@@ -7379,7 +7360,8 @@
                         "TargetType": {
                           "$type": "RPG.GameCore.TargetAlias",
                           "Alias": "AllLightTeam"
-                        }
+                        },
+                        "IncludeUnselectable": true
                       },
                       {
                         "$type": "RPG.GameCore.ByCompareDynamicValue",
@@ -10091,6 +10073,7 @@
             },
             {
               "Event": "OnEnterBattle",
+              "Priority": -90,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.TriggerAbility",
@@ -10502,12 +10485,6 @@
                 }
               ]
             }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "LevelBuff"
-            }
           ]
         },
         "Modifier_BattleEventAbility_Challenge_Month_28_Sub": {
@@ -10789,11 +10766,6 @@
                   },
                   "OwnerAliveState": "Mask_AliveOrLimbo",
                   "TargetAliveState": "Mask_AliveOrLimbo"
-                },
-                {
-                  "$type": "RPG.GameCore.RefreshTeamFormationWhenNextCameraShot",
-                  "Team": "TeamDark",
-                  "FormationType": "DarkTeamNormal"
                 }
               ]
             }
@@ -11197,6 +11169,13 @@
         "TargetType": "InherentTargetEntity"
       },
       "OnStart": [
+        {
+          "$type": "RPG.GameCore.ClearEntityDamageText",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          }
+        },
         {
           "$type": "RPG.GameCore.SetTeamFormation",
           "Team": "TeamLight",
@@ -12618,7 +12597,8 @@
                         "TargetType": {
                           "$type": "RPG.GameCore.TargetAlias",
                           "Alias": "AllLightTeam"
-                        }
+                        },
+                        "IncludeUnselectable": true
                       },
                       {
                         "$type": "RPG.GameCore.ByCompareDynamicValue",
@@ -13165,7 +13145,8 @@
                         "TargetType": {
                           "$type": "RPG.GameCore.TargetAlias",
                           "Alias": "AllLightTeam"
-                        }
+                        },
+                        "IncludeUnselectable": true
                       },
                       {
                         "$type": "RPG.GameCore.ByCompareDynamicValue",
@@ -14096,33 +14077,78 @@
                               ],
                               "FailedTaskList": [
                                 {
-                                  "$type": "RPG.GameCore.DamageByAttackProperty",
-                                  "TargetType": {
-                                    "$type": "RPG.GameCore.TargetAlias",
-                                    "Alias": "ParamEntity"
-                                  },
-                                  "AttackProperty": {
-                                    "$type": "RPG.GameCore.AttackData",
-                                    "DamageType": {
-                                      "DamageType": "Physical"
+                                  "$type": "RPG.GameCore.PredicateTaskList",
+                                  "Predicate": {
+                                    "$type": "RPG.GameCore.ByCompareMonsterRank",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
                                     },
-                                    "DamageValue": {
-                                      "IsDynamic": true,
-                                      "PostfixExpr": {
-                                        "OpCodes": "AQABAQQK",
-                                        "FixedValues": [],
-                                        "DynamicHashes": [
-                                          -430816826,
-                                          192554570
-                                        ]
-                                      }
-                                    },
-                                    "AttackType": "DOT",
-                                    "FinalFormulaType": "ByBaseDamage",
-                                    "HitAnimation": "Hit",
-                                    "HitEffect": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_Damage_hit2.prefab"
+                                    "CompareType": "Equal",
+                                    "CompareValue": 3
                                   },
-                                  "CanTriggerLastKill": true
+                                  "SuccessTaskList": [
+                                    {
+                                      "$type": "RPG.GameCore.DamageByAttackProperty",
+                                      "TargetType": {
+                                        "$type": "RPG.GameCore.TargetAlias",
+                                        "Alias": "ParamEntity"
+                                      },
+                                      "AttackProperty": {
+                                        "$type": "RPG.GameCore.AttackData",
+                                        "DamageType": {
+                                          "DamageType": "Physical"
+                                        },
+                                        "DamageValue": {
+                                          "IsDynamic": true,
+                                          "PostfixExpr": {
+                                            "OpCodes": "AQABAQQK",
+                                            "FixedValues": [],
+                                            "DynamicHashes": [
+                                              -430816826,
+                                              192554570
+                                            ]
+                                          }
+                                        },
+                                        "AttackType": "DOT",
+                                        "FinalFormulaType": "ByBaseDamage",
+                                        "HitAnimation": "Hit",
+                                        "HitEffect": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_Damage_hit2.prefab"
+                                      },
+                                      "CanTriggerLastKill": true
+                                    }
+                                  ],
+                                  "FailedTaskList": [
+                                    {
+                                      "$type": "RPG.GameCore.DamageByAttackProperty",
+                                      "TargetType": {
+                                        "$type": "RPG.GameCore.TargetAlias",
+                                        "Alias": "ParamEntity"
+                                      },
+                                      "AttackProperty": {
+                                        "$type": "RPG.GameCore.AttackData",
+                                        "DamageType": {
+                                          "DamageType": "Physical"
+                                        },
+                                        "DamageValue": {
+                                          "IsDynamic": true,
+                                          "PostfixExpr": {
+                                            "OpCodes": "AQABAQQK",
+                                            "FixedValues": [],
+                                            "DynamicHashes": [
+                                              -430816826,
+                                              -841603780
+                                            ]
+                                          }
+                                        },
+                                        "AttackType": "DOT",
+                                        "FinalFormulaType": "ByBaseDamage",
+                                        "HitAnimation": "Hit",
+                                        "HitEffect": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_Damage_hit2.prefab"
+                                      },
+                                      "CanTriggerLastKill": true
+                                    }
+                                  ]
                                 }
                               ]
                             }
@@ -14215,6 +14241,52 @@
                       "DynamicKey": "MDF_Count"
                     },
                     {
+                      "$type": "RPG.GameCore.ModifyActionDelay",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "AddNormalizedValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -1698326973
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareMonsterRank",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "CompareType": "GreaterEqual",
+                        "CompareValue": 3
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQABAQIK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -2027709849,
+                                -922674015
+                              ]
+                            }
+                          },
+                          "DynamicKey": "MDF_Count"
+                        }
+                      ]
+                    },
+                    {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
                         "$type": "RPG.GameCore.ByCompareDynamicValue",
@@ -14285,66 +14357,66 @@
                           "DynamicKey": "MDF_Count"
                         }
                       ]
-                    },
-                    {
-                      "$type": "RPG.GameCore.PredicateTaskList",
-                      "Predicate": {
-                        "$type": "RPG.GameCore.ByIsContainModifier",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "ModifierName": "Modifier_BattleEventAbility_Challenge_Month_31_Sub",
-                        "Inverse": true
-                      },
-                      "SuccessTaskList": [
-                        {
-                          "$type": "RPG.GameCore.AddModifier",
-                          "TargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "ParamEntity"
-                          },
-                          "ModifierName": "Modifier_BattleEventAbility_Challenge_Month_31_Sub",
-                          "DynamicValues": {
-                            "MDF_DelayRatio": {
-                              "IsDynamic": true,
-                              "PostfixExpr": {
-                                "OpCodes": "AQAK",
-                                "FixedValues": [],
-                                "DynamicHashes": [
-                                  -1698326973
-                                ]
-                              }
-                            },
-                            "MDF_RedStanceRatio": {
-                              "IsDynamic": true,
-                              "PostfixExpr": {
-                                "OpCodes": "AQAK",
-                                "FixedValues": [],
-                                "DynamicHashes": [
-                                  -1617256738
-                                ]
-                              }
-                            },
-                            "MDF_MinStance": {
-                              "IsDynamic": true,
-                              "PostfixExpr": {
-                                "OpCodes": "AQAK",
-                                "FixedValues": [],
-                                "DynamicHashes": [
-                                  -2020024603
-                                ]
-                              }
-                            }
-                          }
-                        }
-                      ]
                     }
                   ]
                 }
               ]
             }
           ],
+          "AdditionConfig": {
+            "SubModifierList": [
+              {
+                "Name": "Modifier_BattleEventAbility_Challenge_Month_31_Sub2",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+                },
+                "DynamicValues": {
+                  "ActionDelayRatio": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1698326973
+                      ]
+                    }
+                  }
+                },
+                "IsHaloStatus": true
+              },
+              {
+                "Name": "Modifier_BattleEventAbility_Challenge_Month_31_Sub",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllDarkTeamWithAllDarkTeamUnselectable"
+                },
+                "DynamicValues": {
+                  "MDF_RedStanceRatio": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1617256738
+                      ]
+                    }
+                  },
+                  "MDF_MinStance": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -2020024603
+                      ]
+                    }
+                  }
+                },
+                "IsHaloStatus": true
+              }
+            ]
+          },
           "Stacking": "ReplaceByCaster",
           "DynamicValues": {
             "Values": {
@@ -14355,6 +14427,8 @@
               "-1938954368": {},
               "111484335": {},
               "192554570": {},
+              "-922674015": {},
+              "-841603780": {},
               "-2027709849": {},
               "-430816826": {}
             }
@@ -14440,6 +14514,26 @@
                   -142087903
                 ]
               }
+            },
+            "BattleEvent_P8_ADF": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -142084690
+                ]
+              }
+            },
+            "BattleEvent_P9_ADF": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -142081489
+                ]
+              }
             }
           }
         },
@@ -14499,6 +14593,18 @@
           "-142087903": {
             "ReadInfo": {
               "Type": 12,
+              "Str": "#BattleEvent"
+            }
+          },
+          "-142084690": {
+            "ReadInfo": {
+              "Type": 14,
+              "Str": "#BattleEvent"
+            }
+          },
+          "-142081489": {
+            "ReadInfo": {
+              "Type": 16,
               "Str": "#BattleEvent"
             }
           }
@@ -16510,7 +16616,6 @@
     },
     "Modifier_BattleEventAbility_Challenge_Month_31_Sub": {
       "BehaviorFlagList": [
-        "RedStance",
         "RemoveWhenCasterDead"
       ],
       "_CallbackList": [
@@ -16527,73 +16632,145 @@
               "Value": "MaxStance"
             },
             {
-              "$type": "RPG.GameCore.StackProperty",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "Property": "MaxStance",
-              "PropertyValue": {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "Value": {
                 "IsDynamic": true,
                 "PostfixExpr": {
-                  "OpCodes": "AQABAQQBAAMK",
+                  "OpCodes": "AQABAQQK",
                   "FixedValues": [],
                   "DynamicHashes": [
                     -1293338785,
                     730498078
                   ]
                 }
-              }
-            },
-            {
-              "$type": "RPG.GameCore.ResetRedStance",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              }
-            }
-          ]
-        },
-        {
-          "Event": "OnEndBreak",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.RemoveSelfModifier"
-            }
-          ]
-        },
-        {
-          "Event": "OnRedStanceBeingBreak",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.ModifyActionDelay",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
               },
-              "AddNormalizedValue": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    -183962634
-                  ]
-                }
-              }
+              "DynamicKey": "TargetStance"
             },
             {
-              "$type": "RPG.GameCore.RemoveSelfModifier"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "TargetStance",
+                "CompareType": "Less",
+                "CompareValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      -653875216
+                    ]
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.StackRedStance",
+                  "RedStanceRatio": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "RedStanceValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -653875216
+                      ]
+                    }
+                  }
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.StackRedStance",
+                  "RedStanceRatio": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        730498078
+                      ]
+                    }
+                  },
+                  "RedStanceValue": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                }
+              ]
             }
           ]
         }
       ],
       "DynamicValues": {
         "Values": {
-          "-183962634": {},
           "730498078": {},
           "-653875216": {},
           "-1293338785": {}
+        }
+      }
+    },
+    "Modifier_BattleEventAbility_Challenge_Month_31_Sub2": {
+      "ModifierAffectedPreshowConfig": {
+        "TargetType": {
+          "$type": "RPG.GameCore.TargetAlias",
+          "Alias": "CurrentAimAtTarget"
+        },
+        "Condition": {
+          "$type": "RPG.GameCore.ByAny",
+          "PredicateList": [
+            {
+              "$type": "RPG.GameCore.ByPreShowStanceBreak",
+              "SkillCaster": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              }
+            },
+            {
+              "$type": "RPG.GameCore.ByPreShowRedStanceBreak",
+              "SkillCaster": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              }
+            }
+          ]
+        },
+        "ActionDelayPreshowConfig": {
+          "AddDelayRatio": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                -1540404286
+              ]
+            }
+          }
+        }
+      },
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {
+        "Values": {
+          "-1540404286": {}
         }
       }
     },

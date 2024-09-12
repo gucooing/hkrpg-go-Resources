@@ -1685,251 +1685,12 @@
     },
     {
       "Modifiers": {
-        "MAvatar_JingYuan_00_PassiveSkill01_ListenUltra": {
-          "BehaviorFlagList": [
-            "ListenBattleEventSkill"
-          ],
-          "_CallbackList": [
-            {
-              "Event": "OnListenAfterSkillUse",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByAnd",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByCurrentSkillType",
-                        "SkillType": "Ultra"
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByIsTeammate",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        }
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByNot",
-                        "Predicate": {
-                          "$type": "RPG.GameCore.ByTargetListIntersects",
-                          "FirstTargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "ParamEntity"
-                          },
-                          "SecondTargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "Caster"
-                          }
-                        }
-                      }
-                    ]
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.AddModifier",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
-                      },
-                      "ModifierName": "MAvatar_JingYuan_00_BattleEvent_ATKCount",
-                      "MaxLayer": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            895186162
-                          ]
-                        }
-                      },
-                      "LayerAddWhenStack": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            1734373289
-                          ]
-                        }
-                      }
-                    },
-                    {
-                      "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
-                      "ModifierName": "MAvatar_JingYuan_00_BattleEvent_ATKCount",
-                      "ValueType": "Layer",
-                      "Multiplier": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1
-                        }
-                      },
-                      "DynamicKey": "EnergyBar_ATKCount"
-                    },
-                    {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "Value": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQABAQIK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -1573937919,
-                            157628827
-                          ]
-                        }
-                      },
-                      "DynamicKey": "EnergyBar_ATKCountSum"
-                    },
-                    {
-                      "$type": "RPG.GameCore.SetEnergyBarState",
-                      "Active": "True",
-                      "BarType": 4,
-                      "CurrentState": "Normal",
-                      "CD": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 0
-                        }
-                      },
-                      "IconPath": "SpriteOutput/BuffIcon/Inlevel/Avatar/Icon1204Passive.png",
-                      "MaxCount": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            895186162
-                          ]
-                        }
-                      },
-                      "CurrentCount": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            1853128792
-                          ]
-                        }
-                      }
-                    },
-                    {
-                      "$type": "RPG.GameCore.Retarget",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "BattleEventEntityList"
-                      },
-                      "Predicate": {
-                        "$type": "RPG.GameCore.ByIsContainModifier",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "ModifierName": "MAvatar_JingYuan_00_BattleEvent"
-                      },
-                      "ByRandom": true,
-                      "TaskList": [
-                        {
-                          "$type": "RPG.GameCore.ShowAttackTime",
-                          "TargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "ParamEntity"
-                          },
-                          "BaseAttackTime": {
-                            "IsDynamic": true,
-                            "PostfixExpr": {
-                              "OpCodes": "AQAK",
-                              "FixedValues": [],
-                              "DynamicHashes": [
-                                -1573937919
-                              ]
-                            }
-                          },
-                          "EnhancedAttackTime": {
-                            "IsDynamic": true,
-                            "PostfixExpr": {
-                              "OpCodes": "AQAK",
-                              "FixedValues": [],
-                              "DynamicHashes": [
-                                157628827
-                              ]
-                            }
-                          },
-                          "IsShow": true
-                        }
-                      ]
-                    },
-                    {
-                      "$type": "RPG.GameCore.Retarget",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "BattleEventEntityList"
-                      },
-                      "Predicate": {
-                        "$type": "RPG.GameCore.ByIsContainModifier",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "ModifierName": "MAvatar_JingYuan_00_BattleEvent"
-                      },
-                      "ByRandom": true,
-                      "TaskList": [
-                        {
-                          "$type": "RPG.GameCore.AddModifier",
-                          "TargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "ParamEntity"
-                          },
-                          "ModifierName": "MAvatar_JingYuan_00_BattleEvent_SpeedUp",
-                          "MaxLayer": {
-                            "IsDynamic": true,
-                            "PostfixExpr": {
-                              "OpCodes": "AQABAQMK",
-                              "FixedValues": [],
-                              "DynamicHashes": [
-                                895186162,
-                                -2017241577
-                              ]
-                            }
-                          },
-                          "LayerAddWhenStack": {
-                            "IsDynamic": true,
-                            "PostfixExpr": {
-                              "OpCodes": "AQAK",
-                              "FixedValues": [],
-                              "DynamicHashes": [
-                                1734373289
-                              ]
-                            }
-                          },
-                          "DynamicValues": {
-                            "MDF_PropertyValue": {
-                              "IsDynamic": true,
-                              "PostfixExpr": {
-                                "OpCodes": "AQAK",
-                                "FixedValues": [],
-                                "DynamicHashes": [
-                                  2060257620
-                                ]
-                              }
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
         "MAvatar_JingYuan_00_ListenFlag": {},
         "MAvatar_JingYuan_00_SkillTree02": {
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -80,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1984,13 +1745,337 @@
                 }
               ]
             }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "CharacterBuff"
-            }
           ]
+        },
+        "MAvatar_JingYuan_00_Skill02_PreShow": {
+          "ModifierAffectedPreshowConfig": {
+            "SkillTypes": [
+              "Skill"
+            ],
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "CasterBattleEvent"
+            },
+            "Condition": {
+              "$type": "RPG.GameCore.ByCompareDynamicValue",
+              "DynamicKey": "_AddLayer",
+              "CompareType": "Greater",
+              "CompareValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            },
+            "ActionDelayPreshowConfig": {
+              "AddSpeedValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQABAQQK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    2060257620,
+                    126952749
+                  ]
+                }
+              }
+            }
+          },
+          "OnDynamicValueChange": [
+            {
+              "Key": {
+                "Hash": -1573937919
+              },
+              "Ranges": [
+                {
+                  "OnChange": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "#Skill02_P2_AddATKCount",
+                        "CompareType": "GreaterEqual",
+                        "CompareValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQABAQMK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              895186162,
+                              -1573937919
+                            ]
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQABAQMK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                895186162,
+                                -1573937919
+                              ]
+                            }
+                          },
+                          "DynamicKey": "_AddLayer"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                919869332
+                              ]
+                            }
+                          },
+                          "DynamicKey": "_AddLayer"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "#Skill02_P2_AddATKCount",
+                    "CompareType": "GreaterEqual",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQABAQMK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          895186162,
+                          -1573937919
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQMK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            895186162,
+                            -1573937919
+                          ]
+                        }
+                      },
+                      "DynamicKey": "_AddLayer"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            919869332
+                          ]
+                        }
+                      },
+                      "DynamicKey": "_AddLayer"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Stacking": "ReplaceByCaster",
+          "DynamicValues": {
+            "Values": {
+              "126952749": {}
+            }
+          }
+        },
+        "MAvatar_JingYuan_00_Skill03_PreShow": {
+          "ModifierAffectedPreshowConfig": {
+            "SkillTypes": [
+              "Ultra"
+            ],
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "CasterBattleEvent"
+            },
+            "Condition": {
+              "$type": "RPG.GameCore.ByCompareDynamicValue",
+              "DynamicKey": "_AddLayer",
+              "CompareType": "Greater",
+              "CompareValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              }
+            },
+            "ActionDelayPreshowConfig": {
+              "AddSpeedValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQABAQQK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    2060257620,
+                    126952749
+                  ]
+                }
+              }
+            }
+          },
+          "OnDynamicValueChange": [
+            {
+              "Key": {
+                "Hash": -1573937919
+              },
+              "Ranges": [
+                {
+                  "OnChange": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "#Skill03_P2_AddATKCount",
+                        "CompareType": "GreaterEqual",
+                        "CompareValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQABAQMK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              895186162,
+                              -1573937919
+                            ]
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQABAQMK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                895186162,
+                                -1573937919
+                              ]
+                            }
+                          },
+                          "DynamicKey": "_AddLayer"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -801861873
+                              ]
+                            }
+                          },
+                          "DynamicKey": "_AddLayer"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "#Skill03_P2_AddATKCount",
+                    "CompareType": "GreaterEqual",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQABAQMK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          895186162,
+                          -1573937919
+                        ]
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQMK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            895186162,
+                            -1573937919
+                          ]
+                        }
+                      },
+                      "DynamicKey": "_AddLayer"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -801861873
+                          ]
+                        }
+                      },
+                      "DynamicKey": "_AddLayer"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Stacking": "ReplaceByCaster",
+          "DynamicValues": {
+            "Values": {
+              "126952749": {}
+            }
+          }
         }
       },
       "Name": "Avatar_JingYuan_00_PassiveSkill01",
@@ -2151,6 +2236,22 @@
           "$type": "RPG.GameCore.SetShenJunActionBar",
           "Level1LayerCount": 6,
           "Level2LayerCount": 8
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MAvatar_JingYuan_00_Skill02_PreShow"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MAvatar_JingYuan_00_Skill03_PreShow"
         }
       ]
     },
@@ -2160,6 +2261,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -80,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2379,12 +2481,6 @@
                   "FailedTaskList": []
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "CharacterBuff"
             }
           ]
         }
@@ -2784,6 +2880,7 @@
                       "$type": "RPG.GameCore.TargetAlias",
                       "Alias": "Caster"
                     },
+                    "IncludeUnselectable": true,
                     "Inverse": true
                   },
                   {
@@ -3051,6 +3148,7 @@
                       "$type": "RPG.GameCore.TargetAlias",
                       "Alias": "Caster"
                     },
+                    "IncludeUnselectable": true,
                     "Inverse": true
                   },
                   {

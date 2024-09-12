@@ -721,12 +721,26 @@
           "ModifierName": "OneMorePerTurn"
         },
         {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": "Monster_W3_Aventurine_00_IF",
+            "Inverse": true
           },
-          "ModifierName": "Monster_W3_Aventurine_00_AIChange"
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Monster_W3_Aventurine_00_AIChange"
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.SetTargetUniqueName",
@@ -806,7 +820,7 @@
               "$type": "RPG.GameCore.TargetAlias",
               "Alias": "Caster"
             },
-            "ModifierName": "Monster_W3_Aventurine_00_RL"
+            "ModifierName": "Monster_W3_Aventurine_00_IF"
           },
           "SuccessTaskList": [
             {
@@ -815,17 +829,40 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "Caster"
               },
-              "ModifierName": "Monster_W3_Aventurine_00_PhaseController_RL"
+              "ModifierName": "Monster_W3_Aventurine_00_IF_PhaseController"
             }
           ],
           "FailedTaskList": [
             {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "ModifierName": "Monster_W3_Aventurine_00_RL"
               },
-              "ModifierName": "Monster_W3_Aventurine_00_PhaseController"
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Monster_W3_Aventurine_00_PhaseController_RL"
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "Monster_W3_Aventurine_00_PhaseController"
+                }
+              ]
             }
           ]
         }
@@ -5041,7 +5078,8 @@
               },
               "ModifierName": "Monster_W3_AventurinePart_00_Result"
             }
-          ]
+          ],
+          "IgnoreParallelWarning": true
         },
         {
           "$type": "RPG.GameCore.WaitAnimState",
@@ -9077,6 +9115,7 @@
       "_CallbackList": [
         {
           "Event": "OnLimboWaitHeal",
+          "Priority": -90,
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -9162,12 +9201,6 @@
               ]
             }
           ]
-        }
-      ],
-      "_PriorityList": [
-        {
-          "PriorityName": "LimboWaitHealPriority",
-          "Key": "ChangePhase"
         }
       ]
     },

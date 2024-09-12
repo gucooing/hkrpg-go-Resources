@@ -2131,6 +2131,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -80,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2173,12 +2174,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "CharacterBuff"
             }
           ]
         }
@@ -2227,6 +2222,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -60,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -2366,12 +2362,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "AvatarDamage"
             }
           ]
         }
@@ -2774,181 +2764,165 @@
           ]
         },
         {
-          "Event": "OnListenInsertAbilityStart",
+          "Event": "OnInsertAbilityStart",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByTargetListIntersects",
-                "FirstTargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ModifierOwnerEntity"
-                },
-                "SecondTargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                }
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": "DV_TurnCD",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "_Max_Count_Left",
+                    "CompareType": "Greater",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  }
+                ]
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByAnd",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByCompareDynamicValue",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ModifierOwnerEntity"
-                        },
-                        "DynamicKey": "DV_TurnCD",
-                        "CompareType": "Equal",
-                        "CompareValue": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 0
-                          }
-                        }
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByCompareDynamicValue",
-                        "DynamicKey": "_Max_Count_Left",
-                        "CompareType": "Greater",
-                        "CompareValue": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 0
-                          }
-                        }
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
+                  "Chance": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -894095079
+                      ]
+                    }
+                  },
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1935328048
+                      ]
+                    }
+                  },
+                  "MaxLayer": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        916155872
+                      ]
+                    }
+                  },
+                  "LayerAddWhenStack": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "DynamicValues": {
+                    "DOT_Ratio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -1507106655
+                        ]
                       }
-                    ]
+                    },
+                    "SkillRank_Rank02_P1_Ratio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -1183793641
+                        ]
+                      }
+                    },
+                    "SkillRank_Rank06_P3_DownRatio": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          15812359
+                        ]
+                      }
+                    },
+                    "MDF_PropertyValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          713155818
+                        ]
+                      }
+                    },
+                    "MDF_PropertyValue_2": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1539289637
+                        ]
+                      }
+                    }
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.AddModifier",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "ModifierName": "MAvatar_Jiaoqiu_00_Debuff_Flavor",
-                      "Chance": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -894095079
-                          ]
-                        }
-                      },
-                      "LifeTime": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -1935328048
-                          ]
-                        }
-                      },
-                      "MaxLayer": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            916155872
-                          ]
-                        }
-                      },
-                      "LayerAddWhenStack": {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
                         "IsDynamic": false,
                         "FixedValue": {
                           "Value": 1
                         }
                       },
-                      "DynamicValues": {
-                        "DOT_Ratio": {
-                          "IsDynamic": true,
-                          "PostfixExpr": {
-                            "OpCodes": "AQAK",
-                            "FixedValues": [],
-                            "DynamicHashes": [
-                              -1507106655
-                            ]
-                          }
-                        },
-                        "SkillRank_Rank02_P1_Ratio": {
-                          "IsDynamic": true,
-                          "PostfixExpr": {
-                            "OpCodes": "AQAK",
-                            "FixedValues": [],
-                            "DynamicHashes": [
-                              -1183793641
-                            ]
-                          }
-                        },
-                        "SkillRank_Rank06_P3_DownRatio": {
-                          "IsDynamic": true,
-                          "PostfixExpr": {
-                            "OpCodes": "AQAK",
-                            "FixedValues": [],
-                            "DynamicHashes": [
-                              15812359
-                            ]
-                          }
-                        },
-                        "MDF_PropertyValue": {
-                          "IsDynamic": true,
-                          "PostfixExpr": {
-                            "OpCodes": "AQAK",
-                            "FixedValues": [],
-                            "DynamicHashes": [
-                              713155818
-                            ]
-                          }
-                        },
-                        "MDF_PropertyValue_2": {
-                          "IsDynamic": true,
-                          "PostfixExpr": {
-                            "OpCodes": "AQAK",
-                            "FixedValues": [],
-                            "DynamicHashes": [
-                              1539289637
-                            ]
-                          }
-                        }
-                      },
-                      "SuccessTaskList": [
-                        {
-                          "$type": "RPG.GameCore.SetDynamicValue",
-                          "Value": {
-                            "IsDynamic": false,
-                            "FixedValue": {
+                      "DynamicKey": "DV_TurnCD"
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAAAAMK",
+                          "FixedValues": [
+                            {
                               "Value": 1
                             }
-                          },
-                          "DynamicKey": "DV_TurnCD"
-                        },
-                        {
-                          "$type": "RPG.GameCore.SetDynamicValue",
-                          "Value": {
-                            "IsDynamic": true,
-                            "PostfixExpr": {
-                              "OpCodes": "AQAAAAMK",
-                              "FixedValues": [
-                                {
-                                  "Value": 1
-                                }
-                              ],
-                              "DynamicHashes": [
-                                248526211
-                              ]
-                            }
-                          },
-                          "DynamicKey": "_Max_Count_Left"
+                          ],
+                          "DynamicHashes": [
+                            248526211
+                          ]
                         }
-                      ]
+                      },
+                      "DynamicKey": "_Max_Count_Left"
                     }
                   ]
                 }

@@ -460,6 +460,107 @@
         }
       ]
     },
+    "BasePp_Common_WeakStanceable": {
+      "Factors": [
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceWeaknessCompare"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "xmax": {
+                  "Value": 0.5
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5
+                },
+                "ymin": {
+                  "Value": 50
+                },
+                "xmax": {
+                  "Value": 1.5
+                },
+                "ymax": {
+                  "Value": 50
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 1.5
+                },
+                "xmax": {
+                  "Value": 3
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceContainBehaviorFlag",
+            "BehaviorFlag": "Break"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "xmax": {
+                  "Value": 1
+                },
+                "ymax": {
+                  "Value": -50
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceContainBehaviorFlag",
+            "BehaviorFlag": "STAT_AITargetLowerPriority"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "xmax": {
+                  "Value": 0.5
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5
+                },
+                "ymin": {
+                  "Value": -100
+                },
+                "xmax": {
+                  "Value": 1
+                },
+                "ymax": {
+                  "Value": -100
+                }
+              }
+            ]
+          },
+          "PostProcess": {
+            "$type": "RPG.GameCore.ComplexSkillAIPostProcessBreak",
+            "CompareType": "LessEqual",
+            "CompareValue": {
+              "Value": -100
+            },
+            "IsOverrideFinalScore": true,
+            "FinalScore": {
+              "Value": 0.01
+            }
+          }
+        }
+      ]
+    },
     "Base_Natasha_SingleHeal": {
       "Factors": [
         {
@@ -5525,6 +5626,47 @@
         }
       ]
     },
+    "Common_IgnoreMuteBreakEnemy": {
+      "CombineOperator": "Mul",
+      "Factors": [
+        {
+          "CombineOperator": "Mul",
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceWeaknessCompare"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "ymin": {
+                  "Value": 1
+                },
+                "xmax": {
+                  "Value": 1.5
+                },
+                "ymax": {
+                  "Value": 1
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 1.5
+                },
+                "ymin": {
+                  "Value": 0.0009999999
+                },
+                "xmax": {
+                  "Value": 3
+                },
+                "ymax": {
+                  "Value": 0.0009999999
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
     "BaseWeight": {
       "Factors": [
         {
@@ -7410,6 +7552,88 @@
         }
       ]
     },
+    "Ultra_Common_WeakBreak": {
+      "Factors": [
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceContainBehaviorFlag",
+            "BehaviorFlag": "Break"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "xmax": {
+                  "Value": 1
+                },
+                "ymax": {
+                  "Value": 500
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceWeaknessCompare"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "xmax": {
+                  "Value": 1
+                },
+                "ymax": {
+                  "Value": 500
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Source": {
+            "$type": "RPG.GameCore.ComplexSkillAISourceContainBehaviorFlag",
+            "BehaviorFlag": "STAT_AITargetLowerPriority"
+          },
+          "Mapper": {
+            "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",
+            "Ranges": [
+              {
+                "xmax": {
+                  "Value": 0.5
+                }
+              },
+              {
+                "xmin": {
+                  "Value": 0.5
+                },
+                "ymin": {
+                  "Value": -100
+                },
+                "xmax": {
+                  "Value": 1
+                },
+                "ymax": {
+                  "Value": -100
+                }
+              }
+            ]
+          },
+          "PostProcess": {
+            "$type": "RPG.GameCore.ComplexSkillAIPostProcessBreak",
+            "CompareType": "LessEqual",
+            "CompareValue": {
+              "Value": -100
+            },
+            "IsOverrideFinalScore": true,
+            "FinalScore": {
+              "Value": 0.01
+            }
+          }
+        }
+      ]
+    },
     "Common_TreasureActivity_Base": {
       "CombineOperator": "Mul",
       "Factors": [
@@ -7716,9 +7940,8 @@
         {
           "CombineOperator": "Mul",
           "Source": {
-            "$type": "RPG.GameCore.ComplexSkillAISourceContainBehaviorFlag",
-            "FromTarget": false,
-            "BehaviorFlag": "Crazy"
+            "$type": "RPG.GameCore.ComplexSkillAISourceNeedChaosTargeting",
+            "FromTarget": false
           },
           "Mapper": {
             "$type": "RPG.GameCore.ComplexSkillAIMapperMultiRange",

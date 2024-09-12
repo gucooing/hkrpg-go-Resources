@@ -676,6 +676,135 @@
     },
     {
       "Modifiers": {
+        "StageAbility_0.4SP_Modifier": {
+          "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByTargetTeam",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Team": "TeamLight"
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByNot",
+                        "Predicate": {
+                          "$type": "RPG.GameCore.ByAny",
+                          "PredicateList": [
+                            {
+                              "$type": "RPG.GameCore.ByCompareBattleEventID",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "TargetBattleEventID": {
+                                "IsDynamic": false,
+                                "FixedValue": {
+                                  "Value": 60001
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                      "DynamicKey": "Target_MaxSP",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "Value": "MaxSP"
+                    },
+                    {
+                      "$type": "RPG.GameCore.ModifySPNew",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "FixedAddValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAHCg==",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -304748635
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.ModifySPNew",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "FixedAddValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAAAAQK",
+                          "FixedValues": [
+                            {
+                              "Value": 0.4
+                            }
+                          ],
+                          "DynamicHashes": [
+                            -304748635
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetHP",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifyValue": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 99999
+                        }
+                      },
+                      "ShowText": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "DynamicValues": {
+            "Values": {
+              "-304748635": {}
+            }
+          }
+        }
+      },
+      "Name": "StageAbility_SetFullHPand0.4SP",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_0.4SP_Modifier"
+        }
+      ]
+    },
+    {
+      "Modifiers": {
         "StageAbility_HalfSP_Modifier": {
           "_CallbackList": [
             {
@@ -778,6 +907,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -90,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.HealHP",
@@ -799,12 +929,6 @@
                   }
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "LevelBuff"
             }
           ]
         }
@@ -1642,6 +1766,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -80,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -1702,12 +1827,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "CharacterBuff"
             }
           ]
         }
@@ -4820,6 +4939,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -90,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -4840,12 +4960,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "LevelBuff"
             }
           ]
         },
@@ -4931,6 +5045,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -90,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -4951,12 +5066,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "LevelBuff"
             }
           ]
         },
@@ -5113,6 +5222,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -90,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.Retarget",
@@ -5141,12 +5251,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "LevelBuff"
             }
           ]
         }
@@ -7987,6 +8091,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -70,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -8096,12 +8201,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "StanceBreak"
             }
           ]
         }
@@ -12045,6 +12144,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -90,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.HealHP",
@@ -12066,12 +12166,6 @@
                   }
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "LevelBuff"
             }
           ]
         }
@@ -12749,12 +12843,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "PROG_Default"
             }
           ],
           "DynamicValues": {
@@ -13646,7 +13734,7 @@
                         "MDF_PropertyRatio": {
                           "IsDynamic": false,
                           "FixedValue": {
-                            "Value": -0.2
+                            "Value": 0.2
                           }
                         }
                       }

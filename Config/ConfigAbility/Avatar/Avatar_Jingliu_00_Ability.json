@@ -1692,6 +1692,16 @@
           "IsHide": true
         },
         {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          },
+          "DynamicKey": "Jingliu_MoonFlag"
+        },
+        {
           "$type": "RPG.GameCore.TriggerAbility",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -3901,6 +3911,7 @@
           "_CallbackList": [
             {
               "Event": "OnEnterBattle",
+              "Priority": -80,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -4012,12 +4023,6 @@
                   ]
                 }
               ]
-            }
-          ],
-          "_PriorityList": [
-            {
-              "PriorityName": "EnterBattlePriority",
-              "Key": "CharacterBuff"
             }
           ]
         },
@@ -4290,7 +4295,26 @@
                     "TargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
                       "Alias": "Caster"
-                    }
+                    },
+                    "IncludeUnselectable": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Flag": "STAT_CTRL",
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Flag": "DisableAction",
+                    "Inverse": true
                   }
                 ]
               },
@@ -4344,16 +4368,6 @@
                       "DynamicKey": "Jingliu_FullMoonFlag"
                     }
                   ]
-                },
-                {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "Value": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0
-                    }
-                  },
-                  "DynamicKey": "Jingliu_MoonFlag"
                 }
               ]
             }
@@ -4425,92 +4439,131 @@
           ]
         },
         {
-          "Event": "OnWaveMonster",
+          "Event": "OnModifierRemove",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByCompareDynamicValue",
-                "DynamicKey": "Jingliu_MoonFlag",
-                "CompareType": "Equal",
-                "CompareValue": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      1402962806
-                    ]
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                    "Flag": "STAT_CTRL"
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                    "Flag": "DisableAction"
                   }
-                }
+                ]
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "Caster"
-                  },
-                  "ModifierName": "MAvatar_Jingliu_Passive_ATK"
-                },
-                {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByRankActivated",
-                    "TriggerKey": {
-                      "Hash": -1445815962
-                    }
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "Flag": "STAT_CTRL",
+                        "Inverse": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "Flag": "DisableAction",
+                        "Inverse": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "Jingliu_MoonFlag",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1402962806
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByHaveEnemyAlive",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "IncludeUnselectable": true
+                      }
+                    ]
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "Value": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQABAQIK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -33614224,
-                            -1222495635
-                          ]
-                        }
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
                       },
-                      "DynamicKey": "Jingliu_FullMoonFlag"
-                    }
-                  ],
-                  "FailedTaskList": [
+                      "ModifierName": "MAvatar_Jingliu_Passive_ATK"
+                    },
                     {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "Value": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -33614224
-                          ]
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByRankActivated",
+                        "TriggerKey": {
+                          "Hash": -1445815962
                         }
                       },
-                      "DynamicKey": "Jingliu_FullMoonFlag"
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQABAQIK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -33614224,
+                                -1222495635
+                              ]
+                            }
+                          },
+                          "DynamicKey": "Jingliu_FullMoonFlag"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -33614224
+                              ]
+                            }
+                          },
+                          "DynamicKey": "Jingliu_FullMoonFlag"
+                        }
+                      ]
                     }
                   ]
-                },
-                {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "Value": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0
-                    }
-                  },
-                  "DynamicKey": "Jingliu_MoonFlag"
                 }
               ]
             }
           ]
         },
         {
-          "Event": "OnListenInsertAbilityFinish",
+          "Event": "OnWaveMonster",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.PredicateTaskList",
@@ -4533,11 +4586,22 @@
                     }
                   },
                   {
-                    "$type": "RPG.GameCore.ByHaveEnemyAlive",
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
                     "TargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
                       "Alias": "Caster"
-                    }
+                    },
+                    "Flag": "STAT_CTRL",
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Flag": "DisableAction",
+                    "Inverse": true
                   }
                 ]
               },
@@ -4591,16 +4655,112 @@
                       "DynamicKey": "Jingliu_FullMoonFlag"
                     }
                   ]
-                },
-                {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "Value": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Event": "OnListenInsertAbilityFinish",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Jingliu_MoonFlag",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1402962806
+                        ]
+                      }
                     }
                   },
-                  "DynamicKey": "Jingliu_MoonFlag"
+                  {
+                    "$type": "RPG.GameCore.ByHaveEnemyAlive",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "IncludeUnselectable": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Flag": "STAT_CTRL",
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Flag": "DisableAction",
+                    "Inverse": true
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ModifierName": "MAvatar_Jingliu_Passive_ATK"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByRankActivated",
+                    "TriggerKey": {
+                      "Hash": -1445815962
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQABAQIK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -33614224,
+                            -1222495635
+                          ]
+                        }
+                      },
+                      "DynamicKey": "Jingliu_FullMoonFlag"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -33614224
+                          ]
+                        }
+                      },
+                      "DynamicKey": "Jingliu_FullMoonFlag"
+                    }
+                  ]
                 }
               ]
             }
@@ -6114,7 +6274,17 @@
                 "DisableAction"
               ],
               "InsertAbilityPriority": "AvatarBuffSelf",
-              "ShowInActionBar": true
+              "ShowInActionBar": true,
+              "PreCheck": {
+                "$type": "RPG.GameCore.TurnInsertAbilityCondition",
+                "Type": "AbilityOwnerInsertCount",
+                "Count": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
+                  }
+                }
+              }
             },
             {
               "$type": "RPG.GameCore.SetDynamicValueByProperty",
@@ -6136,6 +6306,7 @@
           ]
         }
       ],
+      "Stacking": "ReplaceByCaster",
       "DynamicValues": {
         "Values": {
           "-404690166": {},

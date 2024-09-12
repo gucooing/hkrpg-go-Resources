@@ -1,0 +1,82 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.ShowFuncBtn",
+          "PuzzleFunc": "Identify",
+          "CDDuration": 1,
+          "CustomString": {
+            "Value": "PhotoGraphGOGOGO"
+          }
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "PhotoGraphGOGOGO"
+          }
+        },
+        {
+          "$type": "RPG.GameCore.SwitchPhotoGraphMode",
+          "PhotoGraphMode": "Identify"
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PhotoGraphAimTarget",
+          "AimTargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvNPC",
+            "MultiGroupFetch": [
+              {
+                "GroupID": 15,
+                "GroupNpcID": 400014
+              }
+            ]
+          },
+          "IsAim": true
+        },
+        {
+          "$type": "RPG.GameCore.PhotoGraphWaitIdentifyFinish",
+          "WaitTargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvNPC",
+            "MultiGroupFetch": [
+              {
+                "GroupID": 15,
+                "GroupNpcID": 400014
+              }
+            ]
+          },
+          "OnPreviewFinish": [
+            {
+              "$type": "RPG.GameCore.SwitchPhotoGraphMode"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.PhotoGraphAimTarget",
+          "AimTargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvNPC",
+            "MultiGroupFetch": [
+              {
+                "GroupID": 15,
+                "GroupNpcID": 400014
+              }
+            ]
+          }
+        },
+        {
+          "$type": "RPG.GameCore.FinishPerformanceMission",
+          "Key": "Mission_901091705"
+        }
+      ]
+    }
+  ]
+}

@@ -278,6 +278,62 @@
                               "MutexType": "Entity"
                             }
                           ]
+                        },
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByAnd",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByCompareCharacterID",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "DamageAttackerEntity"
+                                },
+                                "TargetCharacterID": {
+                                  "IsDynamic": false,
+                                  "FixedValue": {
+                                    "Value": 1303
+                                  }
+                                }
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByCompareCharacterID",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "CurrentTurnActionEntity"
+                                },
+                                "TargetCharacterID": {
+                                  "IsDynamic": false,
+                                  "FixedValue": {
+                                    "Value": 1317
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.TriggerEffect",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ModifierOwnerEntity"
+                              },
+                              "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Rappa_00/Eff_Avatar_Rappa_00_Common_StanceBreak_01.prefab"
+                            }
+                          ],
+                          "FailedTaskList": [
+                            {
+                              "$type": "RPG.GameCore.ModifierAttachEffect",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ModifierOwnerEntity"
+                              },
+                              "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Ice.prefab",
+                              "MinMutexTime": -1,
+                              "MutexType": "Entity"
+                            }
+                          ]
                         }
                       ]
                     }
@@ -647,12 +703,40 @@
                   ],
                   "FailedTaskList": [
                     {
-                      "$type": "RPG.GameCore.TriggerEffect",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareCharacterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "DamageAttackerEntity"
+                        },
+                        "TargetCharacterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1317
+                          }
+                        }
                       },
-                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Imaginary.prefab"
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Rappa_00/Eff_Avatar_Rappa_00_Common_StanceBreak_01.prefab"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEffect",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_StanceBreak_Common_Imaginary.prefab"
+                        }
+                      ]
                     }
                   ]
                 }

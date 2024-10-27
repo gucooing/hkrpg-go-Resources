@@ -49,7 +49,7 @@
     "DefaultConfig": {
       "IntervalMin": 0.9,
       "IntervalMax": 3,
-      "SummonUnitIntervalBias": -0.1,
+      "ServantIntervalBias": -0.1,
       "TeamWidthRatioFactor": 0.8,
       "WidthRatioForEnemy": 0.2,
       "LeftAngle": 2,
@@ -61,7 +61,7 @@
     "ExtraConfig": {
       "IntervalMin": 0.9,
       "IntervalMax": 3,
-      "SummonUnitIntervalBias": -0.1,
+      "ServantIntervalBias": -0.1,
       "TeamWidthRatioFactor": 0.8,
       "WidthRatioForEnemy": 0.2,
       "LeftAngle": 2,
@@ -70,7 +70,7 @@
       "RightAngleOffsetRatio": 0.8,
       "RightDirAdditiveDisRatioForEnemy": 0.25
     },
-    "SummonUnitCustomTeamFormationConfigs": [
+    "ServantCustomTeamFormationConfigs": [
       {
         "ActiveTeamFormationTypes": [
           "Custom"
@@ -79,7 +79,7 @@
       },
       {
         "ActiveCameraStates": [
-          "SelectSummonUnit"
+          "SelectServant"
         ],
         "ActiveTeamFormationTypes": [
           "LightTeamNormal"
@@ -129,7 +129,12 @@
     "DefaultConfig": {
       "Interval": 1
     },
-    "MaxLocationCount": 5
+    "MaxLocationCount": 5,
+    "RowXOffsetOdd": 0,
+    "RowXOffsetEven": 1.8,
+    "MultiRowWidthExpand0": 0.8,
+    "MultiRowWidthExpand1": 0.8,
+    "MultiRowComfortZoneWidth": 2
   },
   "SkillParameterColor": "#FF9900FF",
   "DefaultLevelPerformConfig": {
@@ -478,6 +483,7 @@
         "STAT_DOT_Poison",
         "STAT_DOT_Electric"
       ],
+      "EventType": "DOT",
       "SortBy": "Phase1Priority"
     },
     {
@@ -544,13 +550,21 @@
         "CustomEvent_TargetStancePreshow"
       ],
       "EventType": "TargetStancePreshow"
+    },
+    {
+      "BehaviorFlags": [
+        "CustomEvent_RogueMagicDelayUnit"
+      ],
+      "EventType": "RogueMagicDelayUnit"
     }
   ],
   "DieAnimTransitDuration": 0,
   "AddBuffPerformTimeInterval": 0.1,
   "AddBuffPerformTimeMax": 1.5,
   "SkillTargetBeyondTargetIntensity": 1,
-  "SkillTargetBeyondTargetFadeTime": 0.2,
+  "SkillTargetBeyondTargetFadeTime": 1,
+  "BackRowExceptSkillTargetIntensity": 0.35,
+  "BackRowExceptSkillTargetFadeTime": 0.35,
   "ModifierBehaviorFlagImmuneMap": {
     "Endurance": {
       "BehaviorFlags": [
@@ -800,7 +814,7 @@
   "ProjectileCurveAsset": [
     "Projectile/ProjectileSpeedCurve.asset"
   ],
-  "GameCoreDesignDataVersion": 7908135,
+  "GameCoreDesignDataVersion": 8177633,
   "MainMonsterUniqueName": "CurMainMonster",
   "StanceBreakActionDelayChangeRatio": {
     "Value": 0.25
@@ -838,7 +852,9 @@
     }
   },
   "EnableModifyDotDamageData": true,
-  "CustomSwitchMap": {},
+  "CustomSwitchMap": {
+    "RevertFixMapSpChaneApplyConfig": true
+  },
   "ForbidRecallModifierEventList": [
     "OnModifierAdd",
     "OnAddModifierSuc",
@@ -969,5 +985,13 @@
         }
       ]
     }
-  }
+  },
+  "RogueMagicConstDynamicValueKeys": {
+    "ScepterID": "#Scepter_ID",
+    "ScepterActiveUnitTriggerCount": "#Scepter_ActiveUnitTriggerCount",
+    "MagicUnitLevel": "#MagicUnit_Level",
+    "MagicUnitIndex": "#MagicUnit_Index"
+  },
+  "ServantModifierEventWhiteList": [],
+  "SeparateBattleEventDie": true
 }

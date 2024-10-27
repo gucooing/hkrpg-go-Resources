@@ -206,6 +206,22 @@
       ]
     },
     {
+      "Name": "Monster_W2_Abomi04_00_PassiveSkill_Formation2",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MMonster_W2_Abomi04_00_PassiveSkill_Formation2"
+        }
+      ]
+    },
+    {
       "Name": "Monster_W2_Abomi04_00_Skill01_Phase01",
       "TargetInfo": {
         "TargetType": "SkillTargetEntityList"
@@ -2731,6 +2747,44 @@
                 "Alias": "ModifierOwnerEntity"
               },
               "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W1_Gepard_00/Eff_Monster_W1_Gepard_00_Skill04_01.prefab"
+            }
+          ]
+        }
+      ]
+    },
+    "MMonster_W2_Abomi04_00_PassiveSkill_Formation2": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenCharacterCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByHasSummonRelation",
+                "SummonerType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "ServantType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetTargetTeamLocation",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "Row": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                }
+              ]
             }
           ]
         }

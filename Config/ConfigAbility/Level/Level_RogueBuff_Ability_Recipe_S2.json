@@ -566,7 +566,7 @@
                 "StanceDamageType": {
                   "DamageType": "Ice"
                 },
-                "AttackType": "Pursued",
+                "AttackType": "Level",
                 "HitAnimation": "Hit"
               }
             }
@@ -1319,7 +1319,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "Stacking": "ReplaceByCaster"
         }
       },
       "Name": "StageAbility_670430_Insert",
@@ -2130,7 +2131,7 @@
           "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+            "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
           },
           "ModifierName": "Modifier_StageAbility_670640_PowerUp",
           "DynamicValues": {
@@ -2293,7 +2294,7 @@
           "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeam"
+            "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
           },
           "ModifierName": "Modifier_StageAbility_670640_PowerUp"
         },
@@ -6144,8 +6145,43 @@
                         }
                       },
                       "InheritCaster": "TargetSelf"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Modifier_StageAbility_672030_Character2"
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        },
+        "Modifier_StageAbility_672030_Character2": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "ShieldTakenRatio",
+                  "PropertyValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        462955996
+                      ]
+                    }
+                  }
                 }
               ]
             }
@@ -8960,29 +8996,6 @@
     },
     "Modifier_StageAbility_672030_Character": {
       "_CallbackList": [
-        {
-          "Event": "OnStack",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.StackProperty",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "Property": "ShieldTakenRatio",
-              "PropertyValue": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAK",
-                  "FixedValues": [],
-                  "DynamicHashes": [
-                    2128130574
-                  ]
-                }
-              }
-            }
-          ]
-        },
         {
           "Event": "OnModifierRemove",
           "CallbackConfig": [

@@ -349,66 +349,7 @@
       ]
     },
     {
-      "Modifiers": {
-        "MAvatar_Lingsha_Tree02_Resistance": {
-          "_CallbackList": [
-            {
-              "Event": "OnStack",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.StackProperty",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "Property": "StatusResistanceBase",
-                  "PropertyValue": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        2128130574
-                      ]
-                    }
-                  }
-                }
-              ]
-            },
-            {
-              "Event": "OnListenCharacterDie",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.Retarget",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "BattleEventEntityList"
-                  },
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByIsContainModifier",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity"
-                    },
-                    "ModifierName": "MAvatar_Lingsha_BPSkill_BattleEvent"
-                  },
-                  "FailedTaskList": [
-                    {
-                      "$type": "RPG.GameCore.RemoveSelfModifier"
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "Stacking": "ReplaceByCaster",
-          "DynamicValues": {
-            "Values": {
-              "2128130574": {}
-            }
-          }
-        }
-      },
+      "Modifiers": {},
       "Name": "Avatar_Lingsha_00_Skill02_Phase02",
       "TargetInfo": {
         "TargetType": "SkillTargetEntityList",
@@ -1971,8 +1912,106 @@
               ]
             },
             {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamDark"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByRankActivated",
+                        "TriggerKey": {
+                          "Hash": 2089636447
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "MAvatar_Lingsha_Rank01_PassiveStackProperty"
+                        },
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "MAvatar_Lingsha_00_Rank01_ListenBreak",
+                          "DynamicValues": {
+                            "Rank01_MDF_PropertyValue": {
+                              "IsDynamic": true,
+                              "PostfixExpr": {
+                                "OpCodes": "AQAK",
+                                "FixedValues": [],
+                                "DynamicHashes": [
+                                  -1129996118
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "Event": "OnEnterBattle",
-              "CallbackConfig": []
+              "Priority": -80,
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByRankActivated",
+                    "TriggerKey": {
+                      "Hash": 2089636447
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllEnemyWithUnSelectable"
+                      },
+                      "ModifierName": "MAvatar_Lingsha_Rank01_PassiveStackProperty"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllEnemyWithUnSelectable"
+                      },
+                      "ModifierName": "MAvatar_Lingsha_00_Rank01_ListenBreak",
+                      "DynamicValues": {
+                        "Rank01_MDF_PropertyValue": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1129996118
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
             }
           ],
           "Stacking": "ReplaceByCaster"
@@ -3346,15 +3385,42 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    "MAvatar_Lingsha_00_Rank01_ListenBreak": {
+      "BehaviorFlagList": [
+        "RemoveWhenCasterDead"
+      ],
+      "_CallbackList": [
         {
-          "Event": "OnListenBreak",
+          "Event": "OnBeforeBeingBreak",
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.AddModifier",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "MAvatar_Lingsha_Rank01_PassiveStackProperty",
+              "DynamicValues": {
+                "MDF_PropertyValue": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      606264292
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
               },
               "ModifierName": "MAvatar_Lingsha_Rank01_DefenceRatioDown",
               "DynamicValues": {
@@ -3364,7 +3430,7 @@
                     "OpCodes": "AQAK",
                     "FixedValues": [],
                     "DynamicHashes": [
-                      -1129996118
+                      606264292
                     ]
                   }
                 }
@@ -3372,9 +3438,14 @@
             }
           ]
         }
-      ]
+      ],
+      "DynamicValues": {
+        "Values": {
+          "606264292": {}
+        }
+      }
     },
-    "MAvatar_Lingsha_Rank01_DefenceRatioDown": {
+    "MAvatar_Lingsha_Rank01_PassiveStackProperty": {
       "BehaviorFlagList": [
         "STAT_DefenceDown"
       ],
@@ -3405,6 +3476,33 @@
               }
             }
           ]
+        }
+      ],
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {
+        "Values": {
+          "2128130574": {}
+        }
+      }
+    },
+    "MAvatar_Lingsha_Rank01_DefenceRatioDown": {
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": "MAvatar_Lingsha_Rank01_PassiveStackProperty"
+            }
+          ]
+        },
+        {
+          "Event": "OnStack",
+          "CallbackConfig": []
         }
       ],
       "DynamicValues": {

@@ -14494,6 +14494,220 @@
       ]
     },
     {
+      "Name": "Monster_W3_Death_00_Skill07_Phase01_FightFest",
+      "TargetInfo": {
+        "TargetType": "AllEnemy"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterPhase",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "UniqueNameEntity_MainMonster"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 2
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllEnemy"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": "Modifier_W3_Death_00_Attack_Sign"
+              },
+              "ByRandom": true,
+              "MaxNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "TaskList": [],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllEnemy"
+                  },
+                  "ByRandom": true,
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Modifier_W3_Death_00_Attack_Sign"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllEnemy"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": "Modifier_W3_Death_00_Attack_Sign"
+              },
+              "ByRandom": true,
+              "MaxNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 2
+                }
+              },
+              "TaskList": [],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllEnemy"
+                  },
+                  "ByRandom": true,
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 2
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Modifier_W3_Death_00_Attack_Sign"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.ShowBattleUI"
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "CustomFormationName": "Monster_XP_Elite01_01_Skill03",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamCenter"
+          },
+          "CustomFormationIgnoreDying": false
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "TargetType": "LightTeamCenter"
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": "Monster_W3_Death_00_Skill07_Phase02",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetSequence",
+            "Sequence": [
+              {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllEnemy"
+              },
+              {
+                "$type": "RPG.GameCore.TargetFilter",
+                "Predicate": {
+                  "$type": "RPG.GameCore.ByIsContainModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "ModifierName": "Modifier_W3_Death_00_Attack_Sign",
+                  "CasterFilter": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  }
+                }
+              },
+              {
+                "$type": "RPG.GameCore.TargetTake",
+                "Count": 2
+              }
+            ]
+          },
+          "AbilityName": "Monster_W3_Death_00_Skill07_Camera",
+          "IsSkillPerform": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimStateName": "Skill07",
+          "NormalizedTimeEnd": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.9
+            }
+          },
+          "NormalizedTimeWait": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.88
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "AnimLogicState": "Idle"
+        },
+        {
+          "$type": "RPG.GameCore.ShowBattleUI",
+          "IsShow": true
+        }
+      ]
+    },
+    {
       "Modifiers": {
         "StageAbility_3122004_Modifier": {
           "_CallbackList": [
@@ -26692,7 +26906,7 @@
           "$type": "RPG.GameCore.Retarget",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeamWithAllLightTeamUnselectable"
+            "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
           },
           "ByRandom": true,
           "TaskList": [
@@ -27559,7 +27773,7 @@
                   "$type": "RPG.GameCore.RemoveModifier",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeamWithAllLightTeamUnselectable"
+                    "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
                   },
                   "ModifierName": "StageAbility_FightFest_DarkFever_BlockUltra"
                 },
@@ -27677,7 +27891,7 @@
                       "$type": "RPG.GameCore.RemoveModifier",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "AllLightTeamWithAllLightTeamUnselectable"
+                        "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
                       },
                       "ModifierName": "StageAbility_FightFest_DarkFever_BlockUltra"
                     },
@@ -27881,7 +28095,7 @@
           "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeamWithAllLightTeamUnselectable"
+            "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
           },
           "ModifierName": "StageAbility_FightFest_DarkFever_BlockUltra"
         },

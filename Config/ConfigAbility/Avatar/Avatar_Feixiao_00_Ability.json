@@ -898,7 +898,7 @@
         {
           "$type": "RPG.GameCore.TransitEnvProfile",
           "Path": {
-            "Value": "Stages/Outputs/ChapterEffect/EnviroProfile/Eff_Avatar_00_Feixiao_Skill03_Ready.enviroProfile.asset"
+            "Value": "Effects/Eff_EnviroProfile/Avatar/Feixiao_00/Eff_Avatar_Feixiao_00_Skill03_Ready.enviroProfile.asset"
           }
         },
         {
@@ -1057,7 +1057,7 @@
         {
           "$type": "RPG.GameCore.TransitEnvProfile",
           "Path": {
-            "Value": "Stages/Outputs/ChapterEffect/EnviroProfile/Eff_Avatar_00_Feixiao_Skill03_Combo_01.enviroProfile.asset"
+            "Value": "Effects/Eff_EnviroProfile/Avatar/Feixiao_00/Eff_Avatar_Feixiao_00_Skill03_Combo_01.enviroProfile.asset"
           }
         },
         {
@@ -1140,6 +1140,7 @@
             "BPDetailPanel",
             "SkillButtonBattleEvent",
             "BattleRightInfo",
+            "BattleRightCenterInfo",
             "BattleScreenEffectPanel"
           ]
         },
@@ -1624,7 +1625,7 @@
             }
           ],
           "AdditionConfig": {
-            "FilterMask": 6,
+            "FilterMask": 3,
             "DependencyOnRemove": {
               "DependentModifier": "M_Feixiao_00_UltraTarget"
             }
@@ -1641,6 +1642,12 @@
               },
               "ModifierName": "MAvatar_Feixiao_00_Ultramode",
               "Inverse": true
+            },
+            "ForceStanceBreakRatio": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 1
+              }
             },
             "AddForceStanceDamageFlag": true
           }
@@ -5643,6 +5650,7 @@
             "BPDetailPanel",
             "SkillButtonBattleEvent",
             "BattleRightInfo",
+            "BattleRightCenterInfo",
             "BattleScreenEffectPanel"
           ],
           "IsActive": true
@@ -6115,6 +6123,7 @@
             "BPDetailPanel",
             "SkillButtonBattleEvent",
             "BattleRightInfo",
+            "BattleRightCenterInfo",
             "BattleScreenEffectPanel"
           ],
           "IsActive": true
@@ -6378,14 +6387,6 @@
                           "Alias": "Caster"
                         },
                         "ModifierName": "MAvatar_Feixiao_00_InsertIsReady"
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByHaveEnemyAlive",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "Caster"
-                        },
-                        "IncludeUnselectable": true
                       }
                     ]
                   },
@@ -6765,6 +6766,16 @@
                           "TargetType": {
                             "$type": "RPG.GameCore.TargetAlias",
                             "Alias": "ParamEntitySkillTargetEntityList"
+                          },
+                          "ModifierName": "M_Feixiao_00_Friend_Mark_Main"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.RemoveModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AllEnemyWithUnSelectable"
                           },
                           "ModifierName": "M_Feixiao_00_Friend_Mark_Main"
                         }
@@ -7169,6 +7180,16 @@
     {
       "OnInsertAbort": [
         {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "DynamicKey": "Is_InsertAbort"
+        },
+        {
           "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -7182,6 +7203,16 @@
         "TargetType": "InherentTargetEntity"
       },
       "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          },
+          "DynamicKey": "Is_InsertAbort"
+        },
         {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
@@ -7300,6 +7331,16 @@
     {
       "OnInsertAbort": [
         {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "DynamicKey": "Is_InsertAbort"
+        },
+        {
           "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -7313,6 +7354,16 @@
         "TargetType": "InherentTargetEntity"
       },
       "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          },
+          "DynamicKey": "Is_InsertAbort"
+        },
         {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
@@ -7456,7 +7507,7 @@
       "OnStart": [
         {
           "$type": "RPG.GameCore.ShowBonusUIEffect",
-          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_1220.prefab",
+          "UIPrefabPath": "UI/Battle/SpecialAction/Avatar/SpecialAction_1220.prefab",
           "TitleTextID": {
             "Hash": 384871404
           }
@@ -7819,6 +7870,14 @@
             "Alias": "Caster"
           },
           "ModifierName": "M_Feixiao_00_InsertCheckSelf"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemyWithUnSelectable"
+          },
+          "ModifierName": "M_Feixiao_00_Friend_Mark_Main"
         },
         {
           "$type": "RPG.GameCore.PredicateTaskList",
@@ -8241,14 +8300,6 @@
                   }
                 },
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "Caster"
-                  },
-                  "ModifierName": "M_Feixiao_00_Maze_ForceCritical"
-                },
-                {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
                     "$type": "RPG.GameCore.ByCompareWaveCount",
@@ -8303,6 +8354,7 @@
                           }
                         },
                         "AttackType": "Maze",
+                        "CustomName": "Feixiao_00_MazeAttack",
                         "HitAnimation": "Hit_H",
                         "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Feixiao_00/Eff_Avatar_Feixiao_00_Common_Attack_01_Tornado_Hit.prefab",
                         "HitEffectHeight": 1,
@@ -8353,6 +8405,7 @@
                           }
                         },
                         "AttackType": "Maze",
+                        "CustomName": "Feixiao_00_MazeAttack",
                         "HitAnimation": "Hit_H",
                         "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Feixiao_00/Eff_Avatar_Feixiao_00_Common_Attack_01_Tornado_Hit.prefab",
                         "HitEffectHeight": 1,
@@ -8366,14 +8419,6 @@
                       }
                     }
                   ]
-                },
-                {
-                  "$type": "RPG.GameCore.RemoveModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "Caster"
-                  },
-                  "ModifierName": "M_Feixiao_00_Maze_ForceCritical"
                 },
                 {
                   "$type": "RPG.GameCore.DamagePerformFinish"
@@ -8415,14 +8460,23 @@
         "M_Feixiao_00_Maze_ForceCritical": {
           "_CallbackList": [
             {
-              "Event": "OnBeforeHit",
+              "Event": "OnBeforeHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
-                    "$type": "RPG.GameCore.ByAttackType",
-                    "AttackTypes": [
-                      "Maze"
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByAttackType",
+                        "AttackTypes": [
+                          "Maze"
+                        ]
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareDamageCustomName",
+                        "CustomName": "Feixiao_00_MazeAttack"
+                      }
                     ]
                   },
                   "SuccessTaskList": [
@@ -8462,6 +8516,14 @@
             "Alias": "Caster"
           },
           "ModifierName": "StageAbility_Maze_Feixiao_00_Modifier_GainSP"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "M_Feixiao_00_Maze_ForceCritical"
         }
       ]
     },
@@ -8967,6 +9029,20 @@
           "Event": "OnStack",
           "CallbackConfig": [
             {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "ForceStanceBreakRatio",
+              "PropertyValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
+            },
+            {
               "$type": "RPG.GameCore.SetControlSkillMapping",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
@@ -9293,8 +9369,54 @@
           "Event": "OnListenInsertAbilityFinish",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.IncludeTaskListTemplate",
-              "Name": "Feixiao_00_InsertRetarget"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareTarget",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "CompareType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByTargetAliveState",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "AliveStateMask": "Mask_AliveOrRevivable"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Is_InsertAbort",
+                    "CompareType": "LessEqual",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "Feixiao_00_InsertRetarget"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -9413,8 +9535,54 @@
           "Event": "OnListenInsertAbilityFinish",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.IncludeTaskListTemplate",
-              "Name": "Feixiao_00_InsertRetargetSelf"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareTarget",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "CompareType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByTargetAliveState",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "AliveStateMask": "Mask_AliveOrRevivable"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Is_InsertAbort",
+                    "CompareType": "LessEqual",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "Feixiao_00_InsertRetargetSelf"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -10959,6 +11127,20 @@
                     "DynamicHashes": [
                       41796156
                     ]
+                  }
+                }
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareHP",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AbilityTargetEntity"
+                },
+                "CompareType": "LessEqual",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
                   }
                 }
               }

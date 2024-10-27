@@ -33,6 +33,12 @@
                 "Custom": true,
                 "Key": "Text2"
               }
+            },
+            {
+              "ID": "Option3",
+              "ButtonText": {
+                "Value": "MazeText_MazePuzzle_RubikCube_Start "
+              }
             }
           ]
         }
@@ -405,17 +411,6 @@
     {
       "TaskList": [
         {
-          "$type": "RPG.GameCore.CollectDataConditions",
-          "TaskIDList": [
-            404034001,
-            404034001
-          ],
-          "MainMissionIDList": [],
-          "PerformanceIDList": [],
-          "PerformanceIDDsList": [],
-          "CustomValueMainMissionIDList": []
-        },
-        {
           "$type": "RPG.GameCore.WaitSubMissionStateChange",
           "SubMissions": [
             404034001
@@ -439,10 +434,13 @@
         {
           "$type": "RPG.GameCore.CollectDataConditions",
           "TaskIDList": [
-            404034001,
             404034001
           ],
-          "MainMissionIDList": [],
+          "MainMissionIDList": [
+            1034204,
+            1034206,
+            1034209
+          ],
           "PerformanceIDList": [],
           "PerformanceIDDsList": [],
           "CustomValueMainMissionIDList": []
@@ -450,27 +448,132 @@
         {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
-            "$type": "RPG.GameCore.ByCompareSubMissionState",
-            "SubMissionID": 404034001,
-            "SubMissionState": "Finish"
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareMainMissionState",
+                "MainMissionID": 1034204,
+                "MainMissionState": "Started"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareMainMissionState",
+                "MainMissionID": 1034206,
+                "MainMissionState": "Started"
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareMainMissionState",
+                "MainMissionID": 1034209,
+                "MainMissionState": "Started"
+              }
+            ]
           },
           "SuccessTaskList": [
             {
               "$type": "RPG.GameCore.AdvEnableButtons",
               "TriggerName": "InteractTrigger",
               "ButtonsByName": [
-                "Option2"
+                "Option3"
               ],
               "IsEnable": true
-            }
-          ],
-          "FailedTaskList": [
+            },
             {
               "$type": "RPG.GameCore.AdvEnableButtons",
               "TriggerName": "InteractTrigger",
               "ButtonsByName": [
                 "Option2"
               ]
+            },
+            {
+              "$type": "RPG.GameCore.AdvEnableButtons",
+              "TriggerName": "InteractTrigger",
+              "ButtonsByName": [
+                "Option1"
+              ]
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareSubMissionState",
+                "SubMissionID": 404034001,
+                "SubMissionState": "Finish"
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AdvEnableButtons",
+                  "TriggerName": "InteractTrigger",
+                  "ButtonsByName": [
+                    "Option2"
+                  ],
+                  "IsEnable": true
+                },
+                {
+                  "$type": "RPG.GameCore.AdvEnableButtons",
+                  "TriggerName": "InteractTrigger",
+                  "ButtonsByName": [
+                    "Option1"
+                  ],
+                  "IsEnable": true
+                },
+                {
+                  "$type": "RPG.GameCore.AdvEnableButtons",
+                  "TriggerName": "InteractTrigger",
+                  "ButtonsByName": [
+                    "Option3"
+                  ]
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.AdvEnableButtons",
+                  "TriggerName": "InteractTrigger",
+                  "ButtonsByName": [
+                    "Option2"
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.AdvEnableButtons",
+                  "TriggerName": "InteractTrigger",
+                  "ButtonsByName": [
+                    "Option1"
+                  ],
+                  "IsEnable": true
+                },
+                {
+                  "$type": "RPG.GameCore.AdvEnableButtons",
+                  "TriggerName": "InteractTrigger",
+                  "ButtonsByName": [
+                    "Option3"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvOnButtonPressed",
+          "ButtonName": "Option3",
+          "OnPressedCallback": [
+            {
+              "$type": "RPG.GameCore.PlayMissionTalk",
+              "StartSentenceID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 103438710
+                }
+              },
+              "EndSentenceID": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 103438710
+                }
+              },
+              "SimpleTalkList": []
             }
           ]
         }

@@ -69,7 +69,8 @@
           "$type": "RPG.GameCore.WaitCustomString",
           "CustomString": {
             "Value": "Stage_WaveMonsterPerformStart2"
-          }
+          },
+          "GoNextImmediately": true
         },
         {
           "$type": "RPG.GameCore.WaveMonsterPerform",
@@ -286,7 +287,8 @@
           "$type": "RPG.GameCore.WaitCustomString",
           "CustomString": {
             "Value": "Stage_WaveMonster_DelayCreate_Begin"
-          }
+          },
+          "GoNextImmediately": true
         },
         {
           "$type": "RPG.GameCore.WaveMonsterPerform",
@@ -851,12 +853,64 @@
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.TriggerEntityColliderCameraConfig",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "BattleDataViewUISelectEnter"
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareTarget",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "BattleDataViewUISelectEnter"
+                        },
+                        "CompareType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "BattleDataViewUISelectLeave.GetServant"
+                        }
                       },
-                      "KeyName": "AvatarSwitch"
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEntityColliderCameraConfig",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "BattleDataViewUISelectEnter"
+                          },
+                          "KeyName": "AvatarServantSwitch"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareTarget",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "BattleDataViewUISelectEnter"
+                            },
+                            "CompareType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "BattleDataViewUISelectLeave.GetSummoner"
+                            }
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.TriggerEntityColliderCameraConfig",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "BattleDataViewUISelectEnter"
+                              },
+                              "KeyName": "AvatarSummonerSwitch"
+                            }
+                          ],
+                          "FailedTaskList": [
+                            {
+                              "$type": "RPG.GameCore.TriggerEntityColliderCameraConfig",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "BattleDataViewUISelectEnter"
+                              },
+                              "KeyName": "AvatarSwitch"
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ],
                   "FailedTaskList": [
@@ -1005,6 +1059,13 @@
                     "Team": "TeamLight"
                   },
                   "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetViewModeServantFollow",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam"
+                      }
+                    },
                     {
                       "$type": "RPG.GameCore.TriggerEntityColliderCameraConfig",
                       "TargetType": {

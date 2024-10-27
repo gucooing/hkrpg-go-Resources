@@ -1618,7 +1618,8 @@
                 {
                   "$type": "RPG.GameCore.TurnInsertAction",
                   "SkillType": "ControlSkill02",
-                  "AutoCast": true
+                  "AutoCast": true,
+                  "CanRunAfterFightFinish": true
                 }
               ]
             }
@@ -1697,6 +1698,41 @@
                     }
                   },
                   "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "FinishRoomNum",
+                        "CompareType": "Greater",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "Value": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAAAAQK",
+                              "FixedValues": [
+                                {
+                                  "Value": 2
+                                }
+                              ],
+                              "DynamicHashes": [
+                                -209011678
+                              ]
+                            }
+                          },
+                          "DynamicKey": "BuffNumber"
+                        }
+                      ],
+                      "FailedTaskList": []
+                    },
                     {
                       "$type": "RPG.GameCore.AddModifier",
                       "TargetType": {
@@ -2733,7 +2769,7 @@
                   "$type": "RPG.GameCore.Retarget",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+                    "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
                   },
                   "Predicate": {
                     "$type": "RPG.GameCore.ByIsContainModifier",
@@ -2765,7 +2801,7 @@
                   "$type": "RPG.GameCore.Retarget",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+                    "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
                   },
                   "Predicate": {
                     "$type": "RPG.GameCore.ByIsContainModifier",
@@ -2928,7 +2964,7 @@
                   "$type": "RPG.GameCore.Retarget",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+                    "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
                   },
                   "Predicate": {
                     "$type": "RPG.GameCore.ByIsContainModifier",
@@ -2960,7 +2996,7 @@
                   "$type": "RPG.GameCore.Retarget",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+                    "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
                   },
                   "Predicate": {
                     "$type": "RPG.GameCore.ByIsContainModifier",

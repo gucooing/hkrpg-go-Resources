@@ -3619,243 +3619,36 @@
           ]
         },
         "Modifier_StageAbility_633012_Character": {
-          "ModifierStancePreshowConfig": {
-            "Condition": {
-              "$type": "RPG.GameCore.ByAnd",
-              "PredicateList": [
-                {
-                  "$type": "RPG.GameCore.ByContainBehaviorFlag",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "Flag": "ForceStanceDamage",
-                  "Inverse": true
-                },
-                {
-                  "$type": "RPG.GameCore.ByHasStanceWeak",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "WeakType": {
-                    "DamageType": "Quantum"
-                  },
-                  "Inverse": true
-                },
-                {
-                  "$type": "RPG.GameCore.ByIsContainModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "ModifierName": "MAvatar_Xueyi_00_StancePreview",
-                  "Inverse": true
-                }
-              ]
-            },
-            "MultiplyRatio": {
-              "IsDynamic": true,
-              "PostfixExpr": {
-                "OpCodes": "AQAK",
-                "FixedValues": [],
-                "DynamicHashes": [
-                  909827945
-                ]
-              }
-            },
-            "AddForceStanceDamageFlag": true
-          },
+          "BehaviorFlagList": [
+            "ForceStanceDamage"
+          ],
           "_CallbackList": [
             {
-              "Event": "OnAfterHit",
+              "Event": "OnStack",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByAnd",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByIsContainModifier",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "ModifierName": "Modifier_StageAbility_633012_Enemy"
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByHasStanceWeak",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "WeakType": {
-                          "DamageType": "Quantum"
-                        },
-                        "Inverse": true
-                      }
-                    ]
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
                   },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.SetDynamicValueByCopying",
-                      "FromTargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "FromDynamicKey": "MDF_HitStanceDamage",
-                      "FromModifierName": "Modifier_StageAbility_633012_Enemy",
-                      "ToTargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "ToDynamicKey": "MDF_HitStanceDamage"
-                    },
-                    {
-                      "$type": "RPG.GameCore.PredicateTaskList",
-                      "Predicate": {
-                        "$type": "RPG.GameCore.ByCompareDynamicValue",
-                        "DynamicKey": "MDF_HitStanceDamage",
-                        "CompareType": "Greater",
-                        "CompareValue": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 0
-                          }
-                        }
-                      },
-                      "SuccessTaskList": [
-                        {
-                          "$type": "RPG.GameCore.SetDynamicValueByProperty",
-                          "DynamicKey": "_CurrentStance",
-                          "ReadTargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "ParamEntity"
-                          },
-                          "Value": "CurrentStance"
-                        },
-                        {
-                          "$type": "RPG.GameCore.PredicateTaskList",
-                          "Predicate": {
-                            "$type": "RPG.GameCore.ByCompareDynamicValue",
-                            "DynamicKey": "_CurrentStance",
-                            "CompareType": "Less",
-                            "CompareValue": {
-                              "IsDynamic": true,
-                              "PostfixExpr": {
-                                "OpCodes": "AQABAQQK",
-                                "FixedValues": [],
-                                "DynamicHashes": [
-                                  -1094919248,
-                                  909827945
-                                ]
-                              }
-                            }
-                          },
-                          "SuccessTaskList": [
-                            {
-                              "$type": "RPG.GameCore.DamageByAttackProperty",
-                              "TargetType": {
-                                "$type": "RPG.GameCore.TargetAlias",
-                                "Alias": "ParamEntity"
-                              },
-                              "AttackProperty": {
-                                "$type": "RPG.GameCore.AttackData",
-                                "DamageType": {
-                                  "DamageType": "Quantum"
-                                },
-                                "FormulaType": "ByMaxHP",
-                                "StanceValue": {
-                                  "IsDynamic": true,
-                                  "PostfixExpr": {
-                                    "OpCodes": "AQAK",
-                                    "FixedValues": [],
-                                    "DynamicHashes": [
-                                      -179396060
-                                    ]
-                                  }
-                                },
-                                "IsNotHit": true,
-                                "StanceDamageType": {
-                                  "DamageType": "AllType"
-                                },
-                                "AttackType": "Level"
-                              }
-                            }
-                          ],
-                          "FailedTaskList": [
-                            {
-                              "$type": "RPG.GameCore.DamageByAttackProperty",
-                              "TargetType": {
-                                "$type": "RPG.GameCore.TargetAlias",
-                                "Alias": "ParamEntity"
-                              },
-                              "AttackProperty": {
-                                "$type": "RPG.GameCore.AttackData",
-                                "DamageType": {
-                                  "DamageType": "Quantum"
-                                },
-                                "FormulaType": "ByMaxHP",
-                                "StanceValue": {
-                                  "IsDynamic": true,
-                                  "PostfixExpr": {
-                                    "OpCodes": "AQABAQQK",
-                                    "FixedValues": [],
-                                    "DynamicHashes": [
-                                      -1094919248,
-                                      909827945
-                                    ]
-                                  }
-                                },
-                                "IsNotHit": true,
-                                "StanceDamageType": {
-                                  "DamageType": "AllType"
-                                },
-                                "AttackType": "Level"
-                              }
-                            }
-                          ]
-                        },
-                        {
-                          "$type": "RPG.GameCore.SetModifierDynamicValue",
-                          "TargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "ParamEntity"
-                          },
-                          "ModifierName": "Modifier_StageAbility_633012_Enemy",
-                          "DynamicKey": "MDF_HitStanceDamage",
-                          "NewValue": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 0
-                            }
-                          }
-                        }
+                  "Property": "ForceStanceBreakRatio",
+                  "PropertyValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        909827945
                       ]
                     }
-                  ]
+                  }
                 }
               ]
             },
             {
               "Event": "OnAfterAttack",
               "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.RemoveModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "ModifierName": "Modifier_StageAbility_633012_Character_Effect"
-                },
-                {
-                  "$type": "RPG.GameCore.RemoveModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllDarkTeam"
-                  },
-                  "ModifierName": "Modifier_StageAbility_633012_Enemy_Effect"
-                },
                 {
                   "$type": "RPG.GameCore.SetDynamicValue",
                   "Value": {
@@ -4099,50 +3892,6 @@
         "Modifier_StageAbility_633012_Enemy": {
           "_CallbackList": [
             {
-              "Event": "OnBeforeBeingHitAll",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.SetDynamicValue",
-                  "Value": {
-                    "IsDynamic": false,
-                    "FixedValue": {
-                      "Value": 0
-                    }
-                  },
-                  "DynamicKey": "ForceStance_Flag"
-                },
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByAnd",
-                    "PredicateList": [
-                      {
-                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "Flag": "ForceStanceDamage",
-                        "Inverse": true
-                      }
-                    ]
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "Value": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 1
-                        }
-                      },
-                      "DynamicKey": "ForceStance_Flag"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
               "Event": "OnStack",
               "CallbackConfig": [
                 {
@@ -4173,40 +3922,8 @@
                   }
                 }
               ]
-            },
-            {
-              "Event": "OnBeforeBeingStanceDamage",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareDynamicValue",
-                    "DynamicKey": "ForceStance_Flag",
-                    "CompareType": "Equal",
-                    "CompareValue": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 1
-                      }
-                    }
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.SetDynamicValueByVariateType",
-                      "DynamicKey": "MDF_HitStanceDamage",
-                      "VariateType": "ParamValue"
-                    }
-                  ]
-                }
-              ]
             }
-          ],
-          "DynamicValues": {
-            "Values": {
-              "-1094919248": {},
-              "1089492552": {}
-            }
-          }
+          ]
         }
       },
       "Name": "StageAbility_633012",
@@ -6425,7 +6142,7 @@
                         "CompareValue": {
                           "IsDynamic": false,
                           "FixedValue": {
-                            "Value": 10
+                            "Value": 30
                           }
                         }
                       },
@@ -6438,7 +6155,7 @@
                               "OpCodes": "AQABAQAAAwAABQkBAAECCg==",
                               "FixedValues": [
                                 {
-                                  "Value": 10
+                                  "Value": 30
                                 },
                                 {
                                   "Value": 1

@@ -1479,9 +1479,166 @@
           "ModifierName": "MMonster_W1_Bronya_00_PassiveSkill_NoLockStance"
         }
       ]
+    },
+    {
+      "Name": "Monster_W1_Bronya_00_PassiveSkill_Formation2",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MMonster_W1_Bronya_00_PassiveSkill_Formation2"
+        }
+      ]
     }
   ],
   "GlobalModifiers": {
-    "MMonster_W1_Bronya_00_PassiveSkill_NoLockStance": {}
+    "MMonster_W1_Bronya_00_PassiveSkill_NoLockStance": {},
+    "MMonster_W1_Bronya_00_PassiveSkill_Formation2": {
+      "_CallbackList": [
+        {
+          "Event": "OnListenCharacterCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByHasSummonRelation",
+                "SummonerType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "ServantType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetTargetTeamLocation",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Row": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "TEST_DarkTeamBackRow": {
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.AvatarIntensityEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Reset": true
+            }
+          ]
+        },
+        {
+          "Event": "OnListenBeforeSkillUse",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.AvatarIntensityEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Reset": true
+            }
+          ]
+        },
+        {
+          "Event": "OnListenInsertAbilityStart",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.AvatarIntensityEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Reset": true
+            }
+          ]
+        },
+        {
+          "Event": "OnListenAimAtTargetsRefresh_CL",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareTeamFormationRowIndex",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "CompareType": "GreaterEqual",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    },
+                    "ActiveRow": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByTargetListIntersects",
+                    "FirstTargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "SecondTargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "CurrentAimAtTarget"
+                    },
+                    "Inverse": true
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AvatarIntensityEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "TargetIntensity": 0.2
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.AvatarIntensityEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Reset": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
   }
 }

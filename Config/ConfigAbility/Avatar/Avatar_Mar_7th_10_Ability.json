@@ -460,6 +460,16 @@
     {
       "OnInsertAbort": [
         {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "DynamicKey": "Is_InsertAbort"
+        },
+        {
           "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -473,6 +483,16 @@
         "TargetType": "InherentTargetEntity"
       },
       "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0
+            }
+          },
+          "DynamicKey": "Is_InsertAbort"
+        },
         {
           "$type": "RPG.GameCore.Retarget",
           "TargetType": {
@@ -582,7 +602,7 @@
       "OnStart": [
         {
           "$type": "RPG.GameCore.ShowBonusUIEffect",
-          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_1224.prefab",
+          "UIPrefabPath": "UI/Battle/SpecialAction/Avatar/SpecialAction_1224.prefab",
           "TitleTextID": {
             "Hash": 2018441976
           }
@@ -816,6 +836,14 @@
             "Alias": "Caster"
           },
           "ModifierName": "M_Mar_7th_10_InsertCheck"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemyWithUnSelectable"
+          },
+          "ModifierName": "M_Mar_7th_10_Rank02_Mark_Main"
         },
         {
           "$type": "RPG.GameCore.SetDynamicValueByProperty",
@@ -4697,7 +4725,7 @@
         },
         {
           "$type": "RPG.GameCore.ShowBonusUIEffect",
-          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_1224.prefab",
+          "UIPrefabPath": "UI/Battle/SpecialAction/Avatar/SpecialAction_1224.prefab",
           "TitleTextID": {
             "Hash": -510968207
           }
@@ -4912,7 +4940,12 @@
           },
           "ModifierName": "MAvatar_Mar_7th_10_SkillMazeEnergy"
         }
-      ]
+      ],
+      "DynamicValues": {
+        "Values": {
+          "462955996": {}
+        }
+      }
     },
     {
       "Modifiers": {
@@ -4983,7 +5016,7 @@
         "M_Mar_7th_10_SkillTree02": {
           "_CallbackList": [
             {
-              "Event": "OnBeforeAttack",
+              "Event": "OnBeforeHitAll",
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.PredicateTaskList",
@@ -5032,27 +5065,42 @@
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.AddModifier",
+                      "$type": "RPG.GameCore.AddBehaviorFlagForModifier",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
                         "Alias": "ModifierOwnerEntity"
                       },
-                      "ModifierName": "M_Mar_7th_10_SkillTree02_ForceStanceDamage"
+                      "ModifierName": "M_Mar_7th_10_SkillTree02",
+                      "AddBehaviorFlags": [
+                        "ForceStanceDamage"
+                      ]
+                    },
+                    {
+                      "$type": "RPG.GameCore.ModifyDamageData",
+                      "Attacker_ForceStanceBreakRatio": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      }
                     }
                   ]
                 }
               ]
             },
             {
-              "Event": "OnAfterAttack",
+              "Event": "OnAfterHitAll",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.RemoveModifier",
+                  "$type": "RPG.GameCore.RemoveBehaviorFlagForModifier",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ModifierOwnerEntity"
                   },
-                  "ModifierName": "M_Mar_7th_10_SkillTree02_ForceStanceDamage"
+                  "ModifierName": "M_Mar_7th_10_SkillTree02",
+                  "RemoveBehaviorFlags": [
+                    "ForceStanceDamage"
+                  ]
                 }
               ]
             },
@@ -5128,12 +5176,6 @@
                 }
               ]
             }
-          ],
-          "Stacking": "ReplaceByCaster"
-        },
-        "M_Mar_7th_10_SkillTree02_ForceStanceDamage": {
-          "BehaviorFlagList": [
-            "ForceStanceDamage"
           ],
           "Stacking": "ReplaceByCaster"
         }
@@ -5602,6 +5644,16 @@
                           "TargetType": {
                             "$type": "RPG.GameCore.TargetAlias",
                             "Alias": "ParamEntitySkillTargetEntityList"
+                          },
+                          "ModifierName": "M_Mar_7th_10_Rank02_Mark_Main"
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.RemoveModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AllEnemyWithUnSelectable"
                           },
                           "ModifierName": "M_Mar_7th_10_Rank02_Mark_Main"
                         }
@@ -6541,8 +6593,54 @@
           "Event": "OnListenInsertAbilityFinish",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.IncludeTaskListTemplate",
-              "Name": "Mar_7th_10_InsertRetarget"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareTarget",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "CompareType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByTargetAliveState",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "AliveStateMask": "Mask_AliveOrRevivable"
+                  }
+                ]
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Is_InsertAbort",
+                    "CompareType": "LessEqual",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "Mar_7th_10_InsertRetarget"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

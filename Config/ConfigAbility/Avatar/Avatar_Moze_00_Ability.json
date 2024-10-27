@@ -2715,6 +2715,114 @@
                   ]
                 }
               ]
+            },
+            {
+              "Event": "OnListenInsertAbilityFinish",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "DynamicKey": "MDF_OnStageMember"
+                },
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareCharacterID",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "TargetCharacterID": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1223
+                      }
+                    },
+                    "Inverse": true
+                  },
+                  "ByRandom": true,
+                  "IncludeLimbo": true,
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAAAAIK",
+                          "FixedValues": [
+                            {
+                              "Value": 1
+                            }
+                          ],
+                          "DynamicHashes": [
+                            -875512511
+                          ]
+                        }
+                      },
+                      "DynamicKey": "MDF_OnStageMember"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "MDF_OnStageMember",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "ModifierName": "MAvatar_Moze_00_OnlyMozeOnStageModifier"
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "MDF_DisableListener",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.RemoveModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": "MAvatar_Moze_00_OnlyMozeOnStageModifier"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
           ],
           "DynamicValues": {
@@ -2978,7 +3086,7 @@
         },
         {
           "$type": "RPG.GameCore.ShowBonusUIEffect",
-          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_1223.prefab",
+          "UIPrefabPath": "UI/Battle/SpecialAction/Avatar/SpecialAction_1223.prefab",
           "TitleTextID": {
             "Hash": -2016443220
           }
@@ -3901,7 +4009,7 @@
         },
         {
           "$type": "RPG.GameCore.ShowBonusUIEffect",
-          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_1223.prefab",
+          "UIPrefabPath": "UI/Battle/SpecialAction/Avatar/SpecialAction_1223.prefab",
           "TitleTextID": {
             "Hash": -2016443220
           }

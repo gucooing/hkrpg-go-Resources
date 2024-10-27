@@ -18179,6 +18179,24 @@
     },
     {
       "Modifiers": {
+        "StageAbility_3120024_Modifier_Control_HPLock_Sub": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.LockHP",
+                  "Threshold": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
         "StageAbility_3120024_Modifier_Control_HPLock1": {
           "_CallbackList": [
             {
@@ -18191,6 +18209,14 @@
                     "Alias": "ModifierOwnerEntity"
                   },
                   "ModifierName": "StageAbility_3120024_Modifier_Control_HPLock2"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "ModifierName": "StageAbility_3120024_Modifier_Control_HPLock_Sub"
                 }
               ]
             },
@@ -18231,6 +18257,48 @@
                       ]
                     }
                   }
+                }
+              ]
+            },
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Remove_Flag",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByTargetTeam",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Team": "TeamDark"
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "StageAbility_3120024_Modifier_Control_HPLock_Sub"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
@@ -18365,6 +18433,14 @@
                     "Alias": "ModifierOwnerEntity"
                   },
                   "ModifierName": "StageAbility_3120024_Modifier_Control_HPLock3"
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "ModifierName": "StageAbility_3120024_Modifier_Control_HPLock_Sub"
                 }
               ]
             },
@@ -18385,6 +18461,48 @@
                   "DynamicKey": "TotalBarCapacity",
                   "Team": "TeamLight",
                   "ValueType": "TotalBarCapacity"
+                }
+              ]
+            },
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "Remove_Flag",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByTargetTeam",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Team": "TeamDark"
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "StageAbility_3120024_Modifier_Control_HPLock_Sub"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
@@ -25859,6 +25977,40 @@
                   "DynamicKey": "TotalBarCapacity",
                   "Team": "TeamLight",
                   "ValueType": "TotalBarCapacity"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareTarget",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "CurrentTurnOwnerEntity"
+                    },
+                    "CompareType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAAAAIK",
+                          "FixedValues": [
+                            {
+                              "Value": 1
+                            }
+                          ],
+                          "DynamicHashes": [
+                            2087301040
+                          ]
+                        }
+                      },
+                      "DynamicKey": "Action_Count"
+                    }
+                  ]
                 }
               ]
             },
@@ -27684,45 +27836,6 @@
                         }
                       },
                       "DynamicKey": "Effect_Flag"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "Event": "OnInsertAbilityFinish",
-              "CallbackConfig": [
-                {
-                  "$type": "RPG.GameCore.PredicateTaskList",
-                  "Predicate": {
-                    "$type": "RPG.GameCore.ByCompareDynamicValue",
-                    "DynamicKey": "Effect_Flag",
-                    "CompareType": "Equal",
-                    "CompareValue": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 1
-                      }
-                    }
-                  },
-                  "SuccessTaskList": [
-                    {
-                      "$type": "RPG.GameCore.SetDynamicValue",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ModifierOwnerEntity"
-                      },
-                      "ContextScope": "ContextOwner",
-                      "Value": {
-                        "IsDynamic": false,
-                        "FixedValue": {
-                          "Value": 91
-                        }
-                      },
-                      "DynamicKey": "W2_Yanqing_00_AICounter"
-                    },
-                    {
-                      "$type": "RPG.GameCore.RemoveSelfModifier"
                     }
                   ]
                 }
@@ -30600,6 +30713,25 @@
         {
           "$type": "RPG.GameCore.LookAt",
           "TargetType": "TeamFormation"
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "ContextScope": "ContextCaster",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 91
+            }
+          },
+          "DynamicKey": "W2_Yanqing_00_AICounter"
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "StageAbility_3120026_Modifier_Control_Wave1Lock"
         }
       ]
     },

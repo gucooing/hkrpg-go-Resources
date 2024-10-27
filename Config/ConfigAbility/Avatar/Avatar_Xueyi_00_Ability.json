@@ -1200,7 +1200,6 @@
               }
             },
             "AttackType": "Ultra",
-            "AdditionallyTriggerBreakIfCan": true,
             "HitAnimation": "Hit",
             "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Xueyi_00/Eff_Avatar_Xueyi_00_Skill03_Hit02.prefab",
             "HitEffectHeight": 1,
@@ -1308,6 +1307,16 @@
         "MAvatar_Xueyi_00_StancePreview": {
           "ModifierStancePreshowConfig": {
             "SkillType": "Ultra",
+            "ForceStanceBreakRatio": {
+              "IsDynamic": true,
+              "PostfixExpr": {
+                "OpCodes": "AQAK",
+                "FixedValues": [],
+                "DynamicHashes": [
+                  -355487391
+                ]
+              }
+            },
             "AddForceStanceDamageFlag": true
           }
         },
@@ -2385,7 +2394,7 @@
         },
         {
           "$type": "RPG.GameCore.ShowBonusUIEffect",
-          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_1214.prefab",
+          "UIPrefabPath": "UI/Battle/SpecialAction/Avatar/SpecialAction_1214.prefab",
           "TitleTextID": {
             "Hash": 8426015
           }
@@ -3690,14 +3699,13 @@
                       "Value": {
                         "IsDynamic": true,
                         "PostfixExpr": {
-                          "OpCodes": "AQABAQAABQkBCg==",
+                          "OpCodes": "AQAAAAUK",
                           "FixedValues": [
                             {
                               "Value": 30
                             }
                           ],
                           "DynamicHashes": [
-                            1776456860,
                             2039530415
                           ]
                         }
@@ -3788,7 +3796,26 @@
       "_CallbackList": [
         {
           "Event": "OnStack",
-          "CallbackConfig": []
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "Property": "ForceStanceBreakRatio",
+              "PropertyValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -355487391
+                  ]
+                }
+              }
+            }
+          ]
         }
       ],
       "Stacking": "ReplaceByCaster"

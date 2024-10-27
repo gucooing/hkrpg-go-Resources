@@ -684,7 +684,8 @@
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AbilityTargetEntity"
-              }
+              },
+              "EventType": "DOT"
             },
             {
               "$type": "RPG.GameCore.TriggerEffect",
@@ -716,6 +717,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AbilityTargetEntity"
               },
+              "EventType": "DOT",
               "DynamicKey": "DOT_TriggerRatio",
               "Value": {
                 "IsDynamic": true,
@@ -755,13 +757,6 @@
               },
               "TimeScale": 0.3,
               "UnscaledDuration": 0.1
-            },
-            {
-              "$type": "RPG.GameCore.HideModifierEffect",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AbilityTargetEntity"
-              }
             },
             {
               "$type": "RPG.GameCore.WaitAnimState",
@@ -1289,6 +1284,7 @@
                 "$type": "RPG.GameCore.TargetAlias",
                 "Alias": "AllEnemy"
               },
+              "EventType": "DOT",
               "DynamicKey": "DOT_TriggerRatio",
               "Value": {
                 "IsDynamic": true,
@@ -2033,41 +2029,119 @@
                           "Alias": "ModifierOwnerEntity"
                         },
                         "ModifierName": "MAvatar_Kafka_00_Passive_CanAttack"
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByCompareHPRatio",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntitySkillTargetEntityList"
-                        },
-                        "CompareType": "Greater",
-                        "CompareValue": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 0
-                          }
-                        }
                       }
                     ]
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.TurnInsertAbility",
-                      "AbilityName": "Avatar_Kafka_00_PassiveAtk_Ability",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByCompareTargetCount",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntitySkillTargetEntityList"
+                            },
+                            "Number": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 1
+                              }
+                            },
+                            "CompareType": "Equal"
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByCompareHPRatio",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntitySkillTargetEntityList"
+                            },
+                            "CompareType": "Greater",
+                            "CompareValue": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 0
+                              }
+                            }
+                          }
+                        ]
                       },
-                      "AbilityTarget": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntitySkillTargetEntityList"
-                      },
-                      "AbortBehaviorFlags": [
-                        "STAT_CTRL",
-                        "DisableAction"
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TurnInsertAbility",
+                          "AbilityName": "Avatar_Kafka_00_PassiveAtk_Ability",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "AbilityTarget": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntitySkillTargetEntityList"
+                          },
+                          "AbortBehaviorFlags": [
+                            "STAT_CTRL",
+                            "DisableAction"
+                          ],
+                          "InsertAbilityPriority": "AvatarInsertAttackSelf",
+                          "ShowInActionBar": true
+                        }
                       ],
-                      "InsertAbilityPriority": "AvatarInsertAttackSelf",
-                      "ShowInActionBar": true
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareTargetCount",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntitySkillTargetEntityList"
+                            },
+                            "Number": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 1
+                              }
+                            },
+                            "CompareType": "Greater"
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.Retarget",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "AllDarkTeam"
+                              },
+                              "ByRandom": true,
+                              "MaxNumber": {
+                                "IsDynamic": false,
+                                "FixedValue": {
+                                  "Value": 1
+                                }
+                              },
+                              "TaskList": [
+                                {
+                                  "$type": "RPG.GameCore.TurnInsertAbility",
+                                  "AbilityName": "Avatar_Kafka_00_PassiveAtk_Ability",
+                                  "TargetType": {
+                                    "$type": "RPG.GameCore.TargetAlias",
+                                    "Alias": "Caster"
+                                  },
+                                  "AbilityTarget": {
+                                    "$type": "RPG.GameCore.TargetAlias",
+                                    "Alias": "ParamEntity"
+                                  },
+                                  "AbortBehaviorFlags": [
+                                    "STAT_CTRL",
+                                    "DisableAction"
+                                  ],
+                                  "InsertAbilityPriority": "AvatarInsertAttackSelf"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }
@@ -2296,7 +2370,7 @@
         },
         {
           "$type": "RPG.GameCore.ShowBonusUIEffect",
-          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_1005.prefab",
+          "UIPrefabPath": "UI/Battle/SpecialAction/Avatar/SpecialAction_1005.prefab",
           "TitleTextID": {
             "Hash": -1235197503
           }

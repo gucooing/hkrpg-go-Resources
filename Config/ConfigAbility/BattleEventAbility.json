@@ -2176,16 +2176,11 @@
         "Modifier_BattleEventAbility_Challenge_Xianzhou_06_Sub2": {
           "_CallbackList": [
             {
-              "Event": "OnStack",
+              "Event": "OnBeforeHitAll",
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.StackProperty",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "Property": "AllDamageTypeAddedRatio",
-                  "PropertyValue": {
+                  "$type": "RPG.GameCore.ModifyDamageData",
+                  "Attacker_AllDamageTypeAddedRatio": {
                     "IsDynamic": true,
                     "PostfixExpr": {
                       "OpCodes": "AQAK",
@@ -5661,7 +5656,7 @@
                   "$type": "RPG.GameCore.Retarget",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeam"
+                    "Alias": "AllLightTeamIgnoreServant"
                   },
                   "Predicate": {
                     "$type": "RPG.GameCore.ByIsPropertyValueMinOrMax",
@@ -5671,7 +5666,7 @@
                     },
                     "CompareTargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "AllLightTeam"
+                      "Alias": "AllLightTeamIgnoreServant"
                     },
                     "PropertyType": "CurrentHP"
                   },
@@ -5792,7 +5787,7 @@
                   "$type": "RPG.GameCore.Retarget",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeam"
+                    "Alias": "AllLightTeamIgnoreServant"
                   },
                   "Predicate": {
                     "$type": "RPG.GameCore.ByIsPropertyValueMinOrMax",
@@ -5802,7 +5797,7 @@
                     },
                     "CompareTargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "AllLightTeam"
+                      "Alias": "AllLightTeamIgnoreServant"
                     },
                     "MinOrMax": "Max",
                     "PropertyType": "Attack"
@@ -5934,7 +5929,7 @@
                   "$type": "RPG.GameCore.Retarget",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeam"
+                    "Alias": "AllLightTeamIgnoreServant"
                   },
                   "Predicate": {
                     "$type": "RPG.GameCore.ByCompareHPRatio",
@@ -9149,6 +9144,7 @@
                             "$type": "RPG.GameCore.TargetAlias",
                             "Alias": "ParamEntity"
                           },
+                          "EventType": "DOT",
                           "DynamicKey": "DOT_TriggerRatio",
                           "Value": {
                             "IsDynamic": true,
@@ -14394,29 +14390,8 @@
         {
           "$type": "RPG.GameCore.TriggerModifierCustomEvent",
           "TargetType": {
-            "$type": "RPG.GameCore.TargetConcat",
-            "Targets": [
-              {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "LevelEntity"
-              },
-              {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllLightTeam"
-              },
-              {
-                "$type": "RPG.GameCore.TargetSequence",
-                "Sequence": [
-                  {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeam"
-                  },
-                  {
-                    "$type": "RPG.GameCore.TargetMapCreatedBattleEvent"
-                  }
-                ]
-              }
-            ]
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "BattleAllEntity"
           },
           "EventType": "InfiniteRefresh"
         },
@@ -14551,29 +14526,8 @@
         {
           "$type": "RPG.GameCore.TriggerModifierCustomEvent",
           "TargetType": {
-            "$type": "RPG.GameCore.TargetConcat",
-            "Targets": [
-              {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "LevelEntity"
-              },
-              {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllLightTeam"
-              },
-              {
-                "$type": "RPG.GameCore.TargetSequence",
-                "Sequence": [
-                  {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeam"
-                  },
-                  {
-                    "$type": "RPG.GameCore.TargetMapCreatedBattleEvent"
-                  }
-                ]
-              }
-            ]
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "BattleAllEntity"
           },
           "EventType": "InfiniteRefresh"
         },
@@ -14707,29 +14661,8 @@
         {
           "$type": "RPG.GameCore.TriggerModifierCustomEvent",
           "TargetType": {
-            "$type": "RPG.GameCore.TargetConcat",
-            "Targets": [
-              {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "LevelEntity"
-              },
-              {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllLightTeam"
-              },
-              {
-                "$type": "RPG.GameCore.TargetSequence",
-                "Sequence": [
-                  {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeam"
-                  },
-                  {
-                    "$type": "RPG.GameCore.TargetMapCreatedBattleEvent"
-                  }
-                ]
-              }
-            ]
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "BattleAllEntity"
           },
           "EventType": "InfiniteRefresh"
         },
@@ -14762,6 +14695,12 @@
         "TargetType": "AllTeamMember"
       },
       "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomFormationIgnoreDying": false
+        },
         {
           "$type": "RPG.GameCore.SetTeamFormation",
           "Team": "TeamDark",
@@ -14814,6 +14753,12 @@
         "TargetType": "AllTeamMember"
       },
       "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomFormationIgnoreDying": false
+        },
         {
           "$type": "RPG.GameCore.SetTeamFormation",
           "Team": "TeamDark",

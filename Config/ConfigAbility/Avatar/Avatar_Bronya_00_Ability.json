@@ -1572,30 +1572,6 @@
                         "$type": "RPG.GameCore.ByCurrentSkillType"
                       },
                       {
-                        "$type": "RPG.GameCore.ByHasStanceWeak",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntitySkillTargetEntityList"
-                        },
-                        "WeakType": {
-                          "DamageType": "Wind"
-                        }
-                      },
-                      {
-                        "$type": "RPG.GameCore.ByCompareHPRatio",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntitySkillTargetEntityList"
-                        },
-                        "CompareType": "Greater",
-                        "CompareValue": {
-                          "IsDynamic": false,
-                          "FixedValue": {
-                            "Value": 0
-                          }
-                        }
-                      },
-                      {
                         "$type": "RPG.GameCore.ByIsContainModifier",
                         "TargetType": {
                           "$type": "RPG.GameCore.TargetAlias",
@@ -1607,24 +1583,138 @@
                   },
                   "SuccessTaskList": [
                     {
-                      "$type": "RPG.GameCore.TurnInsertAbility",
-                      "AbilityName": "Avatar_Bronya_00_Rank04_ATK",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "Caster"
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByAnd",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByCompareHPRatio",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntitySkillTargetEntityList"
+                            },
+                            "CompareType": "Greater",
+                            "CompareValue": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 0
+                              }
+                            }
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByCompareTargetCount",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntitySkillTargetEntityList"
+                            },
+                            "Number": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 1
+                              }
+                            },
+                            "CompareType": "Equal"
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByHasStanceWeak",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntitySkillTargetEntityList"
+                            },
+                            "WeakType": {
+                              "DamageType": "Wind"
+                            }
+                          }
+                        ]
                       },
-                      "AbilityTarget": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntitySkillTargetEntityList"
-                      },
-                      "AbortBehaviorFlags": [
-                        "STAT_CTRL",
-                        "DisableAction"
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TurnInsertAbility",
+                          "AbilityName": "Avatar_Bronya_00_Rank04_ATK",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "AbilityTarget": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntitySkillTargetEntityList"
+                          },
+                          "AbortBehaviorFlags": [
+                            "STAT_CTRL",
+                            "DisableAction"
+                          ],
+                          "InsertAbilityPriority": "AvatarInsertAttackSelf",
+                          "ShowInActionBar": true
+                        }
                       ],
-                      "InsertAbilityPriority": "AvatarInsertAttackSelf",
-                      "ShowInActionBar": true
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareTargetCount",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntitySkillTargetEntityList"
+                            },
+                            "Number": {
+                              "IsDynamic": false,
+                              "FixedValue": {
+                                "Value": 1
+                              }
+                            },
+                            "CompareType": "Greater"
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.Retarget",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "AllDarkTeam"
+                              },
+                              "Predicate": {
+                                "$type": "RPG.GameCore.ByHasStanceWeak",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ParamEntity"
+                                },
+                                "WeakType": {
+                                  "DamageType": "Wind"
+                                }
+                              },
+                              "ByRandom": true,
+                              "MaxNumber": {
+                                "IsDynamic": false,
+                                "FixedValue": {
+                                  "Value": 1
+                                }
+                              },
+                              "TaskList": [
+                                {
+                                  "$type": "RPG.GameCore.TurnInsertAbility",
+                                  "AbilityName": "Avatar_Bronya_00_Rank04_ATK",
+                                  "TargetType": {
+                                    "$type": "RPG.GameCore.TargetAlias",
+                                    "Alias": "Caster"
+                                  },
+                                  "AbilityTarget": {
+                                    "$type": "RPG.GameCore.TargetAlias",
+                                    "Alias": "ParamEntity"
+                                  },
+                                  "AbortBehaviorFlags": [
+                                    "STAT_CTRL",
+                                    "DisableAction"
+                                  ],
+                                  "InsertAbilityPriority": "AvatarInsertAttackSelf",
+                                  "ShowInActionBar": true
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
                     }
-                  ]
+                  ],
+                  "FailedTaskList": []
                 }
               ]
             }
@@ -1696,7 +1786,7 @@
         },
         {
           "$type": "RPG.GameCore.ShowBonusUIEffect",
-          "UIPrefabPath": "UI/Battle/SpecialAction/SpecialAction_1101.prefab",
+          "UIPrefabPath": "UI/Battle/SpecialAction/Avatar/SpecialAction_1101.prefab",
           "TitleTextID": {
             "Hash": 231613418
           }

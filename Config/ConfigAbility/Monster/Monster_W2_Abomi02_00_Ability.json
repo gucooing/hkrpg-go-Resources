@@ -420,101 +420,84 @@
           }
         },
         {
-          "$type": "RPG.GameCore.LoopExecuteTaskList",
-          "MaxLoopCount": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 2
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "ModifierName": "Monster_W2_Abomi02_00_Mark",
+            "CasterFilter": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
             }
           },
+          "ByRandom": true,
           "TaskList": [
             {
-              "$type": "RPG.GameCore.Retarget",
+              "$type": "RPG.GameCore.DamageByAttackProperty",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllEnemy"
+                "Alias": "ParamEntity"
               },
-              "Predicate": {
-                "$type": "RPG.GameCore.ByIsContainModifier",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
+              "AttackProperty": {
+                "$type": "RPG.GameCore.AttackData",
+                "DamageType": {
+                  "DamageType": "Thunder"
                 },
-                "ModifierName": "Monster_W2_Abomi02_00_Mark",
-                "CasterFilter": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "Caster"
-                }
-              },
-              "ByRandom": true,
-              "MaxNumber": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 9
-                }
-              },
-              "TaskList": [
-                {
-                  "$type": "RPG.GameCore.DamageByAttackProperty",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "AttackProperty": {
-                    "$type": "RPG.GameCore.AttackData",
-                    "DamageType": {
-                      "DamageType": "Thunder"
-                    },
-                    "DamagePercentage": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAK",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          889233808
-                        ]
-                      }
-                    },
-                    "SPHitRatio": {
-                      "IsDynamic": false,
-                      "FixedValue": {
-                        "Value": 1
-                      }
-                    },
-                    "AttackType": "Normal",
-                    "HitAnimation": "Hit",
-                    "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Abomi02_00/Eff_Monster_W2_Abomi02_00_Skill03_Hit.prefab",
-                    "HitTimeSlowType": "Puncture"
-                  },
-                  "TriggerHitSound": true,
-                  "SpecialHitSoundEvent": "Ev_sfx_monster_skill_01_hit_aml_minion03",
-                  "DisplayData": {
-                    "UIMessageHeight": 1,
-                    "DitherRangeX": 0.02,
-                    "DitherRangeY": 0.02
+                "DamagePercentage": {
+                  "IsDynamic": true,
+                  "PostfixExpr": {
+                    "OpCodes": "AQAK",
+                    "FixedValues": [],
+                    "DynamicHashes": [
+                      889233808
+                    ]
                   }
                 },
-                {
-                  "$type": "RPG.GameCore.TriggerEffect",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Abomi02_00/Eff_Monster_W2_Abomi02_00_Skill01_locking.prefab",
-                  "AttachPoint": "Head",
-                  "Scale": {
-                    "X": 1,
-                    "Y": 1,
-                    "Z": 1
+                "SPHitRatio": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 1
                   }
                 },
-                {
-                  "$type": "RPG.GameCore.VCameraConfigChange",
-                  "CameraConfig": {
-                    "ShakeTemplateName": "Impact_Heavy"
-                  }
-                }
-              ]
+                "AttackType": "Normal",
+                "HitAnimation": "Hit",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Abomi02_00/Eff_Monster_W2_Abomi02_00_Skill03_Hit.prefab",
+                "HitTimeSlowType": "Puncture"
+              },
+              "TriggerHitSound": true,
+              "SpecialHitSoundEvent": "Ev_sfx_monster_skill_01_hit_aml_minion03",
+              "DisplayData": {
+                "UIMessageHeight": 1,
+                "DitherRangeX": 0.02,
+                "DitherRangeY": 0.02
+              }
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Abomi02_00/Eff_Monster_W2_Abomi02_00_Skill01_locking.prefab",
+              "AttachPoint": "Head",
+              "Scale": {
+                "X": 1,
+                "Y": 1,
+                "Z": 1
+              }
+            },
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "ShakeTemplateName": "Impact_Heavy"
+              }
             }
           ]
         },

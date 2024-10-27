@@ -414,6 +414,17 @@
                             },
                             "ModifierName": "MMonster_W2_LycanKing_00_MainStoryPhase2Mark",
                             "Inverse": true
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "Caster"
+                            },
+                            "Key": {
+                              "Hash": -105291656
+                            },
+                            "Inverse": true
                           }
                         ]
                       },
@@ -503,6 +514,16 @@
                                   "Alias": "Caster"
                                 },
                                 "ModifierName": "MMonster_W2_LycanKing_00_MainStoryPhase2Mark"
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "Caster"
+                                },
+                                "Key": {
+                                  "Hash": -105291656
+                                }
                               }
                             ]
                           },
@@ -1496,12 +1517,27 @@
                     {
                       "$type": "RPG.GameCore.PredicateTaskList",
                       "Predicate": {
-                        "$type": "RPG.GameCore.ByTargetTeam",
-                        "TargetType": {
-                          "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "ParamEntity"
-                        },
-                        "Team": "TeamLight"
+                        "$type": "RPG.GameCore.ByAny",
+                        "PredicateList": [
+                          {
+                            "$type": "RPG.GameCore.ByTargetTeam",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntity"
+                            },
+                            "Team": "TeamLight"
+                          },
+                          {
+                            "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "Key": {
+                              "Hash": 1131341059
+                            }
+                          }
+                        ]
                       },
                       "SuccessTaskList": [
                         {
@@ -1897,9 +1933,83 @@
           "ModifierName": "MMonster_W2_LycanKing_00_RageListener"
         },
         {
-          "$type": "RPG.GameCore.PreloadBattleEventByID",
-          "BattleEventID": [
-            20008
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "LevelEntity"
+            },
+            "DynamicKey": "WolfID01",
+            "ContextScope": "TargetEntity",
+            "CompareType": "Equal",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LevelEntity"
+              },
+              "DynamicKey": "WolfID01",
+              "ResetValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    372614038
+                  ]
+                }
+              },
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "LevelEntity"
+            },
+            "DynamicKey": "WolfID02",
+            "ContextScope": "TargetEntity",
+            "CompareType": "Equal",
+            "CompareValue": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 0
+              }
+            }
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LevelEntity"
+              },
+              "DynamicKey": "WolfID02",
+              "ResetValue": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -30670489
+                  ]
+                }
+              },
+              "ContextScope": "TargetEntity"
+            }
           ]
         },
         {
@@ -1911,347 +2021,368 @@
               "Alias": "Caster"
             },
             "Key": {
-              "Hash": 1131341059
+              "Hash": -105291656
             }
           },
-          "SuccessTaskList": [
-            {
-              "$type": "RPG.GameCore.CreateBattleEvent",
-              "EventID": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 20008
-                }
-              },
-              "DynamicValues": {
-                "P3_Lycan01Delay": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      766341499
-                    ]
-                  }
-                },
-                "P4_Lycan02Delay": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -1421474481
-                    ]
-                  }
-                },
-                "P5_Lycan03Delay": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      134234511
-                    ]
-                  }
-                },
-                "P6_Lycan04Delay": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -987810501
-                    ]
-                  }
-                }
-              },
-              "Team": "TeamDark",
-              "IsDynamicPreload": true
-            },
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByCompareDynamicValue",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "LevelEntity"
-                },
-                "DynamicKey": "P3_Lycan01Delay",
-                "ContextScope": "TargetEntity",
-                "CompareType": "Equal",
-                "CompareValue": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 0
-                  }
-                }
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.DefineDynamicValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "LevelEntity"
-                  },
-                  "DynamicKey": "P3_Lycan01Delay",
-                  "ResetValue": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        766341499
-                      ]
-                    }
-                  },
-                  "ContextScope": "TargetEntity"
-                }
-              ]
-            },
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByCompareDynamicValue",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "LevelEntity"
-                },
-                "DynamicKey": "P4_Lycan02Delay",
-                "ContextScope": "TargetEntity",
-                "CompareType": "Equal",
-                "CompareValue": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 0
-                  }
-                }
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.DefineDynamicValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "LevelEntity"
-                  },
-                  "DynamicKey": "P4_Lycan02Delay",
-                  "ResetValue": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        -1421474481
-                      ]
-                    }
-                  },
-                  "ContextScope": "TargetEntity"
-                }
-              ]
-            },
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByCompareDynamicValue",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "LevelEntity"
-                },
-                "DynamicKey": "P5_Lycan03Delay",
-                "ContextScope": "TargetEntity",
-                "CompareType": "Equal",
-                "CompareValue": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 0
-                  }
-                }
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.DefineDynamicValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "LevelEntity"
-                  },
-                  "DynamicKey": "P5_Lycan03Delay",
-                  "ResetValue": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        134234511
-                      ]
-                    }
-                  },
-                  "ContextScope": "TargetEntity"
-                }
-              ]
-            },
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByCompareDynamicValue",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "LevelEntity"
-                },
-                "DynamicKey": "P6_Lycan04Delay",
-                "ContextScope": "TargetEntity",
-                "CompareType": "Equal",
-                "CompareValue": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 0
-                  }
-                }
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.DefineDynamicValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "LevelEntity"
-                  },
-                  "DynamicKey": "P6_Lycan04Delay",
-                  "ResetValue": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        -987810501
-                      ]
-                    }
-                  },
-                  "ContextScope": "TargetEntity"
-                }
-              ]
-            }
-          ],
           "FailedTaskList": [
             {
-              "$type": "RPG.GameCore.CreateBattleEvent",
-              "EventID": {
-                "IsDynamic": false,
-                "FixedValue": {
-                  "Value": 20008
-                }
-              },
-              "DynamicValues": {
-                "P3_Lycan01Delay": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      363683734
-                    ]
-                  }
-                },
-                "P4_Lycan02Delay": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      -727903732
-                    ]
-                  }
-                }
-              },
-              "Team": "TeamDark",
-              "IsDynamicPreload": true
-            },
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByCompareDynamicValue",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "LevelEntity"
-                },
-                "DynamicKey": "P3_Lycan01Delay",
-                "ContextScope": "TargetEntity",
-                "CompareType": "Equal",
-                "CompareValue": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 0
-                  }
-                }
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.DefineDynamicValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "LevelEntity"
-                  },
-                  "DynamicKey": "P3_Lycan01Delay",
-                  "ResetValue": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        363683734
-                      ]
-                    }
-                  },
-                  "ContextScope": "TargetEntity"
-                }
+              "$type": "RPG.GameCore.PreloadBattleEventByID",
+              "BattleEventID": [
+                20008
               ]
             },
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "$type": "RPG.GameCore.ByCheckCustomValueBool",
                 "TargetType": {
                   "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "LevelEntity"
+                  "Alias": "Caster"
                 },
-                "DynamicKey": "P4_Lycan02Delay",
-                "ContextScope": "TargetEntity",
-                "CompareType": "Equal",
-                "CompareValue": {
-                  "IsDynamic": false,
-                  "FixedValue": {
-                    "Value": 0
-                  }
+                "Key": {
+                  "Hash": 1131341059
                 }
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.DefineDynamicValue",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "LevelEntity"
-                  },
-                  "DynamicKey": "P4_Lycan02Delay",
-                  "ResetValue": {
-                    "IsDynamic": true,
-                    "PostfixExpr": {
-                      "OpCodes": "AQAK",
-                      "FixedValues": [],
-                      "DynamicHashes": [
-                        -727903732
-                      ]
+                  "$type": "RPG.GameCore.CreateBattleEvent",
+                  "EventID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 20008
                     }
                   },
-                  "ContextScope": "TargetEntity"
+                  "DynamicValues": {
+                    "P3_Lycan01Delay": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          766341499
+                        ]
+                      }
+                    },
+                    "P4_Lycan02Delay": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -1421474481
+                        ]
+                      }
+                    },
+                    "P5_Lycan03Delay": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          134234511
+                        ]
+                      }
+                    },
+                    "P6_Lycan04Delay": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -987810501
+                        ]
+                      }
+                    }
+                  },
+                  "Team": "TeamDark",
+                  "IsDynamicPreload": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "DynamicKey": "P3_Lycan01Delay",
+                    "ContextScope": "TargetEntity",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.DefineDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "LevelEntity"
+                      },
+                      "DynamicKey": "P3_Lycan01Delay",
+                      "ResetValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            766341499
+                          ]
+                        }
+                      },
+                      "ContextScope": "TargetEntity"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "DynamicKey": "P4_Lycan02Delay",
+                    "ContextScope": "TargetEntity",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.DefineDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "LevelEntity"
+                      },
+                      "DynamicKey": "P4_Lycan02Delay",
+                      "ResetValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -1421474481
+                          ]
+                        }
+                      },
+                      "ContextScope": "TargetEntity"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "DynamicKey": "P5_Lycan03Delay",
+                    "ContextScope": "TargetEntity",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.DefineDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "LevelEntity"
+                      },
+                      "DynamicKey": "P5_Lycan03Delay",
+                      "ResetValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            134234511
+                          ]
+                        }
+                      },
+                      "ContextScope": "TargetEntity"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "DynamicKey": "P6_Lycan04Delay",
+                    "ContextScope": "TargetEntity",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.DefineDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "LevelEntity"
+                      },
+                      "DynamicKey": "P6_Lycan04Delay",
+                      "ResetValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -987810501
+                          ]
+                        }
+                      },
+                      "ContextScope": "TargetEntity"
+                    }
+                  ]
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.CreateBattleEvent",
+                  "EventID": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 20008
+                    }
+                  },
+                  "DynamicValues": {
+                    "P3_Lycan01Delay": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          363683734
+                        ]
+                      }
+                    },
+                    "P4_Lycan02Delay": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQAK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -727903732
+                        ]
+                      }
+                    }
+                  },
+                  "Team": "TeamDark",
+                  "IsDynamicPreload": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "DynamicKey": "P3_Lycan01Delay",
+                    "ContextScope": "TargetEntity",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.DefineDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "LevelEntity"
+                      },
+                      "DynamicKey": "P3_Lycan01Delay",
+                      "ResetValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            363683734
+                          ]
+                        }
+                      },
+                      "ContextScope": "TargetEntity"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "DynamicKey": "P4_Lycan02Delay",
+                    "ContextScope": "TargetEntity",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 0
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.DefineDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "LevelEntity"
+                      },
+                      "DynamicKey": "P4_Lycan02Delay",
+                      "ResetValue": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAK",
+                          "FixedValues": [],
+                          "DynamicHashes": [
+                            -727903732
+                          ]
+                        }
+                      },
+                      "ContextScope": "TargetEntity"
+                    }
+                  ]
                 }
               ]
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ModifierName": "Monster_W2_LycanKing_00_Revive"
             }
           ]
-        },
-        {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
-          },
-          "ModifierName": "Monster_W2_LycanKing_00_Revive"
         },
         {
           "$type": "RPG.GameCore.AddStageAbilityByName",
@@ -2292,6 +2423,21 @@
         "MMonster_W2_LycanKing_00_FirstTimeRageMark": {},
         "MMonster_W2_LycanKing_00_HPListener": {
           "_CallbackList": [
+            {
+              "Event": "OnActionPhaseBegin",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "DynamicKey": "MDF_DialogFlag"
+                }
+              ]
+            },
             {
               "Event": "OnStack",
               "CallbackConfig": [
@@ -2341,10 +2487,35 @@
                             "Value": 0.25
                           }
                         }
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": "MDF_DialogFlag",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 0
+                          }
+                        }
                       }
                     ]
                   },
                   "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "Value": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "DynamicKey": "MDF_DialogFlag"
+                    },
                     {
                       "$type": "RPG.GameCore.TriggerCustomString",
                       "CustomString": {
@@ -2382,18 +2553,23 @@
                         {
                           "$type": "RPG.GameCore.PredicateTaskList",
                           "Predicate": {
-                            "$type": "RPG.GameCore.ByCompareHPRatio",
-                            "TargetType": {
-                              "$type": "RPG.GameCore.TargetAlias",
-                              "Alias": "ModifierOwnerEntity"
-                            },
-                            "CompareType": "LessEqual",
-                            "CompareValue": {
-                              "IsDynamic": false,
-                              "FixedValue": {
-                                "Value": 0.0009999999
+                            "$type": "RPG.GameCore.ByAnd",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByCompareHPRatio",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ModifierOwnerEntity"
+                                },
+                                "CompareType": "LessEqual",
+                                "CompareValue": {
+                                  "IsDynamic": false,
+                                  "FixedValue": {
+                                    "Value": 0.0009999999
+                                  }
+                                }
                               }
-                            }
+                            ]
                           },
                           "SuccessTaskList": [
                             {
@@ -2455,10 +2631,35 @@
                                     "Value": 0.0009999999
                                   }
                                 }
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ModifierOwnerEntity"
+                                },
+                                "DynamicKey": "MDF_DialogFlag",
+                                "CompareType": "Equal",
+                                "CompareValue": {
+                                  "IsDynamic": false,
+                                  "FixedValue": {
+                                    "Value": 0
+                                  }
+                                }
                               }
                             ]
                           },
                           "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetDynamicValue",
+                              "Value": {
+                                "IsDynamic": false,
+                                "FixedValue": {
+                                  "Value": 1
+                                }
+                              },
+                              "DynamicKey": "MDF_DialogFlag"
+                            },
                             {
                               "$type": "RPG.GameCore.TriggerCustomString",
                               "CustomString": {
@@ -2516,8 +2717,28 @@
                   ]
                 }
               ]
+            },
+            {
+              "Event": "OnAfterBeingAttackedEnd",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "Value": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0
+                    }
+                  },
+                  "DynamicKey": "MDF_DialogFlag"
+                }
+              ]
             }
-          ]
+          ],
+          "DynamicValues": {
+            "Values": {
+              "-1065041578": {}
+            }
+          }
         },
         "MMonster_W2_LycanKing_00_HPListenerPhase02": {
           "_CallbackList": [
@@ -8075,9 +8296,13 @@
                       "SummonMonsterDataList": [
                         {
                           "MonsterID": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 203201010
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -1599639708
+                              ]
                             }
                           },
                           "LocationType": "First",
@@ -8102,9 +8327,13 @@
                       "SummonMonsterDataList": [
                         {
                           "MonsterID": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 203201010
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -1599639708
+                              ]
                             }
                           },
                           "LocationType": "Last",
@@ -8141,9 +8370,13 @@
                       "SummonMonsterDataList": [
                         {
                           "MonsterID": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 203202000
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -33555767
+                              ]
                             }
                           },
                           "LocationType": "First",
@@ -8168,9 +8401,13 @@
                       "SummonMonsterDataList": [
                         {
                           "MonsterID": {
-                            "IsDynamic": false,
-                            "FixedValue": {
-                              "Value": 203202000
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -33555767
+                              ]
                             }
                           },
                           "LocationType": "Last",
@@ -8265,9 +8502,13 @@
                           "SummonMonsterDataList": [
                             {
                               "MonsterID": {
-                                "IsDynamic": false,
-                                "FixedValue": {
-                                  "Value": 203201010
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    -1599639708
+                                  ]
                                 }
                               },
                               "LocationType": "First",
@@ -8292,9 +8533,13 @@
                           "SummonMonsterDataList": [
                             {
                               "MonsterID": {
-                                "IsDynamic": false,
-                                "FixedValue": {
-                                  "Value": 203201010
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    -1599639708
+                                  ]
                                 }
                               },
                               "LocationType": "Last",
@@ -8331,9 +8576,13 @@
                           "SummonMonsterDataList": [
                             {
                               "MonsterID": {
-                                "IsDynamic": false,
-                                "FixedValue": {
-                                  "Value": 203202000
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    -33555767
+                                  ]
                                 }
                               },
                               "LocationType": "First",
@@ -8358,9 +8607,13 @@
                           "SummonMonsterDataList": [
                             {
                               "MonsterID": {
-                                "IsDynamic": false,
-                                "FixedValue": {
-                                  "Value": 203202000
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    -33555767
+                                  ]
                                 }
                               },
                               "LocationType": "Last",
@@ -8444,9 +8697,13 @@
                           "SummonMonsterDataList": [
                             {
                               "MonsterID": {
-                                "IsDynamic": false,
-                                "FixedValue": {
-                                  "Value": 203201010
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    -1599639708
+                                  ]
                                 }
                               },
                               "LocationType": "First",
@@ -8471,9 +8728,13 @@
                           "SummonMonsterDataList": [
                             {
                               "MonsterID": {
-                                "IsDynamic": false,
-                                "FixedValue": {
-                                  "Value": 203201010
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    -1599639708
+                                  ]
                                 }
                               },
                               "LocationType": "Last",
@@ -8510,9 +8771,13 @@
                           "SummonMonsterDataList": [
                             {
                               "MonsterID": {
-                                "IsDynamic": false,
-                                "FixedValue": {
-                                  "Value": 203202000
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    -33555767
+                                  ]
                                 }
                               },
                               "LocationType": "First",
@@ -8537,9 +8802,13 @@
                           "SummonMonsterDataList": [
                             {
                               "MonsterID": {
-                                "IsDynamic": false,
-                                "FixedValue": {
-                                  "Value": 203202000
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    -33555767
+                                  ]
                                 }
                               },
                               "LocationType": "Last",
@@ -8604,9 +8873,13 @@
                           "SummonMonsterDataList": [
                             {
                               "MonsterID": {
-                                "IsDynamic": false,
-                                "FixedValue": {
-                                  "Value": 203201010
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    -1599639708
+                                  ]
                                 }
                               },
                               "LocationType": "First",
@@ -8631,9 +8904,13 @@
                           "SummonMonsterDataList": [
                             {
                               "MonsterID": {
-                                "IsDynamic": false,
-                                "FixedValue": {
-                                  "Value": 203201010
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    -1599639708
+                                  ]
                                 }
                               },
                               "LocationType": "Last",
@@ -8670,9 +8947,13 @@
                           "SummonMonsterDataList": [
                             {
                               "MonsterID": {
-                                "IsDynamic": false,
-                                "FixedValue": {
-                                  "Value": 203202000
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    -33555767
+                                  ]
                                 }
                               },
                               "LocationType": "First",
@@ -8697,9 +8978,13 @@
                           "SummonMonsterDataList": [
                             {
                               "MonsterID": {
-                                "IsDynamic": false,
-                                "FixedValue": {
-                                  "Value": 203202000
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    -33555767
+                                  ]
                                 }
                               },
                               "LocationType": "Last",

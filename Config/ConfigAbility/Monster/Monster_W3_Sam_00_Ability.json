@@ -137,7 +137,7 @@
                   "$type": "RPG.GameCore.RemoveModifier",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeam"
+                    "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
                   },
                   "ModifierName": "Monster_W3_Sam_00_BurningBP"
                 },
@@ -2476,7 +2476,7 @@
           "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeam"
+            "Alias": "AllEnemyWithUnSelectable"
           },
           "ModifierName": "Monster_W3_Sam_00_BurningBP",
           "DynamicValues": {
@@ -3221,7 +3221,7 @@
           "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeam"
+            "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
           },
           "ModifierName": "Monster_W3_Sam_00_BurningBP"
         },
@@ -3692,7 +3692,7 @@
           "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeam"
+            "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
           },
           "ModifierName": "Monster_W3_Sam_00_BurningBP"
         },
@@ -4157,7 +4157,7 @@
           "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeam"
+            "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
           },
           "ModifierName": "Monster_W3_Sam_00_BurningBP"
         },
@@ -4734,39 +4734,52 @@
                 },
                 "SecondTargetType": {
                   "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "AllLightTeam"
+                  "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
                 }
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "Monster_W3_Sam_00_BurningBP",
-                  "DynamicValues": {
-                    "MDF_HealDownRatio": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAK",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          421057014
-                        ]
-                      }
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
                     },
-                    "MDF_DamageUpRatio": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAK",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          1109043686
-                        ]
+                    "Inverse": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Monster_W3_Sam_00_BurningBP",
+                      "DynamicValues": {
+                        "MDF_HealDownRatio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              421057014
+                            ]
+                          }
+                        },
+                        "MDF_DamageUpRatio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1109043686
+                            ]
+                          }
+                        }
                       }
                     }
-                  }
+                  ]
                 }
               ]
             }

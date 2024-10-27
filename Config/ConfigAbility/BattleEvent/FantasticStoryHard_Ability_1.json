@@ -422,7 +422,7 @@
                       "$type": "RPG.GameCore.AddModifier",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+                        "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
                       },
                       "ModifierName": "Modifier_FantasticStory_BaseAbility_0010_plus6_sub"
                     }
@@ -3109,6 +3109,31 @@
                           }
                         }
                       ]
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "DV_FantasticStory_PlusAbility_0027",
+                        "ContextScope": "ContextCaster",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "Modifier_FantasticStory_BaseAbility_0020_sub8"
+                        }
+                      ]
                     }
                   ]
                 },
@@ -3142,6 +3167,126 @@
                           }
                         }
                       }
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "DV_FantasticStory_PlusAbility_0027",
+                        "ContextScope": "ContextCaster",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "Modifier_FantasticStory_BaseAbility_0020_sub5"
+                        },
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "Modifier_FantasticStory_BaseAbility_0020_sub6",
+                          "DynamicValues": {
+                            "TempHP_get": {
+                              "IsDynamic": true,
+                              "PostfixExpr": {
+                                "OpCodes": "AQAK",
+                                "FixedValues": [],
+                                "DynamicHashes": [
+                                  -1387017452
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "DV_FantasticStory_PlusAbility_0028",
+                        "ContextScope": "ContextCaster",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "Modifier_FantasticStory_BaseAbility_0020_sub7"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetEntityType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "EntityTypeMask": "Servant"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "DynamicKey": "DV_FantasticStory_PlusAbility_0022",
+                        "ContextScope": "ContextCaster",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 1
+                          }
+                        }
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "Modifier_FantasticStory_BaseAbility_0020_sub2",
+                          "DynamicValues": {
+                            "TempHP_get": {
+                              "IsDynamic": true,
+                              "PostfixExpr": {
+                                "OpCodes": "AQAK",
+                                "FixedValues": [],
+                                "DynamicHashes": [
+                                  -1387017452
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      ]
                     }
                   ]
                 }
@@ -3149,6 +3294,7 @@
             },
             {
               "Event": "OnEnterBattle",
+              "Priority": -90,
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.AddModifier",
@@ -3363,6 +3509,84 @@
                           }
                         }
                       ]
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "DV_FantasticStory_PlusAbility_0027",
+                    "ContextScope": "ContextCaster",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam"
+                      },
+                      "ModifierName": "Modifier_FantasticStory_BaseAbility_0020_sub5"
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam"
+                      },
+                      "ModifierName": "Modifier_FantasticStory_BaseAbility_0020_sub6",
+                      "DynamicValues": {
+                        "TempHP_get": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              -1387017452
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllDarkTeam"
+                      },
+                      "ModifierName": "Modifier_FantasticStory_BaseAbility_0020_sub8"
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "DynamicKey": "DV_FantasticStory_PlusAbility_0028",
+                    "ContextScope": "ContextCaster",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam"
+                      },
+                      "ModifierName": "Modifier_FantasticStory_BaseAbility_0020_sub7"
                     }
                   ]
                 }
@@ -3801,7 +4025,7 @@
                       "$type": "RPG.GameCore.Retarget",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "AllLightTeam"
+                        "Alias": "AllLightTeamIgnoreServant"
                       },
                       "Predicate": {
                         "$type": "RPG.GameCore.ByIsPropertyValueMinOrMax",
@@ -3811,7 +4035,7 @@
                         },
                         "CompareTargetType": {
                           "$type": "RPG.GameCore.TargetAlias",
-                          "Alias": "AllLightTeam"
+                          "Alias": "AllLightTeamIgnoreServant"
                         },
                         "PropertyRatioType": "HPRatio"
                       },
@@ -4613,6 +4837,996 @@
               "-640648442": {}
             }
           }
+        },
+        "Modifier_FantasticStory_BaseAbility_0020_sub5": {
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "BreakDamageAddedRatioBase",
+                  "PropertyValue": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        1981241386
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "Stacking": "ReplaceByCaster"
+        },
+        "Modifier_FantasticStory_BaseAbility_0020_sub6": {
+          "_CallbackList": [
+            {
+              "Event": "OnTriggerBreak",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "ModifierName": "Modifier_FantasticStory_BaseAbility_0020_sub6_dot",
+                  "LifeTime": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1554211023
+                      ]
+                    }
+                  },
+                  "MaxLayer": {
+                    "IsDynamic": true,
+                    "PostfixExpr": {
+                      "OpCodes": "AQAK",
+                      "FixedValues": [],
+                      "DynamicHashes": [
+                        -1150926496
+                      ]
+                    }
+                  },
+                  "LayerAddWhenStack": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "DynamicValues": {
+                    "Modifier_Poison_Damage": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQABAQQK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          -1014108115,
+                          1577956859
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "Stacking": "Replace",
+          "DynamicValues": {
+            "Values": {
+              "-1014108115": {}
+            }
+          }
+        },
+        "Modifier_FantasticStory_BaseAbility_0020_sub6_dot": {
+          "MaxLayer": 5,
+          "LayerAddWhenStack": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "LifeStepMoment": "ModifierPhase1End",
+          "PerformTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.3
+            }
+          },
+          "BehaviorFlagList": [
+            "STAT_DOT",
+            "STAT_DOT_Poison"
+          ],
+          "UseSnapshotEntity": true,
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AddBuffPerform",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEffect",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Hit_Common_Wind_Add.prefab",
+                      "AttachPoint": "SelectRoot"
+                    }
+                  ],
+                  "AddPerformTime": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.75
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Event": "OnPhase1",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Hit_Common_Wind_Triger.prefab",
+                  "AttachPoint": "SelectRoot"
+                },
+                {
+                  "$type": "RPG.GameCore.WaitSecond",
+                  "WaitTime": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 0.1
+                    }
+                  }
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+                  "ReadTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ValueType": "Layer",
+                  "Multiplier": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "DynamicKey": "Modifier_Poison_PoisonLayer"
+                },
+                {
+                  "$type": "RPG.GameCore.DamageByAttackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "AttackProperty": {
+                    "$type": "RPG.GameCore.AttackData",
+                    "DamageType": {
+                      "DamageType": "Wind"
+                    },
+                    "DamageValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQABAQQK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          1271701936,
+                          175338262
+                        ]
+                      }
+                    },
+                    "AttackType": "DOT"
+                  },
+                  "DisplayData": {
+                    "AttachPoint": "SelectRoot"
+                  }
+                }
+              ]
+            },
+            {
+              "Event": "OnCustomEvent",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.ModifierAttachEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Hit_Common_Wind_Triger.prefab",
+                  "AttachPoint": "SelectRoot",
+                  "MinMutexTime": -1,
+                  "MutexType": "Entity"
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+                  "ReadTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ValueType": "Layer",
+                  "Multiplier": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
+                    }
+                  },
+                  "DynamicKey": "Modifier_Poison_PoisonLayer"
+                },
+                {
+                  "$type": "RPG.GameCore.DamageByAttackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "AttackProperty": {
+                    "$type": "RPG.GameCore.AttackData",
+                    "DamageType": {
+                      "DamageType": "Wind"
+                    },
+                    "DamageValue": {
+                      "IsDynamic": true,
+                      "PostfixExpr": {
+                        "OpCodes": "AQABAQQBAgQK",
+                        "FixedValues": [],
+                        "DynamicHashes": [
+                          375103313,
+                          1271701936,
+                          175338262
+                        ]
+                      }
+                    },
+                    "AttackType": "DOT"
+                  },
+                  "DisplayData": {
+                    "AttachPoint": "SelectRoot"
+                  }
+                }
+              ]
+            }
+          ],
+          "Stacking": "ReplaceByCaster",
+          "DynamicValues": {
+            "Values": {
+              "175338262": {},
+              "1271701936": {},
+              "375103313": {}
+            }
+          }
+        },
+        "Modifier_FantasticStory_BaseAbility_0020_sub8": {
+          "BehaviorFlagList": [
+            "Endurance"
+          ],
+          "Stacking": "ReplaceByCaster"
+        },
+        "Modifier_FantasticStory_BaseAbility_0020_sub7": {
+          "_CallbackList": [
+            {
+              "Event": "OnAfterAttack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCurrentSkillType",
+                    "SkillType": "Ultra"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AttackTargetList"
+                      },
+                      "MaxNumber": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 5
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByAny",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByAnd",
+                                "PredicateList": [
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Poison"
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Burn"
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Bleed"
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Electric"
+                                  }
+                                ]
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByAnd",
+                                "PredicateList": [
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Poison",
+                                    "Inverse": true
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Burn"
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Bleed"
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Electric"
+                                  }
+                                ]
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByAnd",
+                                "PredicateList": [
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Poison"
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Burn",
+                                    "Inverse": true
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Bleed"
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Electric"
+                                  }
+                                ]
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByAnd",
+                                "PredicateList": [
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Poison"
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Burn"
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Bleed",
+                                    "Inverse": true
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Electric"
+                                  }
+                                ]
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByAnd",
+                                "PredicateList": [
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Poison"
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Burn"
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Bleed"
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                    "TargetType": {
+                                      "$type": "RPG.GameCore.TargetAlias",
+                                      "Alias": "ParamEntity"
+                                    },
+                                    "Flag": "STAT_DOT_Electric",
+                                    "Inverse": true
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.TriggerModifierCustomEvent",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "EventType": "DOT",
+                              "DynamicKey": "DOT_TriggerRatio",
+                              "Value": {
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    1572866089
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "FailedTaskList": [
+                            {
+                              "$type": "RPG.GameCore.PredicateTaskList",
+                              "Predicate": {
+                                "$type": "RPG.GameCore.ByAny",
+                                "PredicateList": [
+                                  {
+                                    "$type": "RPG.GameCore.ByAnd",
+                                    "PredicateList": [
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Poison"
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Burn"
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Bleed",
+                                        "Inverse": true
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Electric",
+                                        "Inverse": true
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByAnd",
+                                    "PredicateList": [
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Poison"
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Burn",
+                                        "Inverse": true
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Bleed"
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Electric",
+                                        "Inverse": true
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByAnd",
+                                    "PredicateList": [
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Poison"
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Burn",
+                                        "Inverse": true
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Bleed",
+                                        "Inverse": true
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Electric"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByAnd",
+                                    "PredicateList": [
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Poison",
+                                        "Inverse": true
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Burn"
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Bleed"
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Electric",
+                                        "Inverse": true
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByAnd",
+                                    "PredicateList": [
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Poison",
+                                        "Inverse": true
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Burn"
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Bleed",
+                                        "Inverse": true
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Electric"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "$type": "RPG.GameCore.ByAnd",
+                                    "PredicateList": [
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Poison",
+                                        "Inverse": true
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Burn",
+                                        "Inverse": true
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Bleed"
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                        "TargetType": {
+                                          "$type": "RPG.GameCore.TargetAlias",
+                                          "Alias": "ParamEntity"
+                                        },
+                                        "Flag": "STAT_DOT_Electric"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              "SuccessTaskList": [
+                                {
+                                  "$type": "RPG.GameCore.TriggerModifierCustomEvent",
+                                  "TargetType": {
+                                    "$type": "RPG.GameCore.TargetAlias",
+                                    "Alias": "ParamEntity"
+                                  },
+                                  "EventType": "DOT",
+                                  "DynamicKey": "DOT_TriggerRatio",
+                                  "Value": {
+                                    "IsDynamic": true,
+                                    "PostfixExpr": {
+                                      "OpCodes": "AQAK",
+                                      "FixedValues": [],
+                                      "DynamicHashes": [
+                                        -1156017266
+                                      ]
+                                    }
+                                  }
+                                }
+                              ],
+                              "FailedTaskList": [
+                                {
+                                  "$type": "RPG.GameCore.PredicateTaskList",
+                                  "Predicate": {
+                                    "$type": "RPG.GameCore.ByAny",
+                                    "PredicateList": [
+                                      {
+                                        "$type": "RPG.GameCore.ByAnd",
+                                        "PredicateList": [
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Poison"
+                                          },
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Burn",
+                                            "Inverse": true
+                                          },
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Bleed",
+                                            "Inverse": true
+                                          },
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Electric",
+                                            "Inverse": true
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByAnd",
+                                        "PredicateList": [
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Poison",
+                                            "Inverse": true
+                                          },
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Burn"
+                                          },
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Bleed",
+                                            "Inverse": true
+                                          },
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Electric",
+                                            "Inverse": true
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByAnd",
+                                        "PredicateList": [
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Poison",
+                                            "Inverse": true
+                                          },
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Burn",
+                                            "Inverse": true
+                                          },
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Bleed"
+                                          },
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Electric",
+                                            "Inverse": true
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "$type": "RPG.GameCore.ByAnd",
+                                        "PredicateList": [
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Poison",
+                                            "Inverse": true
+                                          },
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Burn",
+                                            "Inverse": true
+                                          },
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Bleed",
+                                            "Inverse": true
+                                          },
+                                          {
+                                            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                                            "TargetType": {
+                                              "$type": "RPG.GameCore.TargetAlias",
+                                              "Alias": "ParamEntity"
+                                            },
+                                            "Flag": "STAT_DOT_Electric"
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  "SuccessTaskList": [
+                                    {
+                                      "$type": "RPG.GameCore.TriggerModifierCustomEvent",
+                                      "TargetType": {
+                                        "$type": "RPG.GameCore.TargetAlias",
+                                        "Alias": "ParamEntity"
+                                      },
+                                      "EventType": "DOT",
+                                      "DynamicKey": "DOT_TriggerRatio",
+                                      "Value": {
+                                        "IsDynamic": true,
+                                        "PostfixExpr": {
+                                          "OpCodes": "AQAK",
+                                          "FixedValues": [],
+                                          "DynamicHashes": [
+                                            -1559301793
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Stacking": "ReplaceByCaster"
         }
       },
       "Name": "FantasticStory_BaseAbility_0020",
@@ -4669,6 +5883,24 @@
             "Alias": "Caster"
           },
           "DynamicKey": "DV_FantasticStory_PlusAbility_0026",
+          "ContextScope": "ContextCaster"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "DV_FantasticStory_PlusAbility_0027",
+          "ContextScope": "ContextCaster"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "DV_FantasticStory_PlusAbility_0028",
           "ContextScope": "ContextCaster"
         },
         {
@@ -5158,6 +6390,184 @@
         "Values": {
           "462955996": {},
           "59671469": {}
+        }
+      }
+    },
+    {
+      "Name": "FantasticStory_PlusAbility_0027",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "DynamicKey": "DV_FantasticStory_PlusAbility_0027"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "DV_FantasticStory_PlusAbility_0027_ADF_1",
+          "ResetValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                462955996
+              ]
+            }
+          },
+          "ContextScope": "ContextCaster"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "DV_FantasticStory_PlusAbility_0027_ADF_2",
+          "ResetValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                59671469
+              ]
+            }
+          },
+          "ContextScope": "ContextCaster"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "DV_FantasticStory_PlusAbility_0027_ADF_3",
+          "ResetValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                1625755410
+              ]
+            }
+          },
+          "ContextScope": "ContextCaster"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "DV_FantasticStory_PlusAbility_0027_ADF_4",
+          "ResetValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                866240523
+              ]
+            }
+          },
+          "ContextScope": "ContextCaster"
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "462955996": {},
+          "59671469": {},
+          "1625755410": {},
+          "866240523": {}
+        }
+      }
+    },
+    {
+      "Name": "FantasticStory_PlusAbility_0028",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "Value": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "DynamicKey": "DV_FantasticStory_PlusAbility_0028"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "DV_FantasticStory_PlusAbility_0028_ADF_1",
+          "ResetValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                462955996
+              ]
+            }
+          },
+          "ContextScope": "ContextCaster"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "DV_FantasticStory_PlusAbility_0028_ADF_2",
+          "ResetValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                59671469
+              ]
+            }
+          },
+          "ContextScope": "ContextCaster"
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": "DV_FantasticStory_PlusAbility_0028_ADF_3",
+          "ResetValue": {
+            "IsDynamic": true,
+            "PostfixExpr": {
+              "OpCodes": "AQAK",
+              "FixedValues": [],
+              "DynamicHashes": [
+                1625755410
+              ]
+            }
+          },
+          "ContextScope": "ContextCaster"
+        }
+      ],
+      "DynamicValues": {
+        "Values": {
+          "462955996": {},
+          "59671469": {},
+          "1625755410": {}
         }
       }
     },
@@ -7519,7 +8929,7 @@
               "$type": "RPG.GameCore.AddModifier",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+                "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
               },
               "ModifierName": "Modifier_FantasticStory_BaseAbility_0030_plus5_AddSP",
               "DynamicValues": {
@@ -7540,7 +8950,7 @@
               "$type": "RPG.GameCore.AddModifier",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+                "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
               },
               "ModifierName": "Modifier_FantasticStory_BaseAbility_0030_plus5_AddStockedSP",
               "InheritCaster": "TargetSelf"
@@ -12550,8 +13960,93 @@
     },
     {
       "Modifiers": {
+        "Modifier_FantasticStory_HPParentChild": {
+          "_CallbackList": [
+            {
+              "Event": "OnDestroy",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.RemoveEntityFromRelationGroup",
+                  "Relation": "HPParentChild",
+                  "Target": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  }
+                }
+              ]
+            },
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetEntityRelationGroup",
+                  "Relation": "HPParentChild",
+                  "MainTargets": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "SubTargets": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam - ModifierOwnerEntity"
+                  }
+                }
+              ]
+            }
+          ],
+          "Stacking": "ReplaceByCaster"
+        },
         "Modifier_FantasticStory_BaseAbility_0070": {
           "_CallbackList": [
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetTeam",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Team": "TeamDark"
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllDarkTeam"
+                      },
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareMonsterRank",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "CompareType": "GreaterEqual",
+                        "CompareValue": 3
+                      },
+                      "MaxNumber": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "Modifier_FantasticStory_HPParentChild"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
             {
               "Event": "OnEnterBattle",
               "CallbackConfig": [
@@ -12562,6 +14057,91 @@
                     "Alias": "Caster"
                   },
                   "ModifierName": "Modifier_FantasticStory_BaseAbility_0070_sub"
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareWaveCount",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "IsDynamic": false,
+                      "FixedValue": {
+                        "Value": 1
+                      }
+                    }
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllDarkTeam"
+                      },
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareMonsterID",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "TargetMonsterID": {
+                          "IsDynamic": false,
+                          "FixedValue": {
+                            "Value": 8001060
+                          }
+                        }
+                      },
+                      "MaxNumber": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "Modifier_FantasticStory_HPParentChild"
+                        }
+                      ]
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllDarkTeam"
+                      },
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareMonsterRank",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "CompareType": "GreaterEqual",
+                        "CompareValue": 3
+                      },
+                      "MaxNumber": {
+                        "IsDynamic": false,
+                        "FixedValue": {
+                          "Value": 1
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": "Modifier_FantasticStory_HPParentChild"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -12593,75 +14173,9 @@
                     }
                   },
                   "MaxInclusive": true,
-                  "OnEnterRange": [
-                    {
-                      "$type": "RPG.GameCore.SetBattleItemProgressInfo",
-                      "Progress": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQABAQUK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -1515974748,
-                            462955996
-                          ]
-                        }
-                      },
-                      "Count": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQABAQUAAAQK",
-                          "FixedValues": [
-                            {
-                              "Value": 100
-                            }
-                          ],
-                          "DynamicHashes": [
-                            -1515974748,
-                            462955996
-                          ]
-                        }
-                      },
-                      "CountTextID": {
-                        "Hash": -1499424294
-                      }
-                    }
-                  ],
+                  "OnEnterRange": [],
                   "OnExitRange": [],
-                  "OnChange": [
-                    {
-                      "$type": "RPG.GameCore.SetBattleItemProgressInfo",
-                      "Progress": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQABAQUK",
-                          "FixedValues": [],
-                          "DynamicHashes": [
-                            -1515974748,
-                            462955996
-                          ]
-                        }
-                      },
-                      "Count": {
-                        "IsDynamic": true,
-                        "PostfixExpr": {
-                          "OpCodes": "AQABAQUAAAQK",
-                          "FixedValues": [
-                            {
-                              "Value": 100
-                            }
-                          ],
-                          "DynamicHashes": [
-                            -1515974748,
-                            462955996
-                          ]
-                        }
-                      },
-                      "CountTextID": {
-                        "Hash": -1499424294
-                      }
-                    }
-                  ]
+                  "OnChange": []
                 },
                 {
                   "Min": {
@@ -12683,21 +14197,19 @@
                   "MaxInclusive": true,
                   "OnEnterRange": [
                     {
-                      "$type": "RPG.GameCore.SetBattleItemProgressInfo",
-                      "Progress": {
+                      "$type": "RPG.GameCore.NotifyFeverTimeInfoChange",
+                      "PeriodType": "P1",
+                      "CurProgress": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 1
+                          "Value": 0
                         }
                       },
-                      "Count": {
+                      "MaxProgress": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 100
+                          "Value": 0
                         }
-                      },
-                      "CountTextID": {
-                        "Hash": -1499424294
                       }
                     },
                     {
@@ -12818,21 +14330,19 @@
                   ],
                   "OnChange": [
                     {
-                      "$type": "RPG.GameCore.SetBattleItemProgressInfo",
-                      "Progress": {
+                      "$type": "RPG.GameCore.NotifyFeverTimeInfoChange",
+                      "PeriodType": "P1",
+                      "CurProgress": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 1
+                          "Value": 0
                         }
                       },
-                      "Count": {
+                      "MaxProgress": {
                         "IsDynamic": false,
                         "FixedValue": {
-                          "Value": 100
+                          "Value": 0
                         }
-                      },
-                      "CountTextID": {
-                        "Hash": -1499424294
                       }
                     }
                   ]
@@ -12846,7 +14356,7 @@
               "CallbackConfig": [
                 {
                   "$type": "RPG.GameCore.OwnerEntityAddAbility",
-                  "AbilityName": "BattleEventAbility_Camear_AllLightTeamWithoutDither"
+                  "AbilityName": "FantasticStory_BaseAbility_AllLightTeam_Insert_Camera"
                 },
                 {
                   "$type": "RPG.GameCore.OwnerEntityAddAbility",
@@ -12983,6 +14493,44 @@
                                 }
                               },
                               "DynamicKey": "DV_FantasticStory_BaseAbility_0070_CountSum"
+                            },
+                            {
+                              "$type": "RPG.GameCore.NotifyFeverTimeInfoChange",
+                              "CurProgress": {
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    -1515974748
+                                  ]
+                                }
+                              },
+                              "MaxProgress": {
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQAK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    462955996
+                                  ]
+                                }
+                              },
+                              "ToastType": "Normal",
+                              "ToastDelta": {
+                                "IsDynamic": true,
+                                "PostfixExpr": {
+                                  "OpCodes": "AQABAQQK",
+                                  "FixedValues": [],
+                                  "DynamicHashes": [
+                                    462955996,
+                                    866240523
+                                  ]
+                                }
+                              },
+                              "ToastTextID": {
+                                "Hash": -1849873443
+                              }
                             }
                           ]
                         },
@@ -13450,6 +14998,44 @@
                           "DynamicKey": "DV_FantasticStory_BaseAbility_0070_CountSum"
                         },
                         {
+                          "$type": "RPG.GameCore.NotifyFeverTimeInfoChange",
+                          "CurProgress": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                -1515974748
+                              ]
+                            }
+                          },
+                          "MaxProgress": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQAK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                462955996
+                              ]
+                            }
+                          },
+                          "ToastType": "Special",
+                          "ToastDelta": {
+                            "IsDynamic": true,
+                            "PostfixExpr": {
+                              "OpCodes": "AQABAQQK",
+                              "FixedValues": [],
+                              "DynamicHashes": [
+                                462955996,
+                                -1862642832
+                              ]
+                            }
+                          },
+                          "ToastTextID": {
+                            "Hash": 2044749011
+                          }
+                        },
+                        {
                           "$type": "RPG.GameCore.DamageByAttackProperty",
                           "TargetType": {
                             "$type": "RPG.GameCore.TargetAlias",
@@ -13474,7 +15060,7 @@
                             "AttackType": "DOT",
                             "FinalFormulaType": "ByBaseDamage",
                             "HitAnimation": "Hit_H",
-                            "HitEffect": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_ChallengeStory_01/Eff_ActivityProp_ChallengeStory_Hit.prefab"
+                            "HitEffect": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_ChallengeStory_01/Eff_ActivityProp_ChallengeStory_Hit_02.prefab"
                           },
                           "CanTriggerLastKill": true,
                           "DisplayData": {
@@ -13649,10 +15235,6 @@
               ]
             },
             {
-              "Event": "OnEnterBattle",
-              "CallbackConfig": []
-            },
-            {
               "Event": "OnWaveMonster",
               "CallbackConfig": [
                 {
@@ -13785,7 +15367,7 @@
                 "Name": "Modifier_FantasticStory_BaseAbility_0070_plus3_sub3",
                 "TargetType": {
                   "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+                  "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
                 },
                 "Predicate": {
                   "$type": "RPG.GameCore.ByCompareDynamicValue",
@@ -13976,28 +15558,6 @@
           "ContextScope": "ContextCaster"
         },
         {
-          "$type": "RPG.GameCore.InitBattleItemProgressInfo",
-          "BuffIcon": "SpriteOutput/ItemIcon/IconBirdCage.png",
-          "DescText": {
-            "Hash": 940242371
-          },
-          "InitCount": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0
-            }
-          },
-          "InitCountTextID": {
-            "Hash": -1499424294
-          },
-          "InitProgress": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 0
-            }
-          }
-        },
-        {
           "$type": "RPG.GameCore.AddModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
@@ -14021,6 +15581,9 @@
           "1254924272": {}
         }
       }
+    },
+    {
+      "Name": "FantasticStory_BaseAbility_0070_Sub"
     },
     {
       "Name": "FantasticStory_BaseAbility_0070_Insert",
@@ -14075,20 +15638,20 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllLightTeam"
           },
-          "AbilityName": "BattleEventAbility_Camear_AllLightTeamWithoutDither",
+          "AbilityName": "FantasticStory_BaseAbility_AllLightTeam_Insert_Camera",
           "IsSkillPerform": true
         },
         {
           "$type": "RPG.GameCore.TriggerEffect",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllTeamCenter"
+            "Alias": "LightTeamCenter"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_BattleEvent_ShenYuan_Buff.prefab",
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_ChallengeStory_01/Eff_ActivityProp_ChallengeStory_02_Atak.prefab",
           "PositionOffset": {
             "X": 0,
-            "Y": 3.8,
-            "Z": 0
+            "Y": 0,
+            "Z": 4.53
           }
         },
         {
@@ -14096,7 +15659,29 @@
           "WaitTime": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 1.2
+              "Value": 1.83
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamCenter"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_ChallengeStory_01/Eff_ActivityProp_ChallengeStory_02_Atak02.prefab",
+          "PositionOffset": {
+            "X": 0,
+            "Y": 0,
+            "Z": 4.53
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.2
             }
           }
         },
@@ -14106,7 +15691,7 @@
             "$type": "RPG.GameCore.TargetAlias",
             "Alias": "AllLightTeam"
           },
-          "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_OtherRise.prefab"
+          "EffectPath": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_ChallengeStory_01/Eff_ActivityProp_ChallengeStory_Buff03.prefab"
         },
         {
           "$type": "RPG.GameCore.WaitSecond",
@@ -14202,7 +15787,7 @@
           "WaitTime": {
             "IsDynamic": false,
             "FixedValue": {
-              "Value": 1
+              "Value": 0.85
             }
           }
         }
@@ -14216,6 +15801,253 @@
           "-802947737": {}
         }
       }
+    },
+    {
+      "Name": "FantasticStory_BaseAbility_AllLightTeam_Insert_Camera",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomFormationIgnoreDying": false
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomFormationIgnoreDying": false
+        },
+        {
+          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "TargetIntensity": 0.3,
+          "FadeDuration": 0.55
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "CloseupShotConfig": {
+              "CameraTimelineAssetName": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_ChallengeStory_01/Eff_ActivityProp_ChallengeStory_01_Timeline.playable",
+              "TransTypeFollow": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "TransTypeAim": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "Override": true
+            },
+            "BlendConfig": {
+              "BlendType": "Cut"
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.01,
+                "Y": 2.3,
+                "Z": 3.81
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.01,
+                "Y": 3.29,
+                "Z": 4.6
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 1.5
+            },
+            "BlendConfig": {
+              "BlendType": "Cut"
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.01,
+                "Y": 1.4,
+                "Z": 4.81
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.01,
+                "Y": 1.4,
+                "Z": 5.4
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 1.5
+            },
+            "BlendConfig": {
+              "BlendType": "Custom",
+              "CustomCurveName": "Blend_EasyInOut_ChallengStory",
+              "BlendTime": 0.7
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.9
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "IsRevert": true,
+          "FadeDuration": 0.5
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.01,
+                "Y": 1.6,
+                "Z": 6.37
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.01,
+                "Y": 1.4,
+                "Z": 5.4
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 1.5
+            },
+            "BlendConfig": {
+              "BlendType": "EaseInOut",
+              "BlendTime": 0.35
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.8
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "X": 0.01,
+                "Y": 1.6,
+                "Z": 6.37
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "AimOffset": {
+                "X": 0.01,
+                "Y": 1.4,
+                "Z": 5.4
+              },
+              "FollowPoleAngle": 90,
+              "FollowRadius": 1.5
+            },
+            "BlendConfig": {
+              "BlendType": "Cut"
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              }
+            }
+          }
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 0.1
+            }
+          }
+        }
+      ]
     },
     {
       "Modifiers": {
@@ -15595,6 +17427,27 @@
       "BehaviorFlagList": [
         "ForceStanceDamage"
       ],
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "ForceStanceBreakRatio",
+              "PropertyValue": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              }
+            }
+          ]
+        }
+      ],
       "Stacking": "ReplaceByCaster"
     },
     "Modifier_FantasticStory_BaseAbility_0070_aura": {
@@ -15626,6 +17479,29 @@
                 }
               },
               "DynamicKey": "DV_FantasticStory_BaseAbility_0070_CountSumTemp"
+            },
+            {
+              "$type": "RPG.GameCore.NotifyFeverTimeInfoChange",
+              "CurProgress": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    -1515974748
+                  ]
+                }
+              },
+              "MaxProgress": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    462955996
+                  ]
+                }
+              }
             }
           ]
         }
@@ -15636,7 +17512,7 @@
             "Name": "Modifier_FantasticStory_BaseAbility_0070_sub2",
             "TargetType": {
               "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+              "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
             },
             "DynamicValues": {
               "DV_Ratio_Get": {
@@ -15666,7 +17542,7 @@
             "Name": "Modifier_FantasticStory_BaseAbility_0070_plus1_sub",
             "TargetType": {
               "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+              "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
             },
             "Predicate": {
               "$type": "RPG.GameCore.ByCompareDynamicValue",
@@ -15685,7 +17561,7 @@
             "Name": "Modifier_FantasticStory_BaseAbility_0070_plus2_sub",
             "TargetType": {
               "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+              "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
             },
             "DynamicValues": {
               "DV_Value_Get": {
@@ -15735,7 +17611,7 @@
             "Name": "Modifier_FantasticStory_BaseAbility_0070_plus3_sub2",
             "TargetType": {
               "$type": "RPG.GameCore.TargetAlias",
-              "Alias": "AllLightTeamWithAllUnselectableLightTeam"
+              "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
             },
             "Predicate": {
               "$type": "RPG.GameCore.ByCompareDynamicValue",
@@ -16016,7 +17892,7 @@
                         "AttackType": "DOT",
                         "FinalFormulaType": "ByBaseDamage",
                         "HitAnimation": "Hit_H",
-                        "HitEffect": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_ChallengeStory_01/Eff_ActivityProp_ChallengeStory_Hit.prefab"
+                        "HitEffect": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_ChallengeStory_01/Eff_ActivityProp_ChallengeStory_Hit_03.prefab"
                       },
                       "CanTriggerLastKill": true,
                       "DisplayData": {
@@ -16080,7 +17956,7 @@
                         "AttackType": "DOT",
                         "FinalFormulaType": "ByBaseDamage",
                         "HitAnimation": "Hit_H",
-                        "HitEffect": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_ChallengeStory_01/Eff_ActivityProp_ChallengeStory_Hit.prefab"
+                        "HitEffect": "Effects/Eff_Prefab/Eff_ActivityProp/Eff_ChallengeStory_01/Eff_ActivityProp_ChallengeStory_Hit_02.prefab"
                       },
                       "CanTriggerLastKill": true,
                       "DisplayData": {
@@ -16111,8 +17987,12 @@
                       "PerformanceDelay": {
                         "IsDynamic": true,
                         "PostfixExpr": {
-                          "OpCodes": "AQAK",
-                          "FixedValues": [],
+                          "OpCodes": "AQAAAAIK",
+                          "FixedValues": [
+                            {
+                              "Value": 0.1
+                            }
+                          ],
                           "DynamicHashes": [
                             1210023880
                           ]

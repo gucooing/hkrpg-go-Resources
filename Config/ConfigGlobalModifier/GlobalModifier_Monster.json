@@ -4614,6 +4614,130 @@
       ]
     },
     "W2_LycanKing_00_BattleScore2Mark": {},
+    "W3_Theater_00_BattleScore1": {
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "DynamicKey": "W3_Theater_00_BattleScore1_Flag",
+              "ContextScope": "TargetEntity"
+            }
+          ]
+        },
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": "W3_Theater_00_BattleScore1_Flag",
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 0
+                  }
+                }
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30171
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "Stacking": "Replace"
+    },
+    "W3_Theater_00_BattleScore2": {
+      "_CallbackList": [
+        {
+          "Event": "OnBeingBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Key": {
+                      "Hash": -415684185
+                    }
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Flag": "Break",
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareTarget",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "CompareType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "Inverse": true
+                  }
+                ]
+              },
+              "MaxNumber": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 1
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.DebugLog",
+                  "Level": "Warn",
+                  "Message": "==============30172 [ParamEntity]======================"
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.DebugLog",
+                  "Level": "Warn",
+                  "Message": "==============30172 Success======================"
+                },
+                {
+                  "$type": "RPG.GameCore.SetBattleAchievement",
+                  "AchievementID": 30172
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     "W1_Mecha02_ThunderDOT": {
       "LifeTime": 3,
       "MaxLayer": 5,

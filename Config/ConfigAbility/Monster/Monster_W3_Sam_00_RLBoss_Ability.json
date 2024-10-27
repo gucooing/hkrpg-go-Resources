@@ -134,7 +134,7 @@
                       "$type": "RPG.GameCore.RemoveModifier",
                       "TargetType": {
                         "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "AllLightTeam"
+                        "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
                       },
                       "ModifierName": "Monster_W3_Sam_00_BurningBP"
                     },
@@ -668,7 +668,7 @@
               "$type": "RPG.GameCore.RemoveModifier",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllLightTeam"
+                "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
               },
               "ModifierName": "Monster_W3_Sam_00_BurningBP"
             },
@@ -931,34 +931,6 @@
               "Message": "==============Phase3======================"
             },
             {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllLightTeam"
-              },
-              "ModifierName": "MMonster_W3_Sam_00_RLBoss_BlackBloodController",
-              "DynamicValues": {
-                "MDF_DirtyHPMaxRatio": {
-                  "IsDynamic": true,
-                  "PostfixExpr": {
-                    "OpCodes": "AQAK",
-                    "FixedValues": [],
-                    "DynamicHashes": [
-                      1781112801
-                    ]
-                  }
-                }
-              },
-              "InheritCaster": "CasterSelf",
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.DebugLog",
-                  "Level": "Warn",
-                  "Message": "==============ListenerOn======================"
-                }
-              ]
-            },
-            {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
                 "$type": "RPG.GameCore.ByIsContainModifier",
@@ -1050,6 +1022,21 @@
           },
           "AliveOnly": false,
           "ModifierName": "Monster_W3_Sam_00_WeakPointProtected"
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "MMonster_W3_Sam_00_RLBoss_BlackBloodHalo",
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DebugLog",
+              "Level": "Warn",
+              "Message": "==============ListenerOn======================"
+            }
+          ]
         },
         {
           "$type": "RPG.GameCore.SetDynamicValue",
@@ -1628,7 +1615,7 @@
                   "$type": "RPG.GameCore.RemoveModifier",
                   "TargetType": {
                     "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeam"
+                    "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
                   },
                   "ModifierName": "Monster_W3_Sam_00_BurningBP"
                 },
@@ -2090,7 +2077,7 @@
           "$type": "RPG.GameCore.RemoveModifier",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeam"
+            "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
           },
           "ModifierName": "Monster_W3_Sam_00_BurningBP"
         },
@@ -2570,39 +2557,52 @@
                 },
                 "SecondTargetType": {
                   "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "AllLightTeam"
+                  "Alias": "AllLightTeamWithAllUnselectableLightTeamWithoutBattleEvent"
                 }
               },
               "SuccessTaskList": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ParamEntity"
-                  },
-                  "ModifierName": "Monster_W3_Sam_00_BurningBP",
-                  "DynamicValues": {
-                    "MDF_HealDownRatio": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAK",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          421057014
-                        ]
-                      }
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
                     },
-                    "MDF_DamageUpRatio": {
-                      "IsDynamic": true,
-                      "PostfixExpr": {
-                        "OpCodes": "AQAK",
-                        "FixedValues": [],
-                        "DynamicHashes": [
-                          1109043686
-                        ]
+                    "Inverse": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": "Monster_W3_Sam_00_BurningBP",
+                      "DynamicValues": {
+                        "MDF_HealDownRatio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              421057014
+                            ]
+                          }
+                        },
+                        "MDF_DamageUpRatio": {
+                          "IsDynamic": true,
+                          "PostfixExpr": {
+                            "OpCodes": "AQAK",
+                            "FixedValues": [],
+                            "DynamicHashes": [
+                              1109043686
+                            ]
+                          }
+                        }
                       }
                     }
-                  }
+                  ]
                 }
               ]
             }
@@ -3034,6 +3034,32 @@
           "2128130574": {},
           "1662446059": {}
         }
+      }
+    },
+    "MMonster_W3_Sam_00_RLBoss_BlackBloodHalo": {
+      "AdditionConfig": {
+        "SubModifierList": [
+          {
+            "Name": "MMonster_W3_Sam_00_RLBoss_BlackBloodController",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AllLightTeam"
+            },
+            "DynamicValues": {
+              "MDF_DirtyHPMaxRatio": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    1781112801
+                  ]
+                }
+              }
+            },
+            "IsHaloStatus": true
+          }
+        ]
       }
     },
     "MMonster_W3_Sam_00_RLBoss_BlackBloodController": {

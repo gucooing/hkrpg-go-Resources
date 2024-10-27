@@ -131,6 +131,18 @@
           ]
         },
         {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareRogueMode",
+            "RogueMode": "MagicRogue"
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddRogueMagicBinding"
+            }
+          ]
+        },
+        {
           "$type": "RPG.GameCore.CreatePlayerTeam"
         },
         {
@@ -536,10 +548,18 @@
                 "Inverse": true
               },
               {
-                "$type": "RPG.GameCore.ByCompareAllWaveMonsterRank",
-                "CompareType": "Less",
-                "CompareValue": 3,
-                "Inverse": true
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareAllWaveMonsterRank",
+                    "CompareType": "Less",
+                    "CompareValue": 3,
+                    "Inverse": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCheckRoleTrialNormalWaveShowDetail"
+                  }
+                ]
               }
             ]
           },
@@ -765,7 +785,8 @@
           }
         },
         {
-          "$type": "RPG.GameCore.WaitForTurnEnd"
+          "$type": "RPG.GameCore.WaitForTurnEnd",
+          "GoNextImmediately": true
         },
         {
           "$type": "RPG.GameCore.PredicateToMakeFail",
@@ -961,7 +982,8 @@
           "FailedTaskList": []
         },
         {
-          "$type": "RPG.GameCore.WaitForTurnEnd"
+          "$type": "RPG.GameCore.WaitForTurnEnd",
+          "GoNextImmediately": true
         },
         {
           "$type": "RPG.GameCore.PredicateToMakeFail",
@@ -1139,7 +1161,8 @@
           "Pause": true
         },
         {
-          "$type": "RPG.GameCore.WaitForTurnEnd"
+          "$type": "RPG.GameCore.WaitForTurnEnd",
+          "GoNextImmediately": true
         },
         {
           "$type": "RPG.GameCore.PredicateToMakeFail",
@@ -1317,7 +1340,8 @@
           "Pause": true
         },
         {
-          "$type": "RPG.GameCore.WaitForTurnEnd"
+          "$type": "RPG.GameCore.WaitForTurnEnd",
+          "GoNextImmediately": true
         },
         {
           "$type": "RPG.GameCore.PredicateToMakeFail",
@@ -1495,7 +1519,8 @@
           "Pause": true
         },
         {
-          "$type": "RPG.GameCore.WaitForTurnEnd"
+          "$type": "RPG.GameCore.WaitForTurnEnd",
+          "GoNextImmediately": true
         },
         {
           "$type": "RPG.GameCore.PredicateToMakeFail",

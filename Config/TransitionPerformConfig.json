@@ -603,6 +603,39 @@
         }
       ]
     },
+    "BetweenRotatableRegionRogue": {
+      "TasksConfig": [
+        {
+          "$type": "RPG.GameCore.AdventurePauseTeamDataRefresh"
+        },
+        {
+          "$type": "RPG.GameCore.LockPlayerControl",
+          "LockCameraControl": false
+        },
+        {
+          "$type": "RPG.GameCore.LockCamera"
+        },
+        {
+          "$type": "RPG.GameCore.PlayScreenTransfer",
+          "Mode": "SwitchOut"
+        },
+        {
+          "$type": "RPG.GameCore.WaitStreamingJobFinished",
+          "StopLoadingTick": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AdvTeamLeader"
+          },
+          "MuteColliderWhenInvisible": false
+        },
+        {
+          "$type": "RPG.GameCore.UnLockCamera"
+        }
+      ]
+    },
     "FramePortalBetweenRotatableRegion": {
       "TasksConfig": [
         {
@@ -971,6 +1004,86 @@
       ]
     },
     "BetweenRotatableRegion": {
+      "TasksConfig": [
+        {
+          "$type": "RPG.GameCore.LockCamera"
+        },
+        {
+          "$type": "RPG.GameCore.AdventureTriggerAnimStateWithMove",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AdvTeamLeader"
+          },
+          "AnimLogicState": "Idle",
+          "AnimStateName": "StandBy"
+        },
+        {
+          "$type": "RPG.GameCore.SetForceStreamingThisFrame",
+          "StartLoadingTick": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitStreamingJobFinished",
+          "StopLoadingTick": true
+        },
+        {
+          "$type": "RPG.GameCore.PlayScreenTransfer",
+          "CustomTime": 0.25
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AdvTeamLeader"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": false
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByIsInStoryMode"
+              },
+              {
+                "$type": "RPG.GameCore.BySkipNextTeleportEffect"
+              }
+            ]
+          },
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AdvLocalPlayer"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Scene/Interactive Object/Eff_Common_MAZ_Prop_AvatarTeleport.prefab"
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0.3
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.UnLockPlayerControl",
+          "UnLockCameraControl": false
+        },
+        {
+          "$type": "RPG.GameCore.UnLockCamera"
+        },
+        {
+          "$type": "RPG.GameCore.AdventureResumeTeamDataRefresh"
+        }
+      ]
+    },
+    "BetweenRotatableRegionRogue": {
       "TasksConfig": [
         {
           "$type": "RPG.GameCore.LockCamera"

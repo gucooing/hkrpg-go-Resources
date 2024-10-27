@@ -835,6 +835,66 @@
           "TargetType": "TeamFormation"
         },
         {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterUniqueID",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "TargetMonsterUniqueID": {
+              "IsDynamic": false,
+              "FixedValue": {
+                "Value": 203401
+              }
+            }
+          },
+          "MaxNumber": {
+            "IsDynamic": false,
+            "FixedValue": {
+              "Value": 1
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.SetMonsterEnergyBarState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "Active": "True",
+              "State": "Normal",
+              "CenterStyle": 10,
+              "OuterState": 2,
+              "IconPath": "SpriteOutput/BuffIcon/Inlevel/IconMonster_W2_Lycan_RageStatus.png",
+              "MaxCount": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    552488946
+                  ]
+                }
+              },
+              "CurrentCount": {
+                "IsDynamic": true,
+                "PostfixExpr": {
+                  "OpCodes": "AQAK",
+                  "FixedValues": [],
+                  "DynamicHashes": [
+                    552488946
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
           "$type": "RPG.GameCore.PredicateTaskList",
           "Predicate": {
             "$type": "RPG.GameCore.ByAnd",
@@ -1180,7 +1240,45 @@
                 "Alias": "ParamEntity"
               },
               "ModifierName": "MMonster_W2_Lycan_RagePhase1Mark"
-            },
+            }
+          ]
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Key": {
+                  "Hash": 1442509968
+                }
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareMonsterUniqueID",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "TargetMonsterUniqueID": {
+                  "IsDynamic": false,
+                  "FixedValue": {
+                    "Value": 203401
+                  }
+                },
+                "Inverse": true
+              }
+            ]
+          },
+          "TaskList": [
             {
               "$type": "RPG.GameCore.SetMonsterEnergyBarState",
               "TargetType": {
@@ -1925,45 +2023,79 @@
         {
           "$type": "RPG.GameCore.Retarget",
           "TargetType": {
-            "$type": "RPG.GameCore.TargetFetchUniqueNameEntity",
-            "UniqueName": "LycanSummon"
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
           },
-          "MaxNumber": {
-            "IsDynamic": false,
-            "FixedValue": {
-              "Value": 1
-            }
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterRank",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "CompareType": "Equal",
+            "CompareValue": 4
           },
           "TaskList": [
             {
-              "$type": "RPG.GameCore.SetDynamicValueByProperty",
-              "DynamicKey": "P1_ActionDelay",
-              "ReadTargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Key": {
+                  "Hash": 1131341059
+                },
+                "Inverse": true
               },
-              "Value": "ActionDelay"
-            },
-            {
-              "$type": "RPG.GameCore.SetActionDelay",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "Value": {
-                "IsDynamic": true,
-                "PostfixExpr": {
-                  "OpCodes": "AQAAAAIK",
-                  "FixedValues": [
-                    {
-                      "Value": 0.1
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetFetchUniqueNameEntity",
+                    "UniqueName": "LycanSummon"
+                  },
+                  "MaxNumber": {
+                    "IsDynamic": false,
+                    "FixedValue": {
+                      "Value": 1
                     }
-                  ],
-                  "DynamicHashes": [
-                    76339301
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                      "DynamicKey": "P1_ActionDelay",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": "ActionDelay"
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetActionDelay",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "Value": {
+                        "IsDynamic": true,
+                        "PostfixExpr": {
+                          "OpCodes": "AQAAAAIK",
+                          "FixedValues": [
+                            {
+                              "Value": 0.1
+                            }
+                          ],
+                          "DynamicHashes": [
+                            76339301
+                          ]
+                        }
+                      }
+                    }
                   ]
                 }
-              }
+              ]
             }
           ]
         },
@@ -2731,6 +2863,39 @@
     "MMonster_W2_Lycan_RageEffectMark": {},
     "MMonster_W2_Lycan_RageControllerV2": {
       "_CallbackList": [
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LevelEntity"
+              },
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              },
+              "DynamicKey": "Wolf_AttackCount"
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LevelEntity"
+              },
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              },
+              "DynamicKey": "Wolf_MaxAttackCount"
+            }
+          ]
+        },
         {
           "Event": "OnListenActionEnd",
           "CallbackConfig": [
@@ -4014,6 +4179,39 @@
                   "ModifierName": "MMonster_W2_Lycan_RageMarkInRage"
                 }
               ]
+            }
+          ]
+        },
+        {
+          "Event": "OnBeforeWaveMonster",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LevelEntity"
+              },
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              },
+              "DynamicKey": "Wolf_AttackCount"
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LevelEntity"
+              },
+              "Value": {
+                "IsDynamic": false,
+                "FixedValue": {
+                  "Value": 0
+                }
+              },
+              "DynamicKey": "Wolf_MaxAttackCount"
             }
           ]
         },
